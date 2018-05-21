@@ -8,27 +8,27 @@ class Login extends MY_Controller
   	public function __construct()
 	{
 	    parent::__construct();	
-	    $username 		= $this->session->userdata('username');
-	    $id_hak_akses	= $this->session->userdata('id_hak_akses');
-		if (isset($username, $id_hak_akses))
-		{
-			switch ($id_hak_akses) 
-			{
-				case 1:
-					redirect('admin');
-					break;
+	 //    $username 		= $this->session->userdata('username');
+	 //    $id_hak_akses	= $this->session->userdata('id_hak_akses');
+		// if (isset($username, $id_hak_akses))
+		// {
+		// 	switch ($id_hak_akses) 
+		// 	{
+		// 		case 1:
+		// 			redirect('admin');
+		// 			break;
 
-				case 2:
-					redirect('supervisor');
-					break;
-			}
+		// 		case 2:
+		// 			redirect('supervisor');
+		// 			break;
+		// 	}
 
-			exit;
-		}
+		// 	exit;
+		// }
   	}
 
 
-  	public function index()
+  	public function user()
   	{
 		if ($this->POST('login-submit'))
 		{
@@ -57,11 +57,11 @@ class Login extends MY_Controller
 				exit;
 			}
 		}
-		$this->data['title'] = 'LOGIN'.$this->title;
+		$this->data['title'] = 'Login'.$this->title;
 		$this->load->view('login_pelamar',$this->data);
 	}
 
-	public function admin()
+	public function index()
   	{
 
   		if ($this->POST('login-submit'))

@@ -30,7 +30,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <?= form_open('login/admin') ?>
+            <?= form_open('login') ?>
               <h1>Login Form</h1>
               <div>
                 <?= $this->session->flashdata('msg') ?>
@@ -44,16 +44,16 @@
               <div style="margin-left: 0px !important;">
                 <input type="submit" name="login-submit" value="Login" class="btn btn-lg btn-success btn-block">
               </div>
-              <div>
+              <!-- <div>
                   <a class="reset_pass" href="#">Lost your password?</a>
-              </div>
+              </div> -->
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Ingin mendaftar sebagai pelamar?
+                <!-- <p class="change_link">Ingin mendaftar sebagai pelamar?
                   <a href="<?= base_url('login/daftar') ?>" class="to_register"> Klik ini! </a>
-                </p>
+                </p> -->
 
                 <div class="clearfix"></div>
                 <br />
