@@ -31,7 +31,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <?= form_open('login') ?>
-              <h1>Login Form</h1>
+              <h1>Login</h1>
               <div>
                 <?= $this->session->flashdata('msg') ?>
               </div>
@@ -41,7 +41,14 @@
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="password" required />
               </div>
-              <div style="margin-left: 0px !important;">
+              <div>
+                <select name="role" class="form-control">
+                  <option value="Mahasiswa">Mahasiswa</option>
+                  <option value="Dosen">Dosen</option>
+                  <option value="Admin">Admin</option>
+                </select>
+              </div>
+              <div style="margin-left: 0px !important; margin-top: 5%;">
                 <input type="submit" name="login-submit" value="Login" class="btn btn-lg btn-success btn-block">
               </div>
               <!-- <div>

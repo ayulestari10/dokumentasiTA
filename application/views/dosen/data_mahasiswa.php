@@ -1,0 +1,128 @@
+<!-- page content -->
+<div class="right_col" role="main">
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h3 class="page-header">Data Dokumen Tugas Akhir
+				</h3>
+			</div>
+			<!-- <div class="title_right">
+				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="clearfix"></div>
+		
+	</div>
+
+		<div class="">
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<div>
+							<!-- <h2>Data Dokumen Tugas Akhir</h2> -->
+						</div>
+						<ul class="nav navbar-right panel_toolbox">
+							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+							<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div>
+							<?= $this->session->flashdata('msg') ?>
+						</div>
+						<table id="datatable" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>NIM</th>
+									<th>Judul</th>
+									<th>Tahun</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- <?php $i=1; foreach ($user as $row): ?>
+								<tr>
+									<td><?= $i ?></td>
+									<td><?= $row->username ?></td>
+									<td>dosen</td>
+									<td>
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+											Aksi <span class="caret"></span></button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#" data-toggle="modal" data-target="#edit" onclick="get_data('<?= $row->id_user ?>')"><i class="fa fa-pencil"></i> Edit</li>
+												<li><a href="" onclick="delete_data(<?= $row->id_user ?>, 'dosen')"><i class="fa fa-trash"></i> Hapus </a></li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+								<?php $i++; endforeach; ?> -->
+
+								<tr>
+									<td>1</td>
+									<td>09021181520021</td>
+									<td style="text-align: justify; width: 200px;">Ekstraksi ciri GMI pada Citra Multiple Face</td>
+									<td>2018</td>
+									<td>
+										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>09021181520039</td>
+									<td style="text-align: justify; width: 200px;">Penerapan Data Mining Pada Teks</td>
+									<td>2018</td>
+									<td>
+										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
+									</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>09021281520105</td>
+									<td style="text-align: justify; width: 200px;">Pengaruh Algoritma SOM pada Clustering</td>
+									<td>2018</td>
+									<td>
+										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+            <script>
+                $(document).ready(function() {
+                    $('#dataTables-example').DataTable({
+                        responsive: true
+                    });
+                });
+
+                function delete_data(id_user) {
+                    $.ajax({
+                        url: '<?= base_url('mahasiswa/user') ?>',
+                        type: 'POST',
+                        data: {
+                            id_user: id_user,
+                            delete: true
+                        },
+                        success: function() {
+                            window.location = '<?= base_url('mahasiswa/user') ?>';
+                        }
+                    });
+                }
+            </script>
