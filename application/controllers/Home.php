@@ -12,8 +12,12 @@ class Home extends MY_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $this->data['title']    = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->template($this->data, 'home');
     }
+
+
 }
 
 ?>

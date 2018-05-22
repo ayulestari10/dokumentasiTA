@@ -17,8 +17,11 @@ class MY_Controller extends CI_Controller
 	    elseif($template == 'mahasiswa') {
 	      return $this->load->view('mahasiswa/includes/layout', $data);
 	    }
-	    else {
+	    elseif($template == 'dosen') {
 	      return $this->load->view('dosen/includes/layout', $data);
+	    }
+	    else {
+	      return $this->load->view('home/includes/layout', $data);
 	    }
 	}
 
