@@ -42,6 +42,13 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
+    public function edit_dokumen()
+    {
+        $this->data['title']  = 'Edit Dokumen'.$this->title;
+        $this->data['content']  = 'mahasiswa/edit_dokumen';
+        $this->template($this->data, 'mahasiswa');
+    }
+
     public function ubah_password()
     {
         $this->data['title']  = 'Ubah Password'.$this->title;

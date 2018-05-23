@@ -45,6 +45,7 @@
 								<tr>
 									<th>No</th>
 									<th>NIM</th>
+									<th>Nama</th>
 									<th>Judul</th>
 									<th>Tahun</th>
 									<th>Aksi</th>
@@ -72,6 +73,7 @@
 								<tr>
 									<td>1</td>
 									<td>09021181520021</td>
+									<td>Ayu Lestari</td>
 									<td style="text-align: justify; width: 200px;">Ekstraksi ciri GMI pada Citra Multiple Face</td>
 									<td>2018</td>
 									<td>
@@ -81,6 +83,7 @@
 								<tr>
 									<td>2</td>
 									<td>09021181520039</td>
+									<td>Yulinda Ramadhana</td>
 									<td style="text-align: justify; width: 200px;">Penerapan Data Mining Pada Teks</td>
 									<td>2018</td>
 									<td>
@@ -90,6 +93,7 @@
 								<tr>
 									<td>3</td>
 									<td>09021281520105</td>
+									<td>Tri Kurnia Sari</td>
 									<td style="text-align: justify; width: 200px;">Pengaruh Algoritma SOM pada Clustering</td>
 									<td>2018</td>
 									<td>

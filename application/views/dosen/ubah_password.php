@@ -37,7 +37,7 @@
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
-									<input type="text" value="09021181520021" class="form-control" name="nim" disabled>
+									<input type="text" value="198505102015041002" class="form-control" name="nim" disabled>
 								</div>
 								<div class="form-group">
 									<label for="Password">Password <span class="required">*</span></label>

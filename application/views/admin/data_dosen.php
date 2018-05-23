@@ -64,7 +64,7 @@
 
 								<tr>
 									<td>1</td>
-									<td>09021181520021</td>
+									<td>197102041997021003</td>
 									<td>
 										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
 										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>
@@ -72,7 +72,7 @@
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>09021181520039</td>
+									<td>198005222008121002</td>
 									<td>
 										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
 										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>
@@ -80,7 +80,7 @@
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>09021281520105</td>
+									<td>198505102015041002</td>
 									<td>
 										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
 										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>

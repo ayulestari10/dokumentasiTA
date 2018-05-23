@@ -13,7 +13,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2><?= "Ayu, Sari, Yulin" ?></h2>
+                        <h2><?= "Ayu-Sari-Yulinda" ?></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
