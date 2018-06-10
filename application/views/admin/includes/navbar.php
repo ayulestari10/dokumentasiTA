@@ -8,11 +8,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i> <?= "Ayu-Sari-Yulinda" ?>
+                        <i class="fa fa-user"></i> <?= $username ?>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="<?= base_url('logout/admin') ?>"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out"></i> Log Out</a></li>
                     </ul>
                 </li>
                 <!-- <li><a href="<?= base_url() ?>"></a></li> -->

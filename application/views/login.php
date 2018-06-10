@@ -33,21 +33,24 @@
 								<!-- <div class="logo text-center"><img src="<?= base_url('assets/login/') ?>assets/img/logo-dark.png" alt="Klorofil Logo"></div> -->
 								<h3><strong>Login Dokumentasi TA</strong></h3>
 							</div>
-							<form class="form-auth-small" action="index.php">
+							<div>
+								<?= $this->session->userdata('msg') ?>
+							</div>
+							<?= form_open('Login') ?>
 								<div class="form-group">
-									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="email" class="form-control" placeholder="Username">
+									<label for="signin-username" class="control-label sr-only">Username</label>
+									<input type="username" class="form-control" name="username" placeholder="Username">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" placeholder="Password">
+									<input type="password" class="form-control" name="password" placeholder="Password">
 								</div>
 								<div class="form-group">
 					                <div style="text-align: left !important;"><h5>Sebagai</h5></div>
 					                <select name="role" class="form-control">
-					                  <option value="Mahasiswa">Mahasiswa</option>
-					                  <option value="Dosen">Dosen</option>
-					                  <option value="Admin">Admin</option>
+					                  <option value="mahasiswa">Mahasiswa</option>
+					                  <option value="dosen">Dosen</option>
+					                  <option value="admin">Admin</option>
 					                </select>
 					              </div>
 								<!-- <div class="form-group clearfix">
@@ -56,7 +59,7 @@
 										<span>Remember me</span>
 									</label>
 								</div> -->
-								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+								<input name="login-submit" type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
 								<!-- <div class="bottom">
 									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
 								</div> -->

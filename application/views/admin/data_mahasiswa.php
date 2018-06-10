@@ -44,48 +44,16 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- <?php $i=1; foreach ($user as $row): ?>
+								<?php $i=1; foreach ($mahasiswa as $row): ?>
 								<tr>
 									<td><?= $i ?></td>
 									<td><?= $row->username ?></td>
-									<td>Admin</td>
 									<td>
-										<div class="btn-group">
-											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-											Aksi <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a href="#" data-toggle="modal" data-target="#edit" onclick="get_data('<?= $row->id_user ?>')"><i class="fa fa-pencil"></i> Edit</li>
-												<li><a href="" onclick="delete_data(<?= $row->id_user ?>, 'Admin')"><i class="fa fa-trash"></i> Hapus </a></li>
-											</ul>
-										</div>
+										<button class="btn btn-primary" data-toggle="modal" data-target="#edit" onclick="get_data('<?= $row->username ?>')"><i class="fa fa-pencil-square"> Edit</i></button>
+										<button class="btn btn-danger" onclick="delete_data('<?= $row->username ?>')"><i class="fa fa-trash"> Hapus</i></button>
 									</td>
 								</tr>
-								<?php $i++; endforeach; ?> -->
-
-								<tr>
-									<td>1</td>
-									<td>09021181520021</td>
-									<td>
-										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
-										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>09021181520039</td>
-									<td>
-										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
-										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>09021281520105</td>
-									<td>
-										<a href="" class="btn btn-primary" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil-square"> Edit</i></a>
-										<a href="" class="btn btn-danger"><i class="fa fa-trash"> Hapus</i></a>
-									</td>
-								</tr>
+								<?php $i++; endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -128,17 +96,17 @@
 
 	<div class="modal fade" tabindex="-1" role="dialog" id="edit">
 		<div class="modal-dialog" role="document">
-			<?= form_open('admin/edit-mahasiswa') ?>
+			<?= form_open('admin/data-mahasiswa') ?>
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Edit Data Mahasiswa</h4>
 				</div>
-				<input type="hidden" name="id_user" id="edit_id_user">
+				<input type="hidden" name="username_lama" id="edit_username_lama_hidden">
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="Username">Username <span class="required">* NIM</span></label>
-						<input type="text" class="form-control" name="edit_username" id="edit_username" required>
+						<input type="text" class="form-control" name="edit_username" id="edit_username_lama" required>
 					</div>
 					<div class="form-group">
 						<label for="Password">Password <span class="required">*</span></label>
@@ -167,33 +135,34 @@
                     });
                 });
 
-                function get_data(id_user) {
+                function get_data(username) {
+
                   $.ajax({
-                      url: '<?= base_url('admin/user') ?>',
+                      url: '<?= base_url('admin/data-mahasiswa') ?>',
                       type: 'POST',
                       data: {
-                          id_user: id_user,
+                          username: username,
                           get: true
                       },
                       success: function(response) {
+                      		console.log(response);
                           response = JSON.parse(response);
-                          $('#edit_username').val(response.username);
-                          $('#edit_id_user').val(id_user);
+                          $('#edit_username_lama, #edit_username_lama_hidden').val(response.username);
                       },
                       error: function(e) {console.log(e.responseText);}
                   });
                 }
 
-                function delete_data(id_user) {
+                function delete_data(username) {
                     $.ajax({
-                        url: '<?= base_url('admin/user') ?>',
+                        url: '<?= base_url('admin/data-mahasiswa') ?>',
                         type: 'POST',
                         data: {
-                            id_user: id_user,
+                            username: username,
                             delete: true
                         },
                         success: function() {
-                            window.location = '<?= base_url('admin/user') ?>';
+                            window.location = '<?= base_url('admin/data-mahasiswa') ?>';
                         }
                     });
                 }

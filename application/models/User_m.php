@@ -6,7 +6,7 @@ class User_m extends MY_Model
 	{
 		parent::__construct();
 		$this->data['table_name'] 	= 'user';
-		$this->data['primary_key']	= 'id_user';
+		$this->data['primary_key']	= 'username';
 	}
 
 	public function login($data)
@@ -15,8 +15,7 @@ class User_m extends MY_Model
 		if (!isset($result))
 			return $result;
 		$this->session->set_userdata([
-			'username'		=> $result->username,
-			'id_hak_akses'	=> $result->id_hak_akses
+			'username'		=> $result->username
 		]);
 		return $result;
 	}

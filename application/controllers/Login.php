@@ -5,72 +5,53 @@ class Login extends MY_Controller
 {
 	private $data = [];
 
-  	public function __construct()
-	{
+  	public function __construct() {
+
 	    parent::__construct();	
-	 //    $username 		= $this->session->userdata('username');
-	 //    $id_hak_akses	= $this->session->userdata('id_hak_akses');
-		// if (isset($username, $id_hak_akses))
-		// {
-		// 	switch ($id_hak_akses) 
-		// 	{
-		// 		case 1:
-		// 			redirect('admin');
-		// 			break;
+	    $username 		= $this->session->userdata('username');
+	    $role	 		= $this->session->userdata('role');
 
-		// 		case 2:
-		// 			redirect('supervisor');
-		// 			break;
-		// 	}
-
-		// 	exit;
-		// }
+	    if(isset($role)){
+	    	$this->load->model($role);
+	    	
+	    	if($role == "mahasiswa"){
+	    		$cek_data = $this->$role->get(['NIM' => $username]);
+	    	}
+	    	elseif($role == "dosen"){
+	    		$cek_data = $this->$role->get(['NIP' => $username]);
+	    	}
+	    	else{
+	    		$cek_data = $this->$role->get(['NIPUS' => $username]);
+	    	}
+	    	
+	    	if (count($cek_data) != 0){
+				if($role == "mahasiswa"){
+					redirect('Mahasiswa');
+					exit;
+				}
+				elseif($role == "dosen"){
+					redirect('Dosen');
+					exit;
+				}
+				elseif($role == "admin"){
+					redirect('Admin');
+					exit;
+				}
+				else{
+					redirect('login');
+					exit;
+				}
+			}
+	    } 
   	}
 
+	public function index() {
 
-  	public function user()
-  	{
-		if ($this->POST('login-submit'))
-		{
-			$this->load->model('pelamar_m');
-			if (!$this->pelamar_m->required_input(['username','password'])) 
-			{
-				$this->flashmsg('Data harus lengkap','warning');
-				redirect('login');
-				exit;
-			}
-			
-			$this->data = [
-    			'username'	=> $this->POST('username'),
-    			'password'	=> md5($this->POST('password'))
-			];
-
-			$result = $this->pelamar_m->login($this->data);
-			if (!isset($result)) 
-			{
-				$this->flashmsg('Username atau password salah','danger');
-				redirect('login');
-				exit;
-			}
-			else {
-				redirect('pendaftaran');
-				exit;
-			}
-		}
-		$this->data['title'] = 'Login'.$this->title;
-		$this->load->view('login_pelamar',$this->data);
-	}
-
-	public function index()
-  	{
-
-  		if ($this->POST('login-submit'))
-		{
+  		if ($this->POST('login-submit')) {
 			$this->load->model('user_m');
-			if (!$this->user_m->required_input(['username','password'])) 
-			{
+			if (!$this->user_m->required_input(['username','password'])){
 				$this->flashmsg('Data harus lengkap','warning');
-				redirect('login/admin');
+				redirect('login');
 				exit;
 			}
 			
@@ -78,36 +59,20 @@ class Login extends MY_Controller
     			'username'	=> $this->POST('username'),
     			'password'	=> md5($this->POST('password'))
 			];
+
+			$role = $this->POST('role');
+			$this->session->set_userdata('role', $role);
 			
 			$result = $this->user_m->login($this->data);
-			if (!isset($result)) 
-			{
+			if (!isset($result)) {
 				$this->flashmsg('Username atau password salah','danger');
 			}
 			redirect('login');
 			exit;
 		}
+
 		$this->data['title'] = 'LOGIN'.$this->title;
 		$this->load->view('login',$this->data);
 	}
 
-	// public function daftar()
- //  	{
-	//     $this->load->view('daftar');
-	// }	
-
-	public function laporan()
-    {
-        $this->load->model('pelamar_m');
-        $this->load->model('hasil_penilaian_m');
-        $this->load->model('keputusan_m');
-        $this->load->model('kriteria_m');
-        $this->load->model('bobot_m');
-        $this->load->model('penilaian_m');
-
-        $this->data['kriteria'] = $this->kriteria_m->get();
-        $this->data['hasil']    = $this->hasil_penilaian_m->get_by_order('hasil', 'DESC');
-        $this->data['title']    = 'Ranking Pelamar';
-        $this->load->view('supervisor/laporan', $this->data);
-    }
 }
