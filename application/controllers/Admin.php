@@ -7,7 +7,7 @@ class Admin extends MY_Controller
 
     public function __construct()
     {
-      parent::__construct();    
+        parent::__construct();    
         $this->data['username']     = $this->session->userdata('username');
         $this->data['role']         = $this->session->userdata('role');
         
@@ -22,6 +22,9 @@ class Admin extends MY_Controller
         $this->load->model('mahasiswa');
         $this->load->model('dosen');
         $this->load->model('tugas_akhir');
+
+         // load form_validation library
+        $this->load->library('form_validation');
     }
 
     public function index(){
@@ -45,7 +48,6 @@ class Admin extends MY_Controller
 
         if($this->POST('username') && $this->POST('get')){
             $this->data['data_mahasiswa'] = $this->user_m->get_row(['username' => $this->POST('username')]);
-            // $this->dump($this->data['data_mahasiswa']);exit;
             echo json_encode($this->data['data_mahasiswa']);
             exit;
         }
@@ -59,9 +61,16 @@ class Admin extends MY_Controller
     public function tambah_mahasiswa(){
 
         if($this->POST('simpan')){
+
+            if($this->POST('password1') != $this->POST('password2')){
+                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+                redirect('admin/data-mahasiswa');
+                exit;
+            }
+
             $data_mahasiswa = [
                 'username'  => $this->POST('username'),
-                'password'  => md5($this->POST('password'))
+                'password'  => md5($this->POST('password1'))
             ];
             $this->user_m->insert($data_mahasiswa);
 
@@ -75,14 +84,23 @@ class Admin extends MY_Controller
     }
 
     public function edit_mahasiswa(){
-        if($this->POST('username') && $this->POST('get')){
-            $this->data['data_mahasiswa'] = $this->user_m->get_row(['username' => $this->POST('username')]);
-            // $this->dump($this->data['data_mahasiswa']);exit;
-            echo json_encode($this->data['data_mahasiswa']);
-            exit;
-        }
 
         if($this->POST('edit')){
+            if($this->POST('password1') != $this->POST('password2')){
+                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+                redirect('admin/data-mahasiswa');
+                exit;
+            }
+
+            $username = $this->POST('username_lama');
+
+            $data_mahasiswa = [
+                'password'  => md5($this->POST('password1'))
+            ];
+            $this->user_m->update($username, $data_mahasiswa);
+
+            $this->flashmsg('Data berhasil diedit!');
+            redirect('admin/data-mahasiswa');
             exit;
         }
     }

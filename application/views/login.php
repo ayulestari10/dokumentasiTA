@@ -15,10 +15,15 @@
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/css/demo.css">
 	<!-- GOOGLE FONTS -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet"> -->
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="<?= base_url('assets/login/') ?>assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/login/') ?>assets/img/favicon.png">
+
+	 <style>
+    .field_title{font-size: 13px;font-family:Arial;width: 300px;margin-top: 10px}
+    .form_error{font-size: 13px;font-family:Arial;color:red;font-style:italic}
+    </style>
 </head>
 
 <body>
@@ -36,14 +41,17 @@
 							<div>
 								<?= $this->session->userdata('msg') ?>
 							</div>
+							<div >
+					          <?php echo validation_errors(); ?>
+					        </div>
 							<?= form_open('Login') ?>
 								<div class="form-group">
 									<label for="signin-username" class="control-label sr-only">Username</label>
-									<input type="username" class="form-control" name="username" placeholder="Username">
+									<input type="username" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" >
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" name="password" placeholder="Password">
+									<input type="password" class="form-control" name="password" placeholder="Password" value="" >
 								</div>
 								<div class="form-group">
 					                <div style="text-align: left !important;"><h5>Sebagai</h5></div>

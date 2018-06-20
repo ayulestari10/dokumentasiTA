@@ -28,7 +28,6 @@ if (@$_SERVER["HTTPS"] == "on") {$config['base_url'] .= "s";}
 $config['base_url'] .= "://";
 $config['base_url'] .= $_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-
 /*
 |--------------------------------------------------------------------------
 | Index File

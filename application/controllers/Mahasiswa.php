@@ -7,16 +7,17 @@ class Mahasiswa extends MY_Controller
 
     public function __construct()
     {
-      parent::__construct();    
-        // $this->data['username']     = $this->session->userdata('username');
-        // $this->data['id_hak_akses'] = $this->session->userdata('id_hak_akses');
+        parent::__construct();    
+        $this->data['username']     = $this->session->userdata('username');
+        $this->data['role']         = $this->session->userdata('role');
         
-        // if (!isset($this->data['username'], $this->data['id_hak_akses']) or $this->data['id_hak_akses'] != 1)
-        // {
-        //     $this->session->sess_destroy();
-        //     redirect('login/mahasiswa');
-        //     exit;
-        // }
+        if (!isset($this->data['username'], $this->data['role']) or $this->data['role'] != "mahasiswa")
+        {
+            $this->session->sess_destroy();
+            $this->flashmsg('Anda harus login dulu!','warning');
+            redirect('login');
+            exit;
+        }
 
     }
 
