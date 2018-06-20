@@ -1,6 +1,6 @@
 <?php 
 
-class Tugas_akhir extends MY_Model 
+class Tugas_akhir_m extends MY_Model 
 {
 	public function __construct()
 	{

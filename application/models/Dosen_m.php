@@ -1,6 +1,6 @@
 <?php 
 
-class Dosen extends MY_Model 
+class Dosen_m extends MY_Model 
 {
 	public function __construct()
 	{

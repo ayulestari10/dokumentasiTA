@@ -19,9 +19,9 @@ class Admin extends MY_Controller
         }
 
         $this->load->model('user_m');
-        $this->load->model('mahasiswa');
-        $this->load->model('dosen');
-        $this->load->model('tugas_akhir');
+        $this->load->model('mahasiswa_m');
+        $this->load->model('dosen_m');
+        $this->load->model('tugas_akhir_m');
 
          // load form_validation library
         $this->load->library('form_validation');
@@ -31,9 +31,9 @@ class Admin extends MY_Controller
 
         $this->data['title']        = 'Dashboard Admin'.$this->title;
         $this->data['content']      = 'admin/dashboard';
-        $this->data['mahasiswa']    = $this->mahasiswa->get();
-        $this->data['dosen']        = $this->dosen->get();
-        $this->data['tugas_akhir']  = $this->tugas_akhir->get();
+        $this->data['mahasiswa']    = $this->mahasiswa_m->get();
+        $this->data['dosen']        = $this->dosen_m->get();
+        $this->data['tugas_akhir']  = $this->tugas_akhir_m->get();
         $this->template($this->data);
     }
 
@@ -54,7 +54,7 @@ class Admin extends MY_Controller
 
         $this->data['title']        = 'Data Mahasiswa'.$this->title;
         $this->data['content']      = 'admin/data_mahasiswa';
-        $this->data['mahasiswa']    = $this->mahasiswa->getData();
+        $this->data['mahasiswa']    = $this->mahasiswa_m->getData();
         $this->template($this->data);
     }
 
@@ -62,8 +62,22 @@ class Admin extends MY_Controller
 
         if($this->POST('simpan')){
 
-            if($this->POST('password1') != $this->POST('password2')){
-                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+            $this->form_validation->set_rules('username', 'Username', 'required|min_length[14]|max_length[18]|numeric', array(
+                    'required'      => 'Username tidak boleh kosong', 
+                    'min_length'    => 'Username harus lebih dari 14 karakter', 
+                    'max_length'    => 'Username harus maksimum 18 karakter', 
+                    'numeric'       => 'Username harus angka'
+                ));
+            $this->form_validation->set_rules('password1', 'Password', 'required', array(
+                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong',
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->flashmsg(validation_errors(), 'danger');
                 redirect('admin/data-mahasiswa');
                 exit;
             }
@@ -75,7 +89,7 @@ class Admin extends MY_Controller
             $this->user_m->insert($data_mahasiswa);
 
             $nim = ['nim'   => $this->POST('username')];
-            $this->mahasiswa->insert($nim);
+            $this->mahasiswa_m->insert($nim);
 
             $this->flashmsg('Data berhasil disimpan!');
             redirect('admin/data-mahasiswa');
@@ -86,8 +100,17 @@ class Admin extends MY_Controller
     public function edit_mahasiswa(){
 
         if($this->POST('edit')){
-            if($this->POST('password1') != $this->POST('password2')){
-                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+            
+            $this->form_validation->set_rules('password1', 'Password', 'required', array(
+                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong',
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->flashmsg(validation_errors(), 'danger');
                 redirect('admin/data-mahasiswa');
                 exit;
             }
@@ -123,7 +146,7 @@ class Admin extends MY_Controller
 
         $this->data['title']        = 'Data Dosen'.$this->title;
         $this->data['content']      = 'admin/data_dosen';
-        $this->data['dosen']        = $this->dosen->getData();
+        $this->data['dosen']        = $this->dosen_m->getData();
         $this->template($this->data);
     }
 
@@ -131,8 +154,22 @@ class Admin extends MY_Controller
 
         if($this->POST('simpan')){
 
-            if($this->POST('password1') != $this->POST('password2')){
-                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+            $this->form_validation->set_rules('username', 'Username', 'required|min_length[14]|max_length[18]|numeric', array(
+                    'required'      => 'Username tidak boleh kosong', 
+                    'min_length'    => 'Username harus lebih dari 14 karakter', 
+                    'max_length'    => 'Username harus maksimum 18 karakter', 
+                    'numeric'       => 'Username harus angka'
+                ));
+            $this->form_validation->set_rules('password1', 'Password', 'required', array(
+                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong',
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->flashmsg(validation_errors(), 'danger');
                 redirect('admin/data-dosen');
                 exit;
             }
@@ -144,7 +181,7 @@ class Admin extends MY_Controller
             $this->user_m->insert($data_dosen);
 
             $nip = ['nip'   => $this->POST('username')];
-            $this->dosen->insert($nip);
+            $this->dosen_m->insert($nip);
 
             $this->flashmsg('Data berhasil disimpan!');
             redirect('admin/data-dosen');
@@ -155,9 +192,18 @@ class Admin extends MY_Controller
     public function edit_dosen(){
 
         if($this->POST('edit')){
-            if($this->POST('password1') != $this->POST('password2')){
-                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
-                redirect('admin/data-dosen');
+            
+            $this->form_validation->set_rules('password1', 'Password', 'required', array(
+                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong',
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->flashmsg(validation_errors(), 'danger');
+                redirect('admin/data-mahasiswa');
                 exit;
             }
 
@@ -174,17 +220,50 @@ class Admin extends MY_Controller
         }
     }
 
-    public function data_dokumen()
-    {
-        $this->data['title']  = 'Data Dokumen'.$this->title;
+    public function data_dokumen(){
+        if($this->POST('status') && $this->POST('NIM')){
+            $dokumen = $this->tugas_akhir_m->get_row(['nim' => $this->POST('NIM')]);
+
+            if (isset($dokumen)){
+                $nim = $this->POST('NIM');
+
+                if ($dokumen->status == 'Terverifikasi'){
+                    $this->tugas_akhir_m->update($nim, ['status' => 'Belum Terverifikasi']);
+                    echo "<button class='btn btn-danger' onclick=\"changeStatus('".$nim."')\"><i class='fa fa-close'></i> Belum Terverifikasi</button>";
+                }
+                else {
+                    $this->tugas_akhir_m->update($nim, ['status' => 'Terverifikasi']);
+                    echo "<button class='btn btn-success' onclick=\"changeStatus('".$nim."')\"><i class='fa fa-check'></i> Terverifikasi</button>";   
+                }
+            }
+            exit;
+        }
+
+        if($this->POST('delete') && $this->POST('NIM')){
+
+            $this->tugas_akhir_m->delete($this->POST('NIM'));
+            $this->flashmsg('<i class="fa fa-check"></i> Data tugas akhir berhasil dihapus');
+            exit;
+        }
+
+        $this->data['title']    = 'Data Dokumen'.$this->title;
+        $this->data['dokumen']  = $this->tugas_akhir_m->get();
         $this->data['content']  = 'admin/data_dokumen';
         $this->template($this->data);
     }
 
-    public function detail_dokumen()
-    {
-        $this->data['title']  = 'Detail Dokumen'.$this->title;
+    public function detail_dokumen() {
+        $nim = $this->uri->segment(3);
+
+        if(!isset($nim)){
+            $this->flashmsg('<i class="fa fa-close"></i> NIM tidak dicantumkan', 'danger');
+            redirect('admin/data-dokumen');
+            exit;
+        }
+
+        $this->data['title']    = 'Detail Dokumen'.$this->title;
         $this->data['content']  = 'admin/detail_dokumen';
+        $this->data['dokumen']  = $this->tugas_akhir_m->get_row(['NIM' => $nim]);
         $this->template($this->data);
     }
 }

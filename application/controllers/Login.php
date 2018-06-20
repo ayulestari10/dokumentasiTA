@@ -34,8 +34,15 @@ class Login extends MY_Controller
 	public function index() {
 
   		if ($this->POST('login-submit')) {
-  			$this->form_validation->set_rules('username', 'Username', 'required|min_length[14]|max_length[18]|alpha_numeric');
-  			$this->form_validation->set_rules('password', 'Password', 'required');
+
+  			$this->form_validation->set_rules('username', 'Username', 'required|min_length[14]|max_length[18]|numeric', array(
+  					'required'		=> 'Username tidak boleh kosong', 
+  					'min_length' 	=> 'Username harus lebih dari 14 karakter', 
+  					'max_length'	=> 'Username harus maksimum 18 karakter', 
+  					'numeric' 		=> 'Username harus angka'
+  				));
+  			$this->form_validation->set_rules('password', 'Password', 'required', array(
+  					'required'		=> 'Password tidak boleh kosong'));
 
 			if ($this->form_validation->run() == FALSE)
 	        {
@@ -44,13 +51,6 @@ class Login extends MY_Controller
 	            exit;
 	        }
 
-			$this->load->model('user_m');
-			if (!$this->user_m->required_input(['username','password'])){
-				$this->flashmsg('Data harus lengkap!','warning');
-				redirect('login');
-				exit;
-			}
-			
 			$this->data = [
     			'username'	=> $this->POST('username'),
     			'password'	=> md5($this->POST('password'))
@@ -58,6 +58,7 @@ class Login extends MY_Controller
 
 			$role = $this->POST('role');
 			
+			$this->load->model('user_m');
 			$result = $this->user_m->login($this->data);
 			if (!isset($result)) {
 				$this->flashmsg('Username atau password salah','danger');

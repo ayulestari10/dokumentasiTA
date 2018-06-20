@@ -47,7 +47,7 @@
 							<?= form_open('Login') ?>
 								<div class="form-group">
 									<label for="signin-username" class="control-label sr-only">Username</label>
-									<input type="username" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" >
+									<input type="number" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" >
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
