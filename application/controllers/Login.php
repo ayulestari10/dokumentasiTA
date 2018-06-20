@@ -39,17 +39,10 @@ class Login extends MY_Controller
 
 			if ($this->form_validation->run() == FALSE)
 	        {
-	        	// echo validation_errors(); exit;
 	        	$this->flashmsg(validation_errors(), 'danger');
 	            redirect('login');
 	            exit;
 	        }
-	        else
-	        {
-	            // load success template...
-	            echo "It's all Good!";exit;
-	        }
-
 
 			$this->load->model('user_m');
 			if (!$this->user_m->required_input(['username','password'])){

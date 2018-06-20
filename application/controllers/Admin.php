@@ -107,9 +107,71 @@ class Admin extends MY_Controller
 
     public function data_dosen()
     {
-        $this->data['title']  = 'Data Dosen'.$this->title;
-        $this->data['content']  = 'admin/data_dosen';
+
+        if($this->POST('delete') && $this->POST('username')){
+
+            $this->user_m->delete($this->POST('username'));
+            $this->flashmsg('<i class="fa fa-check"></i> Data dosen berhasil dihapus');
+            exit;
+        }
+
+        if($this->POST('username') && $this->POST('get')){
+            $this->data['data_dosen'] = $this->user_m->get_row(['username' => $this->POST('username')]);
+            echo json_encode($this->data['data_dosen']);
+            exit;
+        }
+
+        $this->data['title']        = 'Data Dosen'.$this->title;
+        $this->data['content']      = 'admin/data_dosen';
+        $this->data['dosen']        = $this->dosen->getData();
         $this->template($this->data);
+    }
+
+    public function tambah_dosen(){
+
+        if($this->POST('simpan')){
+
+            if($this->POST('password1') != $this->POST('password2')){
+                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+                redirect('admin/data-dosen');
+                exit;
+            }
+
+            $data_dosen = [
+                'username'  => $this->POST('username'),
+                'password'  => md5($this->POST('password1'))
+            ];
+            $this->user_m->insert($data_dosen);
+
+            $nip = ['nip'   => $this->POST('username')];
+            $this->dosen->insert($nip);
+
+            $this->flashmsg('Data berhasil disimpan!');
+            redirect('admin/data-dosen');
+            exit;
+        }
+    }
+
+    public function edit_dosen(){
+
+        if($this->POST('edit')){
+            if($this->POST('password1') != $this->POST('password2')){
+                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+                redirect('admin/data-dosen');
+                exit;
+            }
+
+            $username = $this->POST('username_lama');
+
+            $data_dosen = [
+                'password'  => md5($this->POST('password1'))
+            ];
+            $this->user_m->update($username, $data_dosen);
+
+            $this->flashmsg('Data berhasil diedit!');
+            redirect('admin/data-dosen');
+            exit;
+        }
     }
 
     public function data_dokumen()
