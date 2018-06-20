@@ -45,7 +45,11 @@
 								</div>
 								<div class="form-group">
 									<label for="Jurusan">Jurusan <span class="required">*</span></label>
-									<input type="text" class="form-control" name="jurusan" required>
+									<select name="jurusan" class="form-control">
+					                  <option value="ti">Teknik Informatika</option>
+					                  <option value="si">Sistem Informasi</option>
+					                  <option value="sk">Sistem Komputer</option>
+					                </select>
 								</div>
 								<div class="form-group">
 									<label for="Email">Email <span class="required">*</span></label>
@@ -57,11 +61,15 @@
 								</div>
 								<div class="form-group">
 									<label for="Konsentrasi">Konsentrasi <span class="required">*</span></label>
-									<input type="text" class="form-control" name="konsentrasi" required>
+									<select name="Konsentrasi" class="form-control">
+					                  <option value="ai">Kecerdasan Buatan</option>
+					                  <option value="bd">Basis Data</option>
+					                  <option value="citra">Citra</option>
+					                </select>
 								</div>
 								<div class="form-group">
 									<label for="Tahun">Tahun <span class="required">*</span></label>
-									<input type="text" class="form-control" name="tahun" required>
+									<input type="number" class="form-control" name="tahun" required>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>

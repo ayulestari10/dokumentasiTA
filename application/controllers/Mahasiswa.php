@@ -19,12 +19,16 @@ class Mahasiswa extends MY_Controller
             exit;
         }
 
+        $this->load->model('user_m');
+        $this->load->model('Mahasiswa_m');
+        $this->load->model('tugas_akhir');
     }
 
     public function index()
     {
         $this->data['title']  = 'Dashboard Mahasiswa'.$this->title;
         $this->data['content']  = 'mahasiswa/dashboard';
+        //$this->data['mahasiswa']    = $this->mahasiswa->get();
         $this->template($this->data, 'mahasiswa');
     }
 

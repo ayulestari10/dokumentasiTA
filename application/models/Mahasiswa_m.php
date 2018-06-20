@@ -1,6 +1,6 @@
 <?php 
 
-class Mahasiswa extends MY_Model 
+class Mahasiswa_m extends MY_Model 
 {
 	public function __construct()
 	{
