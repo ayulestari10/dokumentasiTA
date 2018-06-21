@@ -41,5 +41,8 @@
     
     <!-- Custom Theme Scripts -->
     <script src="<?= base_url('assets') ?>/build/js/custom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script src="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.css">
   </body>
 </html>

@@ -45,4 +45,10 @@ class Tugas_akhir_m extends MY_Model
 		$query = $this->db->get('tugas_akhir');
 		return $query->result();
 	}
+
+	public function deleteByNim($nim){
+		$this->db->where($this->data['primary_key'], $nim);
+		$query = $this->db->delete($this->data['table_name']);
+		return $query;
+	}
 }

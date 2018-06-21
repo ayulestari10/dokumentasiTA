@@ -71,7 +71,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Konsentrasi">Konsentrasi <span class="required">*</span></label>
-									<select name="konsentrasi" class="form-control" value="<?= $ta->konsentrasi ?>">
+									<select name="konsentrasi" class="form-control">
 					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
 					                  <option value="Basis Data">Basis Data</option>
 					                  <option value="Citra">Citra</option>
@@ -79,11 +79,15 @@
 								</div>
 								<div class="form-group">
 									<label for="Tahun">Tahun<span class="required">*</span></label>
-									<input type="number" class="form-control" name="tahun" value="<?= $ta->tahun_pembuatan ?>" required>
+									<select class="form-control" name="tahun" required>
+										<?php for($i = 2018; $i >= 2008; $i--): ?>
+											<option value="<?= $i ?>"><?= $i ?></option>
+										<?php endfor; ?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>
-									<select name="dosen_pembimbing1" class="form-control" value="<?= $ta->dosen_pembimbing1 ?>">
+									<select name="dosen_pembimbing1" class="form-control">
 					                	<?php foreach($dosen as $row): ?>
 					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
 					              		<?php endforeach; ?>
@@ -91,7 +95,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 2">Dosen Pembimbing 2 <span class="required">*</span></label>
-									<select name="dosen_pembimbing2" class="form-control" value="<?= $ta->dosen_pembimbing2 ?>">
+									<select name="dosen_pembimbing2" class="form-control">
 					                	<?php foreach($dosen as $row): ?>
 					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
 					              		<?php endforeach; ?>

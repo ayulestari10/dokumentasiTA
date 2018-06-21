@@ -38,7 +38,7 @@
 						<table class="table table-striped table-bordered">
 							<tr>
 								<th style="width: 180px">NIM</th>
-								<td><?= $this->session->userdata('username'); ?></td>
+								<td><?= $username ?></td>
 							</tr>
 							<tr>
 								<th>Nama</th>
@@ -47,6 +47,10 @@
 							<tr>
 								<th>Jurusan</th>
 								<td><?= "$individu->jurusan" ?></td>
+							</tr>
+							<tr>
+								<th>Angkatan</th>
+								<td><?= "$individu->angkatan" ?></td>
 							</tr>
 							<tr>
 								<th>Email</th>
@@ -66,11 +70,21 @@
 							</tr>
 							<tr>
 								<th>Dosen Pembimbing 1</th>
-								<td><?= "$dp1->nama" ?></td>
+								<td><?php
+									if ($dp1 == NULL)
+										echo NULL;
+								 	else
+								 		echo "$dp1->nama" ?>
+								 </td>
 							</tr>
 							<tr>
 								<th>Dosen Pembimbing 2</th>
-								<td><?= "$dp2->nama" ?></td>
+								<td><?php
+									if ($dp2 == NULL)
+										echo NULL;
+								 	else
+								 		echo "$dp2->nama" ?>
+								 </td>
 							</tr>
 							<tr>
 								<th>Status</th>
@@ -82,8 +96,10 @@
 			</div>
 
 			<div class="col-md-2 col-sm-2 col-xs-2">
-				<button type="button" class="btn btn-info btn-sm" onclick="download_file(<?= $this->session->userdata('username'); ?>)">Unduh Berkas <i class="fa fa-download"></i></button>
-				<button type="button" class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $this->session->userdata('username'); ?>)" >Hapus <i class="fa fa-trash"></i></button>					
+				<a href="<?= base_url('mahasiswa/download_file/'."$username")?>" class="btn btn-info btn-sm">Unduh Berkas <i class="fa fa-download"></i></a>
+				<button class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
+
+
 			</div>
 		</div>
 
@@ -122,8 +138,8 @@
 
                 function delete_data(id){
 		            swal({
-		              title: 'Apakah Anda ingin menghapus data Tugas Akhir ?',
-		              text: "File yang telah dihapus tidak dapat dikembalikan lagi!",
+		              title: 'Hapus data tugas akhir ?',
+		              text: "File yang telah dihapus tidak dapat dikembalikan lagi !",
 		              type: 'warning',
 		              showCancelButton: true,
 		              confirmButtonColor: '#3085d6',
@@ -144,7 +160,7 @@
 		                        delete: true
 		                    },
 		                    success: function() {
-		                       window.location = '<?= base_url('admin/data_dokumen') ?>';
+		                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
 		                    }
 		                });
 		              } 
@@ -158,8 +174,4 @@
 		              }
 		            })  
         		}
-
-        		function download_file(nim){
-                	window.location = '<?= base_url('Mahasiswa/download_file/') ?>' + nim;
-            	}
             </script>
