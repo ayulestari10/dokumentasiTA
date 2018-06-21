@@ -62,7 +62,7 @@
 									<td style="text-align: justify; width: 200px;"><?= $key->judulTA ?></td>
 									<td><?= $key->tahun_pembuatan ?></td>
 									<td>
-										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
+										<a href="<?= base_url('dosen/detail-dokumen/'."$key->nim") ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
 									</td>
 								</tr>
 								<?php 

@@ -98,8 +98,6 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<a href="<?= base_url('mahasiswa/download_file/'."$username")?>" class="btn btn-info btn-sm">Unduh Berkas <i class="fa fa-download"></i></a>
 				<button class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
-
-
 			</div>
 		</div>
 

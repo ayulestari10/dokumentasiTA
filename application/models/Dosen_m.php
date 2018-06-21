@@ -15,7 +15,13 @@ class Dosen_m extends MY_Model
 		$query = $this->db->query('SELECT mahasiswa.nim, mahasiswa.nama, tugas_akhir.judulTA, tugas_akhir.tahun_pembuatan 
 			FROM mahasiswa  INNER JOIN tugas_akhir ON tugas_akhir.NIM = mahasiswa.nim 
 							INNER JOIN dosen ON tugas_akhir.dosen_pembimbing1 = dosen.nip 
-							WHERE tugas_akhir.dosen_pembimbing1 = "'.$username.'" ');
+							WHERE tugas_akhir.dosen_pembimbing1 = "'.$username.'" 
+							UNION 
+							SELECT mahasiswa.nim, mahasiswa.nama, tugas_akhir.judulTA, tugas_akhir.tahun_pembuatan 
+							FROM mahasiswa  INNER JOIN tugas_akhir ON tugas_akhir.NIM = mahasiswa.nim 
+							INNER JOIN dosen ON tugas_akhir.dosen_pembimbing2 = dosen.nip 
+							WHERE tugas_akhir.dosen_pembimbing2 = "'.$username.'"
+							');
 
 		return $query->result();
 	}
@@ -29,9 +35,12 @@ class Dosen_m extends MY_Model
 
 	public function detail_ta($nim)
 	{
-		$query = $this->db->query('SELECT tugas_akhir.nim, mahasiswa.nama, mahasiswa.jurusan, mahasiswa.email, tugas_akhir.judulTA, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, tugas_akhir.dosen_pembimbing1, tugas_akhir.dosen_pembimbing2 FROM mahasiswa INNER JOIN tugas_akhir on mahasiswa.nim = tugas_akhir.nim WHERE tugas_akhir.nim = "'.$nim.'" ');
+		$query = $this->db->query('SELECT tugas_akhir.nim, mahasiswa.nama, mahasiswa.jurusan, mahasiswa.email, tugas_akhir.judulTA, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, tugas_akhir.dosen_pembimbing1, tugas_akhir.dosen_pembimbing2, tugas_akhir.abstrak 
+			FROM mahasiswa INNER JOIN tugas_akhir on mahasiswa.nim = tugas_akhir.nim 
+						   INNER JOIN dosen ON tugas_akhir.dosen_pembimbing1 = dosen.nip 
+						   WHERE tugas_akhir.nim = "'.$nim.'" ');
 
-		return $query->result();
+		return $query->row();
 	}
 
 	public function getAll(){

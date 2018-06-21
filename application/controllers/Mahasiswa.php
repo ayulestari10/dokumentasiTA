@@ -133,13 +133,13 @@ class Mahasiswa extends MY_Controller
 
     public function download_file($getNim){
         $username = $this->data['username'];
-        $this->load->helper('download');
-        if(file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')){
+
+        if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
+            $this->load->helper('download');
             force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-            redirect('mahasiswa/data_dokumen');
-        }
-        else{
-            $this->flashmsg('File tidak ada !', 'danger');
+            redirect('mahasiswa\data_dokumen');
+        }else{
+            $this->flashmsg('File tidak ada !','danger');
             redirect('mahasiswa/data_dokumen');
         }
         
