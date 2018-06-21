@@ -32,12 +32,12 @@ class Home extends MY_Controller
 
             $fileInfo = $this->tugas_akhir_m->get_data($nim);
 
-            $uploads_folder = 'uploads';
+            $uploads_folder = 'assets/File_TugasAkhir';
             $file = '';
             foreach ($fileInfo as $key => $value) 
             {
-                $value->url_pdf = base_url().$uploads_folder.'/'. $value->NIM.'.pdf';
-                $file = $uploads_folder.'/'. $value->NIM.'pdf';
+                $value->url_pdf = base_url().$uploads_folder.'/'. $value->nim.'.pdf';
+                $file = $uploads_folder.'/'. $value->nim.'pdf';
             }
 
             force_download($file, NULL);

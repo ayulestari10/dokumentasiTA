@@ -72,7 +72,7 @@ class Login extends MY_Controller
 		    		$cek_data = $this->mahasiswa_m->get(['NIM' => $this->POST('username')]);
 		    	}
 		    	elseif($role == "dosen"){
-		    		$cek_data = $this->dosen_m>get(['NIP' => $this->POST('username')]);
+		    		$cek_data = $this->dosen_m->get(['NIP' => $this->POST('username')]);
 		    	}
 		    	else{
 		    		$cek_data = $this->admin_m->get(['NIPUS' => $this->POST('username')]);

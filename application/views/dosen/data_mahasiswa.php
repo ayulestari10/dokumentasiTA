@@ -57,9 +57,9 @@
 								 ?>
 								<tr>
 									<td>1</td>
-									<td><?= $key->NIM ?></td>
+									<td><?= $key->nim ?></td>
 									<td><?= $key->nama ?></td>
-									<td style="text-align: justify; width: 200px;"><?= $key->JudulTA ?></td>
+									<td style="text-align: justify; width: 200px;"><?= $key->judulTA ?></td>
 									<td><?= $key->tahun_pembuatan ?></td>
 									<td>
 										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>

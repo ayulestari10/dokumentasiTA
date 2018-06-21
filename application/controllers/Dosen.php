@@ -32,22 +32,14 @@ class Dosen extends MY_Controller
         $this->template($this->data, 'dosen');
     }
 
-    public function data_mahasiswa($username)
+    public function data_mahasiswa()
     {
         $username = $this->session->userdata['username'];
 
         $this->data['title']  = 'Data Mahasiswa'.$this->title;
         $this->data['content']  = 'dosen/data_mahasiswa';
+        $this->data['data_mhs'] =  $this->Dosen_m->get_data_mahasiswa($username);
         $this->template($this->data, 'dosen');
-
-        $data = array(
-                    'title' => 'Data Mahasiswa'.$this->title,
-                    'content' => 'dosen/data_mahasiswa',
-                    'data_mhs' => $this->Dosen_m->get_data_mahasiswa($username)
-                );
-
-        $this->load->view('dosen/includes/layout',$data);
-
     }
 
     public function detail_dokumen()

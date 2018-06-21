@@ -83,7 +83,7 @@
                 </div>
                 <div>
                   <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="<?php echo base_url('Home/download/') ?><?php //echo $key->NIM ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
+                  <a href="<?php echo base_url('Home/download/') ?><?php echo $key->nim ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
 
                   <div class="collapse" id="collapseExample">
                     <div class="well">

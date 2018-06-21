@@ -12,10 +12,10 @@ class Dosen_m extends MY_Model
 
 	public function get_data_mahasiswa($username)
 	{
-		$query = $this->db->query('SELECT tugas_akhir.nim, mahasiswa.nama, tugas_akhir.judulTA, tugas_akhir.tahun_pembuatan 
+		$query = $this->db->query('SELECT mahasiswa.nim, mahasiswa.nama, tugas_akhir.judulTA, tugas_akhir.tahun_pembuatan 
 			FROM mahasiswa  INNER JOIN tugas_akhir ON tugas_akhir.NIM = mahasiswa.nim 
-							INNER JOIN dosen ON tugas_akhir.dosen_pembimbing1 = dosen.nip OR tugas_akhir.dosen_pembimbing2 = dosen.nip 
-							WHERE tugas_akhir.dosen_pembimbing1 = "'.$username.'" OR tugas_akhir.dosen_pembimbing2 = "'.$username.'"  ');
+							INNER JOIN dosen ON tugas_akhir.dosen_pembimbing1 = dosen.nip 
+							WHERE tugas_akhir.dosen_pembimbing1 = "'.$username.'" ');
 
 		return $query->result();
 	}
