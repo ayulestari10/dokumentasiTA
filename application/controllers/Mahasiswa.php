@@ -72,7 +72,7 @@ class Mahasiswa extends MY_Controller
                 $angkatan   = $this->POST('angkatan');
                 $alamat     = $this->POST('alamat');
                 $judul      = $this->POST('judul');
-                $konsentrasi= $this->POST('Konsentrasi');
+                $konsentrasi= $this->POST('konsentrasi');
                 $tahun      = $this->POST('tahun');
                 $dp1        = $this->POST('dosen_pembimbing1');
                 $dp2        = $this->POST('dosen_pembimbing2');
@@ -89,7 +89,7 @@ class Mahasiswa extends MY_Controller
 
                 $dataTA = array(
                             'judulTA' => $judul,
-                            'Konsentrasi' => $konsentrasi,
+                            'konsentrasi' => $konsentrasi,
                             'tahun_pembuatan' => $tahun,
                             'dosen_pembimbing1' => $dp1,
                             'dosen_pembimbing2' => $dp2,
@@ -113,10 +113,9 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
-    public function download_file(){
-        $getNim = $this->uri->segment(3);
+    public function download_file($getNim){
         $this->load->helper('download');
-        force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
+        force_download('assets/File_TugasAkhir/0'.$getNim.'.pdf',NULL);
         redirect('mahasiswa\data_dokumen');
     }
 
