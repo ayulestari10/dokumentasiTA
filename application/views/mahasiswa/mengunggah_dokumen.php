@@ -33,7 +33,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<?= form_open('mahasiswa/unggah-dokumen') ?>
+						<?= form_open_multipart('mahasiswa/unggah-dokumen') ?>
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
@@ -50,8 +50,21 @@
 					                </select>
 								</div>
 								<div class="form-group">
+									<label for="Angkatan">Angkatan<span class="required">*</span></label>
+									<!-- <input type="number" class="form-control" name="angkatan" value="<?= $individu->angkatan ?>" required> -->
+									<select class="form-control" name="angkatan" required>
+										<?php for($i = 2018; $i >= 2008; $i--): ?>
+											<option value="<?= $i ?>"><?= $i ?></option>
+										<?php endfor; ?>
+									</select>
+								</div>
+								<div class="form-group">
 									<label for="Email">Email <span class="required">*</span></label>
 									<input type="text" class="form-control" name="email" value="<?= $individu->email ?>" required>
+								</div>
+								<div class="form-group">
+									<label for="Alamat">Alamat <span class="required">*</span></label>
+									<textarea class="form-control" name="alamat" required><?= $individu->alamat ?></textarea>
 								</div>
 								<div class="form-group">
 									<label for="Judul">Judul <span class="required">*</span></label>

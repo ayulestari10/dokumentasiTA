@@ -57,38 +57,42 @@ class Mahasiswa extends MY_Controller
 
         if ($this->POST('simpan')) {
 
-            $required = ['nama', 'jurusan', 'email', 'judul', 'konsentrasi', 'tahun', 'dosen_pembimbing1', 'dosen_pembimbing2', 'abstrak', 'upload_file'];
+            // $required = ['nama', 'jurusan', 'email', 'judul', 'konsentrasi', 'tahun', 'dosen_pembimbing1', 'dosen_pembimbing2', 'abstrak', 'upload_file'];
 
-            if(!$this->required_input($required)){
-                $this->flashmsg('Data harus lengkap !', 'danger');
-                redirect('mahasiswa\unggah_dokumen');
-            }
+            // if(!$this->required_input($required)){
+            //     $this->flashmsg('Data harus lengkap !', 'danger');
+            //     redirect('mahasiswa/unggah-dokumen');
+            // }
 
-            else{
-                $nim = $this->session->userdata('username');
-                $nama = $this->POST('nama');
-                $jurusan = $this->POST('jurusan');
-                $email = $this->POST('email');
-                $judul = $this->POST('judul');
-                $konsentrasi = $this->POST('Konsentrasi');
-                $tahun = $this->POST('tahun');
-                $dp1 = $this->POST('dosen_pembimbing1');
-                $dp2 = $this->POST('dosen_pembimbing2');
-                $file  = $this->POST('upload_file');
-                $abstrak = $this->POST('abstrak');
+            // else{
+                $nim        = $this->session->userdata('username');
+                $nama       = $this->POST('nama');
+                $jurusan    = $this->POST('jurusan');
+                $email      = $this->POST('email');
+                $angkatan   = $this->POST('angkatan');
+                $alamat     = $this->POST('alamat');
+                $judul      = $this->POST('judul');
+                $konsentrasi= $this->POST('Konsentrasi');
+                $tahun      = $this->POST('tahun');
+                $dp1        = $this->POST('dosen_pembimbing1');
+                $dp2        = $this->POST('dosen_pembimbing2');
+                $file       = $this->POST('upload_file');
+                $abstrak    = $this->POST('abstrak');
 
                 $dataInd = array(
                             'nama'  => $nama,
                             'jurusan' => $jurusan,
-                            'email' => $email
+                            'email' => $email,
+                            'angkatan' => $angkatan,
+                            'alamat'    => $alamat
                         );
 
                 $dataTA = array(
                             'judulTA' => $judul,
                             'Konsentrasi' => $konsentrasi,
                             'tahun_pembuatan' => $tahun,
-                            'dosen_pembimbing1' => $nama_dp1,
-                            'dosen_pembimbing2' => $nama_dp2,
+                            'dosen_pembimbing1' => $dp1,
+                            'dosen_pembimbing2' => $dp2,
                             'abstrak' => $abstrak
                         );
 
@@ -98,11 +102,13 @@ class Mahasiswa extends MY_Controller
                 if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) > 0){
                     $this->Mahasiswa_m->update($nim, $dataInd);
                     $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim);
-                    redirect('mahasiswa\data_dokumen');
+                    $this->uploadPDF($nim, 'upload_file');
+
+                    $this->flashmsg('Data tugas akhir berhasil disimpan!');
+                    redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
-            }
+            //}
         }
         $this->template($this->data, 'mahasiswa');
     }
