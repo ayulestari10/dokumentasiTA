@@ -33,7 +33,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<?= form_open('mahasiswa/unggah_dokumen') ?>
+						<?= form_open('mahasiswa/unggah-dokumen') ?>
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
@@ -59,7 +59,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Konsentrasi">Konsentrasi <span class="required">*</span></label>
-									<select name="Konsentrasi" class="form-control" value="<?= $ta->konsentrasi ?>">
+									<select name="konsentrasi" class="form-control" value="<?= $ta->konsentrasi ?>">
 					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
 					                  <option value="Basis Data">Basis Data</option>
 					                  <option value="Citra">Citra</option>

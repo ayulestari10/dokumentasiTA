@@ -74,7 +74,7 @@
 							</tr>
 							<tr>
 								<th>Status</th>
-								<td>Terverifikasi</td>
+								<td><?= "$ta->status" ?></td>
 							</tr>
 						</table>
 					</div>
@@ -82,9 +82,8 @@
 			</div>
 
 			<div class="col-md-2 col-sm-2 col-xs-2">
-				<!-- <a href="<?= base_url('mahasiswa/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a> -->
-				<button type="button" class="btn btn-info btn-sm" onclick="download_file(<?= $this->session->userdata('username'); ?>)">Unduh Berkas<i class="fa fa-download"></i></button>
-				<button type="button" class="btn btn-danger btn-circle" onclick="delete_data(<?= $this->session->userdata('username'); ?>)" >Hapus<i class="fa fa-trash"></i></button>					
+				<button type="button" class="btn btn-info btn-sm" onclick="download_file(<?= $this->session->userdata('username'); ?>)">Unduh Berkas <i class="fa fa-download"></i></button>
+				<button type="button" class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $this->session->userdata('username'); ?>)" >Hapus <i class="fa fa-trash"></i></button>					
 			</div>
 		</div>
 

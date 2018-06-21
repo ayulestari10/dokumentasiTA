@@ -24,9 +24,9 @@
                         <h3>Menu</h3>
                         <ul class="nav side-menu">
                             <li><a href="<?= base_url('mahasiswa') ?>"><i class="fa fa-home"></i> Home</a></li>
-                            <li><a href="<?= base_url('mahasiswa/data-dokumen') ?>"><i class="fa fa-file-pdf-o"></i> Dokumen Tugas Akhir</a></li>
-                            <li><a href="<?= base_url('mahasiswa/unggah-dokumen') ?>"><i class="fa fa-upload"></i> Unggah Dokumen</a></li>
-                            <li><a href="<?= base_url('mahasiswa/ubah-password') ?>"><i class="fa fa-lock"></i> Ubah Password</a></li>
+                            <li><a href="<?= base_url('mahasiswa/data_dokumen') ?>"><i class="fa fa-file-pdf-o"></i> Dokumen Tugas Akhir</a></li>
+                            <li><a href="<?= base_url('mahasiswa/unggah_dokumen') ?>"><i class="fa fa-upload"></i> Unggah Dokumen</a></li>
+                            <li><a href="<?= base_url('mahasiswa/ubah_password') ?>"><i class="fa fa-lock"></i> Ubah Password</a></li>
                         </ul>
                     </div>
                 </div>

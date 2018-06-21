@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i> <?= "Ayu, Sari, Yulin" ?>
+                        <i class="fa fa-user"></i> <?= $this->session->userdata('username') ?>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -90,6 +90,28 @@ class MY_Controller extends CI_Controller
 		return FALSE;
 	}
 
+	public function validate($conf)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules($conf);
+		return $this->form_validation->run();
+	}
+
+	public function required_input($input_names)
+	{
+		$rules = [];
+		foreach ($input_names as $input)
+		{
+			$rules []= [
+				'field'		=> $input,
+				'label'		=> ucfirst($input),
+				'rules'		=> 'required'
+			];
+		}
+
+		return $this->validate($rules);
+	}
+
 	public function dump($var)
 	{
 		echo '<pre>';
