@@ -19,23 +19,30 @@ class Mahasiswa extends MY_Controller
             exit;
         }
 
-        $this->load->model('user_m');
+        $this->load->model('dosen_m');
         $this->load->model('Mahasiswa_m');
-        $this->load->model('tugas_akhir');
+        $this->load->model('tugas_akhir_m');
     }
 
     public function index()
     {
         $this->data['title']  = 'Dashboard Mahasiswa'.$this->title;
         $this->data['content']  = 'mahasiswa/dashboard';
-        //$this->data['mahasiswa']    = $this->mahasiswa->get();
         $this->template($this->data, 'mahasiswa');
     }
+
+    // public function __toString(){
+    //     return $this->nama;sss
+    // }
 
     public function data_dokumen()
     {
         $this->data['title']  = 'Data Dokumen'.$this->title;
         $this->data['content']  = 'mahasiswa/data_dokumen';
+        $this->data['ta'] = $this->tugas_akhir_m->getDatabyNim($this->data['username']);
+        $this->data['individu'] = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+        $this->data['dp1'] = $this->dosen_m->getNamaDosen1($ta->dosen_pembimbing1);
+        $this->data['dp2'] = $this->dosen_m->getNamaDosen1($ta->dosen_pembimbing2);
         $this->template($this->data, 'mahasiswa');
     }
 
@@ -44,20 +51,85 @@ class Mahasiswa extends MY_Controller
     {
         $this->data['title']  = 'Mengunggah Dokumen'.$this->title;
         $this->data['content']  = 'mahasiswa/mengunggah_dokumen';
+        $this->data['ta'] = $this->tugas_akhir_m->getDatabyNim($this->data['username']);
+        $this->data['individu'] = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+        $this->data['dosen'] = $this->dosen_m->getAll();
+
+        if ($this->POST('simpan')) {
+            $nim = $this->session->userdata('username');
+            $nama = $this->POST('nama');
+            $jurusan = $this->POST('jurusan');
+            $email = $this->POST('email');
+            $judul = $this->POST('judul');
+            $konsentrasi = $this->POST('Konsentrasi');
+            $tahun = $this->POST('tahun');
+            $dp1 = $this->POST('dosen_pembimbing1');
+            $dp2 = $this->POST('dosen_pembimbing2');
+            $file  = $this->POST('upload_file');
+            $abstrak = $this->POST('abstrak');
+            $required = ['username', 'nama', 'jurusan', 'email', 'judul', 'konsentrasi', 'tahun', 'dosen_pembimbing1', 'dosen_pembimbing2', 'abstrak'];
+
+            if(!$this->required_input($required)){
+                $this->flashmsg('Data harus lengkap!', 'warning');
+            }
+
+            else{
+                $dataInd = array(
+                            'nama'  => $nama,
+                            'jurusan' => $jurusan,
+                            'email' => $email
+                        );
+
+                $dataTA = array(
+                            'judulTA' => $judul,
+                            'Konsentrasi' => $konsentrasi,
+                            'tahun_pembuatan' => $tahun,
+                            'dosen_pembimbing1' => $nama_dp1,
+                            'dosen_pembimbing2' => $nama_dp2,
+                            'abstrak' => $abstrak
+                        );
+
+                $cekNIM_TA = $this->tugas_akhir_m->getDatabyNim($nim);
+                $cekNIM_Individu = $this->Mahasiswa_m->getDatabyNim($nim);
+
+                if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) > 0){
+                    $this->Mahasiswa_m->update($nim, $dataInd);
+                    $this->tugas_akhir_m->update($nim, $dataTA);
+                    $this->uploadPDF($nim]);
+                    redirect('mahasiswa\data_dokumen');
+                    exit;
+                }
+            }
+        }
         $this->template($this->data, 'mahasiswa');
     }
 
-    public function edit_dokumen()
-    {
-        $this->data['title']  = 'Edit Dokumen'.$this->title;
-        $this->data['content']  = 'mahasiswa/edit_dokumen';
-        $this->template($this->data, 'mahasiswa');
+    public function download_file(){
+        $getNim = $this->uri->segment(3);
+        $this->load->helper('download');
+        force_download('assets/File_TugasAkhir/'"'"..$getNim"'",NULL);
     }
 
     public function ubah_password()
     {
         $this->data['title']  = 'Ubah Password'.$this->title;
         $this->data['content']  = 'mahasiswa/ubah_password';
+
+        if($this->POST('simpan')){
+            $nim = $this->session->userdata('username');
+            $password1 = $this->POST('password1');
+            $password2 = $this->POST('password2');
+            $required = ['password1', 'password2']
+
+            if(!$this->required_input($required)){
+                $this->flashmsg('Data harus lengkap!', 'warning')
+            }
+            else{
+
+                //$this->flashmsg('Password berhasil diubah','success');
+            }
+        }
+
         $this->template($this->data, 'mahasiswa');
     }
 }

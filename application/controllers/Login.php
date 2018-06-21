@@ -67,7 +67,7 @@ class Login extends MY_Controller
 			if(isset($role)){
 		    	$this->load->model($role);
 		    	
-		    	if($role == "mahasiswa"){
+		    	if($role == "mahasiswa_m"){
 		    		$cek_data = $this->$role->get(['NIM' => $this->POST('username')]);
 		    	}
 		    	elseif($role == "dosen"){

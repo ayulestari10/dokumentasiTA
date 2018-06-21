@@ -33,11 +33,11 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<?= form_open('mahasiswa/ubah-password') ?>
+						<?= form_open('mahasiswa/ubah_password') ?>
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
-									<input type="text" value="09021181520021" class="form-control" name="nim" disabled>
+									<input type="text" value="<?= $this->session->userdata('username')?>" class="form-control" name="nim" disabled>
 								</div>
 								<div class="form-group">
 									<label for="Password">Password <span class="required">*</span></label>

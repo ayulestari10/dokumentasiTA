@@ -72,11 +72,11 @@ class MY_Controller extends CI_Controller
 		return FALSE;
 	}
 
-	public function uploadPDF($id, $directory, $tag_name = 'userfile')
+	public function uploadPDF($id, $tag_name = 'userfile')
 	{
 		if ($_FILES[$tag_name])
 		{
-			$upload_path = realpath(APPPATH . '../assets/' . $directory . '/');
+			$upload_path = realpath(APPPATH . '../assets/File_TugasAkhir/');
 			@unlink($upload_path . '/' . $id . '.pdf');
 			$config = [
 				'file_name'			=> $id . '.pdf',

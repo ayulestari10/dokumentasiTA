@@ -33,59 +33,65 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<?= form_open('mahasiswa/mengunggah-dokumen') ?>
+						<?= form_open('mahasiswa/unggah_dokumen') ?>
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
-									<input type="text" value="09021181520021" class="form-control" name="nim" disabled>
+									<input type="text" value="<?= $this->session->userdata('username') ?>" class="form-control" name="nim" disabled>
 								</div>
 								<div class="form-group">
 									<label for="Nama">Nama <span class="required">*</span></label>
-									<input type="text" class="form-control" name="nama" required>
+									<input type="text" class="form-control" name="nama" value="<?= $individu->nama ?>" required>
 								</div>
 								<div class="form-group">
 									<label for="Jurusan">Jurusan <span class="required">*</span></label>
-									<select name="jurusan" class="form-control">
-					                  <option value="ti">Teknik Informatika</option>
-					                  <option value="si">Sistem Informasi</option>
-					                  <option value="sk">Sistem Komputer</option>
+									<select name="jurusan" class="form-control" value="<?= $individu->jurusan ?>">
+					                  <option value="Teknik Informatika">Teknik Informatika</option>
 					                </select>
 								</div>
 								<div class="form-group">
 									<label for="Email">Email <span class="required">*</span></label>
-									<input type="text" class="form-control" name="email" required>
+									<input type="text" class="form-control" name="email" value="<?= $individu->email ?>" required>
 								</div>
 								<div class="form-group">
 									<label for="Judul">Judul <span class="required">*</span></label>
-									<textarea class="form-control" name="judul" required></textarea>
+									<textarea class="form-control" name="judul" required><?= $ta->judulTA ?></textarea>
 								</div>
 								<div class="form-group">
 									<label for="Konsentrasi">Konsentrasi <span class="required">*</span></label>
-									<select name="Konsentrasi" class="form-control">
-					                  <option value="ai">Kecerdasan Buatan</option>
-					                  <option value="bd">Basis Data</option>
-					                  <option value="citra">Citra</option>
+									<select name="Konsentrasi" class="form-control" value="<?= $ta->konsentrasi ?>">
+					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
+					                  <option value="Basis Data">Basis Data</option>
+					                  <option value="Citra">Citra</option>
 					                </select>
 								</div>
 								<div class="form-group">
-									<label for="Tahun">Tahun <span class="required">*</span></label>
-									<input type="number" class="form-control" name="tahun" required>
+									<label for="Tahun">Tahun<span class="required">*</span></label>
+									<input type="number" class="form-control" name="tahun" value="<?= $ta->tahun_pembuatan ?>" required>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>
-									<input type="text" class="form-control" name="dosen_pembimbing1" required>
+									<select name="dosen_pembimbing1" class="form-control" value="<?= $ta->dosen_pembimbing1 ?>">
+					                	<?php foreach($dosen as $row): ?>
+					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
+					              		<?php endforeach; ?>
+					                </select>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 2">Dosen Pembimbing 2 <span class="required">*</span></label>
-									<input type="text" class="form-control" name="dosen_pembimbing2" required>
+									<select name="dosen_pembimbing2" class="form-control" value="<?= $ta->dosen_pembimbing2 ?>">
+					                	<?php foreach($dosen as $row): ?>
+					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
+					              		<?php endforeach; ?>
+					                </select>
 								</div>
 								<div class="form-group">
 									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
-									<input type="file" name="upload" required>
+									<input type="file" name="upload_file" required>
 								</div>
 								<div class="form-group">
 									<label for="Abstrak">Abstrak <span class="required">*</span></label>
-									<textarea class="form-control" name="abstrak" required></textarea>
+									<textarea class="form-control" name="abstrak" required><?= $ta->abstrak ?></textarea>
 								</div>
 
 								<input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
