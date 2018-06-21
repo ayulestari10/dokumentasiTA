@@ -36,6 +36,41 @@
 							<?= $this->session->flashdata('msg') ?>
 						</div>
 						<table class="table table-striped table-bordered">
+							<!-- <thead>
+								<tr>
+									<th>NIM</th>
+									<th>Nama</th>
+									<th>Jurusan</th>
+									<th>Email</th>
+									<th>Judul</th>
+									<th>Konsentrasi</th>
+									<th>Tahun</th>
+									<th>Dosen Pembimbing1</th>
+									<th>Dosen Pembimbing2</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<?php 
+									//foreach ($data => $key) {
+										# code...
+								
+								 ?>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<?php 
+									//}
+								 ?>
+							</tbody>
+ -->
+
 							<tr>
 								<th>NIM</th>
 								<td>09021181520021</td>
@@ -65,8 +100,12 @@
 								<td>2018</td>
 							</tr>
 							<tr>
-								<th>Dosen Pembimbing</th>
-								<td>M. Fachrurrozi, S.Si., MT dan Osvari Arsalan, S.Kom., M.T</td>
+								<th>Dosen Pembimbing1</th>
+								<td>M. Fachrurrozi, S.Si., MT</td>
+							</tr>
+							<tr>
+								<th>Dosen Pembimbing2</th>
+								<td>Osvari Arsalan, S.Kom., M.T</td>
 							</tr>
 						</table>
 					</div>
@@ -116,6 +155,13 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 					</p>
 				</div>
 			</div>
+
+			<!-- <div class="col-md-12 col-sm-12 col-xs-12 abstrak">
+				<object data="<?php echo base_url().$judulTA; ?>" type="application/pdf" width="100%" height="500px" style="margin-top: 3%">
+                    <embed src="<?php echo base_url().$judulTA; ?>" type="application/pdf"></embed>
+                </object>
+			</div> -->
+
 		</div>
 
 	</div>

@@ -13,7 +13,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2><?= "Ayu, Sari, Yulin" ?></h2>
+                        <h2><?= $username ?></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -24,7 +24,7 @@
                         <h3>Menu</h3>
                         <ul class="nav side-menu">
                             <li><a href="<?= base_url('dosen') ?>"><i class="fa fa-home"></i> Home</a></li>
-                            <li><a href="<?= base_url('dosen/data-mahasiswa') ?>"><i class="fa fa-users"></i> Data Mahasiswa</a></li>
+                            <li><a href="<?= base_url('Dosen/data_mahasiswa'.$username) ?>"><i class="fa fa-users"></i> Data Mahasiswa</a></li>
                             <li><a href="<?= base_url('dosen/ubah-password') ?>"><i class="fa fa-lock"></i> Ubah Password</a></li>
                         </ul>
                     </div>

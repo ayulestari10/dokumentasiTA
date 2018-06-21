@@ -32,12 +32,14 @@
           <div>
             <h5 class="my-4">Tahun</h5>
             <select class="form-control">
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-              <option value="2014">2014</option>
-              <option value="2013">2013</option>
+              <?php
+                $thn_skr = date('Y');
+                for ($x = $thn_skr; $x >= 2013; $x--) {
+              ?>
+                <option value="<?php echo $x ?>"><?php echo $x ?></option>
+              <?php
+                }
+              ?>
             </select>
           </div>
 
@@ -62,27 +64,31 @@
 
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div>
+            <?php 
+              foreach ($dokumenTA as $key ) {
+                # code...
+              
+             ?>
             <div class="card mt-4">
               <div class="card-body">
-                <h5 class="card-title">Lorem Ipsum</h5>
-                <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p> -->
+                <h5 class="card-title"><?php echo $key->judulTA; ?></h5>
                 <div class="authors">
                   <ul style="list-style: none; margin-left: -5%;">
-                    <li>Penulis : Ayu Lestari</li>
-                    <li>Jurusan : Teknik Informatika</li>
-                    <li>Konsentrasi : Citra</li>
-                    <li>Tahun : 2018</li>
-                    <li>Email : ayu@gmail.com</li>
+                    <li>Penulis : <?php echo $key->nama; ?></li>
+                    <li>Jurusan : <?php echo $key->jurusan; ?></li>
+                    <li>Konsentrasi : <?php echo $key->konsentrasi; ?></li>
+                    <li>Tahun : <?php echo $key->tahun_pembuatan; ?></li>
+                    <li>Email : <?php echo $key->email; ?></li>
                   </ul>
                 </div>
                 <div>
                   <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="" class="btn btn-success"><i class="fa fa-download">   </i></a>
+                  <a href="<?php echo base_url('Home/download/') ?><?php //echo $key->NIM ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
 
                   <div class="collapse" id="collapseExample">
                     <div class="well">
                       <p class="card-text konten">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
+                        <?php echo $key->abstrak; ?>
                       </p>
                     </div>
                   </div>
@@ -91,134 +97,11 @@
               </div>
             </div>
             <!-- /.card -->
+
+              <?php 
+                }
+              ?>
           </div>
-
-          <div>
-            <div class="card mt-4">
-              <div class="card-body">
-                <h5 class="card-title">Simulation of product distribution PT Anugrah Citra Boga by using vehicle routing problem with time window method to minimize the distribution cost</h5>
-                <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
-                    <li>Penulis : Ayu Lestari</li>
-                    <li>Jurusan : Teknik Informatika</li>
-                    <li>Konsentrasi : Citra</li>
-                    <li>Tahun : 2018</li>
-                    <li>Email : ayu@gmail.com</li>
-                  </ul>
-                </div>
-                <div>
-                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="" class="btn btn-success"><i class="fa fa-download">   </i></a>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="well">
-                      <p class="card-text konten">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-
-          <div>
-            <div class="card mt-4">
-              <div class="card-body">
-                <h5 class="card-title">Evaluation of knowledge management system to improve the performance of employees at PT Data Citra Mandiri</h5>
-                <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
-                    <li>Penulis : Ayu Lestari</li>
-                    <li>Jurusan : Teknik Informatika</li>
-                    <li>Konsentrasi : Citra</li>
-                    <li>Tahun : 2018</li>
-                    <li>Email : ayu@gmail.com</li>
-                  </ul>
-                </div>
-                <div>
-                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="" class="btn btn-success"><i class="fa fa-download">   </i></a>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="well">
-                      <p class="card-text konten">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-
-          <div>
-            <div class="card mt-4">
-              <div class="card-body">
-                <h5 class="card-title">CITRA: interactive multimedia package in moral education for primary school children</h5>
-                <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
-                    <li>Penulis : Ayu Lestari</li>
-                    <li>Jurusan : Teknik Informatika</li>
-                    <li>Konsentrasi : Citra</li>
-                    <li>Tahun : 2018</li>
-                    <li>Email : ayu@gmail.com</li>
-                  </ul>
-                </div>
-                <div>
-                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="" class="btn btn-success"><i class="fa fa-download">   </i></a>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="well">
-                      <p class="card-text konten">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-
-          <div>
-            <div class="card mt-4">
-              <div class="card-body">
-                <h5 class="card-title">Cooperative Intrusion Traceback and Response Architecture (CITRA)</h5>
-                <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
-                    <li>Penulis : Ayu Lestari</li>
-                    <li>Jurusan : Teknik Informatika</li>
-                    <li>Konsentrasi : Citra</li>
-                    <li>Tahun : 2018</li>
-                    <li>Email : ayu@gmail.com</li>
-                  </ul>
-                </div>
-                <div>
-                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
-                  <a href="" class="btn btn-success"><i class="fa fa-download">   </i></a>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="well">
-                      <p class="card-text konten">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-
         </div>
-
-
       </div>
     </div>

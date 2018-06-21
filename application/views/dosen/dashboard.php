@@ -8,7 +8,7 @@
                   <div class="tile-stats">
                     <div class="icon"><i class="fa fa-users"></i></div>
                     <div class="count">_</div>
-                    <h3>Data dosen</h3>
+                    <h3>Data mahasiswa</h3>
                   </div>
                 </a>
               </div>

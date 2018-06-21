@@ -52,54 +52,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- <?php $i=1; foreach ($user as $row): ?>
-								<tr>
-									<td><?= $i ?></td>
-									<td><?= $row->username ?></td>
-									<td>dosen</td>
-									<td>
-										<div class="btn-group">
-											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-											Aksi <span class="caret"></span></button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a href="#" data-toggle="modal" data-target="#edit" onclick="get_data('<?= $row->id_user ?>')"><i class="fa fa-pencil"></i> Edit</li>
-												<li><a href="" onclick="delete_data(<?= $row->id_user ?>, 'dosen')"><i class="fa fa-trash"></i> Hapus </a></li>
-											</ul>
-										</div>
-									</td>
-								</tr>
-								<?php $i++; endforeach; ?> -->
-
+								<?php 
+									foreach ($data_mhs as $key) {
+								 ?>
 								<tr>
 									<td>1</td>
-									<td>09021181520021</td>
-									<td>Ayu Lestari</td>
-									<td style="text-align: justify; width: 200px;">Ekstraksi ciri GMI pada Citra Multiple Face</td>
-									<td>2018</td>
+									<td><?= $key->NIM ?></td>
+									<td><?= $key->nama ?></td>
+									<td style="text-align: justify; width: 200px;"><?= $key->JudulTA ?></td>
+									<td><?= $key->tahun_pembuatan ?></td>
 									<td>
 										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
 									</td>
 								</tr>
-								<tr>
-									<td>2</td>
-									<td>09021181520039</td>
-									<td>Yulinda Ramadhana</td>
-									<td style="text-align: justify; width: 200px;">Penerapan Data Mining Pada Teks</td>
-									<td>2018</td>
-									<td>
-										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>09021281520105</td>
-									<td>Tri Kurnia Sari</td>
-									<td style="text-align: justify; width: 200px;">Pengaruh Algoritma SOM pada Clustering</td>
-									<td>2018</td>
-									<td>
-										<a href="<?= base_url('dosen/detail-dokumen') ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
-									</td>
-								</tr>
+								<?php 
+									}
+								 ?>
 							</tbody>
 						</table>
 					</div>
