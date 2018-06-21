@@ -29,6 +29,9 @@ class Login extends MY_Controller
 	     // load form_validation library
         $this->load->library('form_validation');
 
+        $this->load->model('mahasiswa_m');
+        $this->load->model('dosen_m');
+        $this->load->model('admin_m');
   	}
 
 	public function index() {
@@ -65,16 +68,15 @@ class Login extends MY_Controller
 			}
 
 			if(isset($role)){
-		    	$this->load->model($role);
 		    	
 		    	if($role == "mahasiswa"){
-		    		$cek_data = $this->$role->get(['NIM' => $this->POST('username')]);
+		    		$cek_data = $this->mahasiswa_m->get(['NIM' => $this->POST('username')]);
 		    	}
 		    	elseif($role == "dosen"){
-		    		$cek_data = $this->$role->get(['NIP' => $this->POST('username')]);
+		    		$cek_data = $this->dosen_m>get(['NIP' => $this->POST('username')]);
 		    	}
 		    	else{
-		    		$cek_data = $this->$role->get(['NIPUS' => $this->POST('username')]);
+		    		$cek_data = $this->admin_m->get(['NIPUS' => $this->POST('username')]);
 		    	}
 		    	
 		    	if(count($cek_data) != 0){

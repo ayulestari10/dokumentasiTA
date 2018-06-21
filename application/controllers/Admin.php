@@ -90,6 +90,7 @@ class Admin extends MY_Controller
 
             $nim = ['nim'   => $this->POST('username')];
             $this->mahasiswa_m->insert($nim);
+            $this->tugas_akhir_m->insert($nim);
 
             $this->flashmsg('Data berhasil disimpan!');
             redirect('admin/data-mahasiswa');

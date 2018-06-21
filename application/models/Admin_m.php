@@ -1,6 +1,6 @@
 <?php 
 
-class Admin extends MY_Model 
+class Admin_m extends MY_Model 
 {
 	public function __construct()
 	{
