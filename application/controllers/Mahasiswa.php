@@ -114,9 +114,17 @@ class Mahasiswa extends MY_Controller
     }
 
     public function download_file($getNim){
-        $this->load->helper('download');
-        force_download('assets/File_TugasAkhir/0'.$getNim.'.pdf',NULL);
-        redirect('mahasiswa\data_dokumen');
+        $username = $this->session->userdata['username'];
+
+        if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
+            $this->load->helper('download');
+            force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
+            redirect('mahasiswa\data_dokumen');
+        }else{
+            $this->flashmsg('File tidak ada !','danger');
+            redirect('mahasiswa/data_dokumen');
+        }
+        
     }
 
     public function ubah_password()
