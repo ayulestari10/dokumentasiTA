@@ -85,10 +85,75 @@ class Mahasiswa extends MY_Controller
 
         if ($this->POST('simpan'))
         {
-            // $this->form_validation->set_rules('password1', 'Password', 'required', array(
-            //         'required'      => 'Password tidak boleh kosong'));
-            
-            $this->form_validation->set_rules('nama');
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
+                    'trim'      => 'Nama tidak boleh kosong',
+                    'required'  => 'Nama tidak boleh kosong',
+                    'alpha_spaces'     => 'Nama hanya boleh karakter'
+                ));
+
+            $this->form_validation->set_rules('jurusan', 'Jurusan', 'trim|required', array(
+                    'trim'      => 'Jurusan tidak boleh kosong',
+                    'required'  => 'Jurusan tidak boleh kosong'
+                ));
+
+            $this->form_validation->set_rules('angkatan', 'Angkatan', 'trim|required|numeric', array(
+                    'trim'      => 'Angkatan tidak boleh kosong',
+                    'required'  => 'Angkatan tidak boleh kosong',
+                    'numeric'   => 'Angkatan harus angka'
+                ));
+
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
+                    'trim'      => 'Email tidak boleh kosong',
+                    'required'  => 'Email tidak boleh kosong',
+                    'valid_email' => 'Email tidak valid'
+                ));
+
+            $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
+                    'trim'      => 'Alamat tidak boleh kosong',
+                    'required'  => 'Alamat tidak boleh kosong'
+                ));
+
+            $this->form_validation->set_rules('judul', 'Judul', 'trim|required', array(
+                    'trim'      => 'Judul tidak boleh kosong',
+                    'required'  => 'Judul tidak boleh kosong'
+                ));
+
+            $this->form_validation->set_rules('konsentrasi', 'Konsentrasi', 'trim|required', array(
+                    'trim'      => 'Konsentrasi tidak boleh kosong',
+                    'required'  => 'Konsentrasi tidak boleh kosong'
+                ));
+
+            $this->form_validation->set_rules('tahun', 'Tahun', 'trim|required|numeric', array(
+                    'trim'      => 'Tahun tidak boleh kosong',
+                    'required'  => 'Tahun tidak boleh kosong',
+                    'numeric'   => 'Tahun harus angka'
+                ));
+
+            $this->form_validation->set_rules('dosen_pembimbing1', 'Dosen Pembimbing 1', 'trim|required', array(
+                    'trim'      => 'Dosen pembimbing 1 tidak boleh kosong',
+                    'required'  => 'Dosen pembimbing 1 tidak boleh kosong'
+                ));
+
+            $this->form_validation->set_rules('dosen_pembimbing2', 'Dosen Pembimbing 2', 'trim|required', array(
+                    'trim'      => 'Dosen pembimbing 2 tidak boleh kosong',
+                    'required'  => 'Dosen pembimbing 2 tidak boleh kosong'
+                ));
+
+            // $this->form_validation->set_rules('upload_file', 'Unggah Dokumen', 'required', array(
+            //         'required'  => 'Dokumen tidak boleh kosong'
+            //     ));
+
+            $this->form_validation->set_rules('abstrak', 'Abstrak', 'trim|required', array(
+                    'trim'      => 'Abstrak tidak boleh kosong',
+                    'required'  => 'Abstrak tidak boleh kosong'
+                ));
+
+
+                if ($this->form_validation->run() == FALSE){
+                    $this->flashmsg(validation_errors(), 'danger');
+                    redirect('Mahasiswa/unggah-dokumen');
+                    exit;
+                }
 
                 $nim        = $this->data['username'];
                 $nama       = $this->POST('nama');
