@@ -11,7 +11,7 @@
             <form>
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="text" class="form-control form-control-lg" placeholder="Masukkan Kata Kunci...">
+                  <input type="text" class="form-control form-control-lg" name="keyword" placeholder="Masukkan Kata Kunci...">
                 </div>
                 <div class="col-12 col-md-3">
                   <button type="submit" class="btn btn-block btn-lg btn-primary"><i class="fa fa-search"> Cari</i></button>

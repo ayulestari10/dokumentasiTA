@@ -85,6 +85,11 @@ class Mahasiswa extends MY_Controller
 
         if ($this->POST('simpan'))
         {
+            // $this->form_validation->set_rules('password1', 'Password', 'required', array(
+            //         'required'      => 'Password tidak boleh kosong'));
+            
+            $this->form_validation->set_rules('nama');
+
                 $nim        = $this->data['username'];
                 $nama       = $this->POST('nama');
                 $jurusan    = $this->POST('jurusan');
@@ -98,6 +103,7 @@ class Mahasiswa extends MY_Controller
                 $dp2        = $this->POST('dosen_pembimbing2');
                 $file       = $this->POST('upload_file');
                 $abstrak    = $this->POST('abstrak');
+                $status     = "Belum Terverifikasi";
 
                 $dataInd = array(
                             'nama'  => $nama,
@@ -113,7 +119,8 @@ class Mahasiswa extends MY_Controller
                             'tahun_pembuatan' => $tahun,
                             'dosen_pembimbing1' => $dp1,
                             'dosen_pembimbing2' => $dp2,
-                            'abstrak' => $abstrak
+                            'abstrak' => $abstrak,
+                            'status' => $status
                         );
 
                 $cekNIM_TA = $this->tugas_akhir_m->getDatabyNim($nim);
@@ -138,7 +145,7 @@ class Mahasiswa extends MY_Controller
         if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
             $this->load->helper('download');
             force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-            redirect('mahasiswa\data_dokumen');
+            redirect('mahasiswa/data_dokumen');
         }else{
             $this->flashmsg('File tidak ada !','danger');
             redirect('mahasiswa/data_dokumen');
@@ -155,6 +162,7 @@ class Mahasiswa extends MY_Controller
             
             $this->form_validation->set_rules('password1', 'Password', 'required', array(
                     'required'      => 'Password tidak boleh kosong'));
+
             $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
                     'required'      => 'Konfirmasi password tidak boleh kosong',
                     'matches'       => 'Password dan konfirmasi password harus sama'
@@ -163,17 +171,18 @@ class Mahasiswa extends MY_Controller
             if ($this->form_validation->run() == FALSE)
             {
                 $this->flashmsg(validation_errors(), 'danger');
-                redirect('mahasiswa/ubah-password');
+                redirect('Mahasiswa/ubah-password');
                 exit;
             }
-
+            
             $data_mahasiswa = [
                 'password'  => md5($this->POST('password1'))
             ];
+
             $this->user_m->update($username,$data_mahasiswa);
 
-            $this->flashmsg('Data berhasil diedit!');
-            redirect('mahasiswa/ubah-password');
+            $this->flashmsg('Password berhasil diubah.');
+            redirect('Mahasiswa/ubah-password');
             exit;
         }
 

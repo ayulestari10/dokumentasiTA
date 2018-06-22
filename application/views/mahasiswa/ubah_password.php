@@ -41,7 +41,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Password">Password <span class="required">*</span></label>
-									<input type="password" class="form-control" name="password1" required>
+									<input type="password" class="form-control" name="password1" required="">
 								</div>
 								<div class="form-group">
 									<label for="Konfirmasi Password">Konfirmasi Password <span class="required">*</span></label>
