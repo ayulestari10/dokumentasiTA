@@ -82,10 +82,10 @@
                   </ul>
                 </div>
                 <div>
-                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Abstrak</a>
+                  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample_<?= $key->NIM ?>" aria-expanded="false" aria-controls="collapseExample_<?= $key->NIM ?>">Abstrak</a>
                   <a href="<?php echo base_url('Home/download/') ?><?php echo $key->nim ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
 
-                  <div class="collapse" id="collapseExample">
+                  <div class="collapse" id="collapseExample_<?= $key->NIM ?>">
                     <div class="well">
                       <p class="card-text konten">
                         <?php echo $key->abstrak; ?>

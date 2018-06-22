@@ -241,8 +241,17 @@ class Admin extends MY_Controller
         }
 
         if($this->POST('delete') && $this->POST('NIM')){
+            $edit_data = [
+                'judulTA'           => NULL,
+                'konsentrasi'       => NULL,
+                'abstrak'           => NULL,
+                'status'            => NULL,
+                'tahun_pembuatan'   => NULL,
+                'dosen_pembimbing1' => NULL,
+                'dosen_pembimbing2' => NULL
 
-            $this->tugas_akhir_m->delete($this->POST('NIM'));
+            ];
+            $this->tugas_akhir_m->update($this->POST('NIM'), $edit_data);
             $this->flashmsg('<i class="fa fa-check"></i> Data tugas akhir berhasil dihapus');
             exit;
         }
