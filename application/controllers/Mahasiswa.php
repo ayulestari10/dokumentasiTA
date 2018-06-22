@@ -60,7 +60,8 @@ class Mahasiswa extends MY_Controller
                             'tahun_pembuatan' => NULL,
                             'dosen_pembimbing1' => NULL,
                             'dosen_pembimbing2' => NULL,
-                            'abstrak' => NULL
+                            'abstrak' => NULL,
+                            'status' => NULL
                         );
             $this->load->helper('file');
             unlink('assets/File_TugasAkhir/'.$nim.'.pdf');

@@ -64,4 +64,9 @@ class Dosen_m extends MY_Model
    		return $query->row();
 	}
 
+	public function getData(){
+		$query = $this->db->query('Select username, password From user Inner Join dosen on dosen.NIP = user.username; ');
+		return $query->result();
+	}
+
 }

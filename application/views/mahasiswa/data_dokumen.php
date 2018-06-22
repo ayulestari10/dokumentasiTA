@@ -65,7 +65,7 @@
 								<td><?= "$ta->konsentrasi" ?></td>
 							</tr>
 							<tr>
-								<th>Tahun</th>
+								<th>Tahun Lulus</th>
 								<td><?= "$ta->tahun_pembuatan" ?></td>
 							</tr>
 							<tr>

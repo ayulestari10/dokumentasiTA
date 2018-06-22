@@ -35,10 +35,4 @@ class Mahasiswa_m extends MY_Model
    		$query = $this->db->update($this->data['table_name'], $data);
    		return $query;
    	}
-
-   	public function getDosen($nip){
-		$this->db->where('nip', $nip);
-		$query = $this->db->get('dosen');
-		return $query;
-	}
 }
