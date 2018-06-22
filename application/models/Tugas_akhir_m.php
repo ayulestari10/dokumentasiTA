@@ -34,7 +34,7 @@ class Tugas_akhir_m extends MY_Model
 
    	public function get_ta()
 	{
-		$query = $this->db->query('SELECT tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM');
+		$query = $this->db->query('SELECT tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM ORDER BY tugas_akhir.tahun_pembuatan DESC');
 
 		return $query->result();
 	}

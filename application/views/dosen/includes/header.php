@@ -11,6 +11,7 @@
 
     <!-- Bootstrap -->
     <link href="<?= base_url('assets') ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="<?=  base_url('assets') ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Font Awesome -->
     <link href="<?= base_url('assets') ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->

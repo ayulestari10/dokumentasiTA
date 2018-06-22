@@ -53,10 +53,11 @@
 							</thead>
 							<tbody>
 								<?php 
+									$no = 1;
 									foreach ($data_mhs as $key) {
 								 ?>
 								<tr>
-									<td>1</td>
+									<td><?= $no ?></td>
 									<td><?= $key->nim ?></td>
 									<td><?= $key->nama ?></td>
 									<td style="text-align: justify; width: 200px;"><?= $key->judulTA ?></td>
@@ -66,6 +67,7 @@
 									</td>
 								</tr>
 								<?php 
+									$no++;
 									}
 								 ?>
 							</tbody>

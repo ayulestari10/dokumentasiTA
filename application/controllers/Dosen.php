@@ -14,6 +14,7 @@ class Dosen extends MY_Controller
         if (!isset($this->data['username'], $this->data['role']) or $this->data['role'] != "dosen")
         {
             $this->session->sess_destroy();
+            $this->flashmsg('Anda harus login dulu!','warning');
             redirect('login');
             exit;
         }
@@ -99,6 +100,19 @@ class Dosen extends MY_Controller
             $this->data['content']  = 'dosen/ubah_password';
             $this->template($this->data, 'dosen');
         }
+    }
+
+    public function download($getNim){
+        $this->dump($getNim);
+        if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
+            $this->load->helper('download');
+            force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
+            redirect('mahasiswa\data_dokumen');
+        }else{
+            $this->flashmsg('File tidak ada !','danger');
+            redirect('mahasiswa/data_dokumen');
+        }
+        
     }
 }
 
