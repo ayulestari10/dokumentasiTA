@@ -57,7 +57,6 @@ class Home extends MY_Controller
         
     }
      
-
     public function search(){
 
     $keyword = $this->input->post('keyword');
@@ -66,8 +65,19 @@ class Home extends MY_Controller
         $this->data['content']  = 'home/home';
         $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
         
-        $this->template($this->data, 'Hone');
-  }
+        $this->template($this->data, 'Home');
+    }
+
+    public function konsentrasi()
+    {
+        $konsentrasi = $this->input->post('konsentrasi');
+
+        $this->data['title']  = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
+        
+        $this->template($this->data, 'Home'); 
+    }
 }
     
 

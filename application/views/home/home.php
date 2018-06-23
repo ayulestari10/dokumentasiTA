@@ -35,7 +35,7 @@
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 2013; $x--) {
               ?>
-                <option value="<?php echo $x ?>"><?php echo $x ?></option>
+                <option value="<?php echo $x ?>" name="keyword"><?php echo $x ?></option>
               <?php
                 }
               ?>
@@ -45,9 +45,9 @@
           <div>
             <h5 class="my-4">Konsentrasi</h5>
             <div class="list-group">
-              <a href="#" class="list-group-item">Kecerdasan Buatan</a>
-              <a href="#" class="list-group-item">Basis Data</a>
-              <a href="#" class="list-group-item">Citra</a>
+              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" name="konsentrasi">Kecerdasan Buatan</a>
+              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" nama="konsentrasi">Basis Data</a>
+              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" nama="konsentrasi">Citra</a>
             </div>
           </div>
 

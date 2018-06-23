@@ -63,5 +63,10 @@ class Tugas_akhir_m extends MY_Model
 							       ');
 		return $query->result();
 	}
-	
+
+	public function konsentrasi($konsentrasi)
+	{
+		$query = $this->db->query('SELECT * FROM tugas_akhir WHERE tugas_akhir.konsentrasi = "'.$konsentrasi.'" ');
+	}
+
 }
