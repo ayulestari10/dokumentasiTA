@@ -8,16 +8,15 @@
             <h3 class="mb-5">Mencari Tugas Akhir? Masukan Judul atau Kata Kunci yang Ada!</h3>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
+            <?= form_open_multipart('Home/search') ?>
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
                   <input type="text" class="form-control form-control-lg" name="keyword" placeholder="Masukkan Kata Kunci...">
                 </div>
                 <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary"><i class="fa fa-search"> Cari</i></button>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" name="cari"><i class="fa fa-search"> Cari</i></button>
                 </div>
-              </div>
-            </form>
+             <?= form_close() ?>
           </div>
         </div>
       </div>
@@ -73,17 +72,15 @@
               <div class="card-body">
                 <h5 class="card-title"><?php echo $key->judulTA; ?></h5>
                 <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
+                  <ul id="myUL" style="list-style: none; margin-left: -5%;">
                     <li>Penulis : <?php echo $key->nama; ?></li>
-                    <li>Jurusan : <?php echo $key->jurusan; ?></li>
                     <li>Konsentrasi : <?php echo $key->konsentrasi; ?></li>
                     <li>Tahun : <?php echo $key->tahun_pembuatan; ?></li>
-                    <li>Email : <?php echo $key->email; ?></li>
                   </ul>
                 </div>
                 <div>
                   <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample_<?= $key->NIM ?>" aria-expanded="false" aria-controls="collapseExample_<?= $key->NIM ?>">Abstrak</a>
-                  <a href="<?php echo base_url('Home/download/') ?><?php echo $key->nim ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
+                  <a href="<?php echo base_url('Home/download/'."$key->NIM") ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
 
                   <div class="collapse" id="collapseExample_<?= $key->NIM ?>">
                     <div class="well">

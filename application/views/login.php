@@ -40,6 +40,7 @@
 							</div>
 							<div>
 								<?= $this->session->userdata('msg') ?>
+								<?= $this->session->flashdata('msg') ?>
 							</div>
 							<div >
 					          <?php echo validation_errors(); ?>

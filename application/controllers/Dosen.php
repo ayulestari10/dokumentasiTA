@@ -11,7 +11,7 @@ class Dosen extends MY_Controller
         $this->data['username']     = $this->session->userdata('username');
         $this->data['role']         = $this->session->userdata('role');
         
-        if (!isset($this->data['username'], $this->data['role']) or $this->data['role'] != "dosen")
+        if (!isset($this->data['username'], $this->data['role']) or $this->data['role'] != "dosen" )
         {
             $this->session->sess_destroy();
             $this->flashmsg('Anda harus login dulu!','warning');
@@ -103,7 +103,7 @@ class Dosen extends MY_Controller
     }
 
     public function download($getNim){
-        $this->dump($getNim);
+        
         if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
             $this->load->helper('download');
             force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
@@ -114,6 +114,7 @@ class Dosen extends MY_Controller
         }
         
     }
+
 }
 
 ?>
