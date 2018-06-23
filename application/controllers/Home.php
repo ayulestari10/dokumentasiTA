@@ -70,7 +70,11 @@ class Home extends MY_Controller
 
     public function konsentrasi($konsentrasi)
     {
-        //$konsentrasi = $this->input->post('konsentrasi');
+        $konsentrasi1 = $this->input->post('konsentrasi');
+
+        if ($konsentrasi1 == "AI") {
+            $konsentrasi == "Kecerdasan Buatan";
+        }
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
