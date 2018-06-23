@@ -68,14 +68,14 @@ class Home extends MY_Controller
         $this->template($this->data, 'Home');
     }
 
-    public function konsentrasi()
+    public function konsentrasi($konsentrasi)
     {
-        $konsentrasi = $this->input->post('konsentrasi');
+        //$konsentrasi = $this->input->post('konsentrasi');
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
         $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-        
+        //$this->dump($this->data['dokumenTA']);
         $this->template($this->data, 'Home'); 
     }
 }

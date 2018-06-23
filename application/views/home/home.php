@@ -45,9 +45,9 @@
           <div>
             <h5 class="my-4">Konsentrasi</h5>
             <div class="list-group">
-              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" name="konsentrasi">Kecerdasan Buatan</a>
-              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" nama="konsentrasi">Basis Data</a>
-              <a href="<?= base_url('Home/konsentrasi') ?>" class="list-group-item" nama="konsentrasi">Citra</a>
+              <a href="" class="list-group-item" name="Kecerdasan Buatan">Kecerdasan Buatan</a>
+              <a href="" class="list-group-item" nama="Basis Data">Basis Data</a>
+              <a href="<?php echo base_url('Home/konsentrasi/'."$dokumenTA->konsentrasi") ?>" class="list-group-item" nama="citra" value="citra">Citra</a>
             </div>
           </div>
 
