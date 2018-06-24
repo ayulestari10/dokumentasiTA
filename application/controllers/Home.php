@@ -25,14 +25,11 @@ class Home extends MY_Controller
 
     public function index()
     {
-
-        $data = array(
-            'title' => 'Home'.$this->title,
-            'content' => 'home/home',
-            'dokumenTA' => $this->tugas_akhir_m->get_ta()
-        );
-
-        $this->load->view('home/includes/layout',$data);
+        $this->data['title']  = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->data['dokumenTA']  = $this->tugas_akhir_m->get_ta();
+        $this->template($this->data, 'home');
+        //$this->dump($this->data['dokumenTA']);
     }
 
     public function download($getNim){
@@ -57,7 +54,8 @@ class Home extends MY_Controller
         
     }
      
-    public function search(){
+    public function search()
+    {
 
     $keyword = $this->input->post('keyword');
 
@@ -79,45 +77,50 @@ class Home extends MY_Controller
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
         $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-        $this->dump($this->data['dokumenTA']);
-        //$this->template($this->data, 'Home'); 
+        //$this->dump($this->data['dokumenTA']);
+        $this->template($this->data, 'Home'); 
     }
 
     public function tampil_pdf($getNim)
     {
 
-    if (!isset($this->data['username'], $this->data['role']))
-    {
-        $this->session->sess_destroy();
-        $this->flashmsg('Anda harus login dulu!','warning');
-        redirect('login');
-        exit;
+        if (!isset($this->data['username'], $this->data['role']))
+        {
+            $this->session->sess_destroy();
+            $this->flashmsg('Anda harus login dulu!','warning');
+            redirect('login');
+            exit;
+        }
+        else if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf'))
+        {
+           if (isset($getNim) && !empty($getNim)) 
+           { 
+
+              $fileInfo = $this->tugas_akhir_m->get_data($getNim);
+
+              $uploads_folder = 'assets/File_TugasAkhir/';
+              $file_name = $getNim.'.pdf';
+              $file = '';
+              foreach ($fileInfo as $key => $value) 
+              {
+                  $value->url_pdf = base_url().$uploads_folder. $getNim .'pdf'; 
+                  $file = $uploads_folder.$file_name; 
+
+              }        
+                      $data['file'] = $file;
+                      $data['nim'] = $getNim;
+                    
+
+                      $this->load->view('tampil',$data);
+            } 
+        }
+        else
+        {
+              $this->flashmsg('File tidak ada !','danger');
+              redirect('mahasiswa/data_dokumen');  
+        }
+
     }
-    else
-    {
-       if (isset($getNim) && !empty($getNim)) 
-       { 
-
-          $fileInfo = $this->tugas_akhir_m->get_data($getNim);
-
-          $uploads_folder = 'assets/File_TugasAkhir/';
-          $file_name = $getNim.'.pdf';
-          $file = '';
-          foreach ($fileInfo as $key => $value) 
-          {
-              $value->url_pdf = base_url().$uploads_folder. $getNim .'pdf'; 
-              $file = $uploads_folder.$file_name; 
-
-          }        
-                  $data['file'] = $file;
-                  $data['nim'] = $getNim;
-                
-
-                  $this->load->view('tampil',$data);
-        } 
-    }
-       
-}
     
 }
 
