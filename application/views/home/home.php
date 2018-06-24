@@ -8,16 +8,15 @@
             <h3 class="mb-5">Mencari Tugas Akhir? Masukan Judul atau Kata Kunci yang Ada!</h3>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
+            <?= form_open_multipart('Home/search') ?>
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
                   <input type="text" class="form-control form-control-lg" name="keyword" placeholder="Masukkan Kata Kunci...">
                 </div>
                 <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary"><i class="fa fa-search"> Cari</i></button>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary" name="cari"><i class="fa fa-search"> Cari</i></button>
                 </div>
-              </div>
-            </form>
+             <?= form_close() ?>
           </div>
         </div>
       </div>
@@ -36,7 +35,7 @@
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 2013; $x--) {
               ?>
-                <option value="<?php echo $x ?>"><?php echo $x ?></option>
+                <option value="<?php echo $x ?>" name="keyword"><?php echo $x ?></option>
               <?php
                 }
               ?>
@@ -46,9 +45,10 @@
           <div>
             <h5 class="my-4">Konsentrasi</h5>
             <div class="list-group">
-              <a href="#" class="list-group-item">Kecerdasan Buatan</a>
-              <a href="#" class="list-group-item">Basis Data</a>
-              <a href="#" class="list-group-item">Citra</a>
+              <a href="<?php echo base_url('Home') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
+              <a href="<?php echo base_url('Home/konsentrasi/AI') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
+              <a href="<?php echo base_url('Home/konsentrasi/basis_data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
+              <a href="<?php echo base_url('Home/konsentrasi') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
             </div>
           </div>
 
@@ -65,25 +65,22 @@
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div>
             <?php 
-              foreach ($dokumenTA as $key ) {
-                # code...
-              
+              foreach ($dokumenTA as $key ) {             
              ?>
             <div class="card mt-4">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $key->judulTA; ?></h5>
                 <div class="authors">
-                  <ul style="list-style: none; margin-left: -5%;">
+                  <ul id="myUL" style="list-style: none; margin-left: -5%;">
                     <li>Penulis : <?php echo $key->nama; ?></li>
-                    <li>Jurusan : <?php echo $key->jurusan; ?></li>
                     <li>Konsentrasi : <?php echo $key->konsentrasi; ?></li>
                     <li>Tahun : <?php echo $key->tahun_pembuatan; ?></li>
-                    <li>Email : <?php echo $key->email; ?></li>
                   </ul>
                 </div>
                 <div>
                   <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample_<?= $key->NIM ?>" aria-expanded="false" aria-controls="collapseExample_<?= $key->NIM ?>">Abstrak</a>
-                  <a href="<?php echo base_url('Home/download/') ?><?php echo $key->nim ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
+                  <a href="<?php echo base_url('Home/download/'."$key->NIM") ?>" class="btn btn-success"><i class="fa fa-download"></i></a>
+                  <a href="<?php echo base_url('Home/tampil_pdf/'."$key->NIM") ?>" class="btn btn-success">View</a>
 
                   <div class="collapse" id="collapseExample_<?= $key->NIM ?>">
                     <div class="well">

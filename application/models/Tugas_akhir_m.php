@@ -51,4 +51,25 @@ class Tugas_akhir_m extends MY_Model
 		$query = $this->db->delete($this->data['table_name']);
 		return $query;
 	}
+
+	public function search($keyword)
+	{
+		$query = $this->db->query('
+			SELECT * FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE mahasiswa.nama LIKE "%'.$keyword.'" OR tugas_akhir.tahun_pembuatan LIKE "%'.$keyword.'" OR tugas_akhir.judulTA LIKE "%'.$keyword.'" OR tugas_akhir.konsentrasi LIKE "%'.$keyword.'"
+			UNION
+			SELECT * FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE mahasiswa.nama LIKE "%'.$keyword.'%" OR tugas_akhir.tahun_pembuatan LIKE "%'.$keyword.'%" OR tugas_akhir.judulTA LIKE "%'.$keyword.'%" OR tugas_akhir.konsentrasi LIKE "%'.$keyword.'%"
+			UNION
+			SELECT * FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE mahasiswa.nama LIKE "'.$keyword.'%" OR tugas_akhir.tahun_pembuatan LIKE "'.$keyword.'%" OR tugas_akhir.judulTA LIKE "'.$keyword.'%" OR tugas_akhir.konsentrasi LIKE "'.$keyword.'%"
+							       ');
+		return $query->result();
+	}
+
+	public function konsentrasi($konsentrasi)
+	{
+		
+		$query = $this->db->query('SELECT tugas_akhir.NIM, tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE tugas_akhir.konsentrasi = "'.$konsentrasi.'" ORDER BY tugas_akhir.tahun_pembuatan DESC ');
+
+		return $query->result();
+	}
+
 }

@@ -69,4 +69,5 @@ class Dosen_m extends MY_Model
 		return $query->result();
 	}
 
+
 }
