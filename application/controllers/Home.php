@@ -68,21 +68,58 @@ class Home extends MY_Controller
         $this->template($this->data, 'Home');
     }
 
-    public function konsentrasi($konsentrasi)
+    public function konsentrasi()
     {
-        $konsentrasi1 = $this->input->post('konsentrasi');
+        $konsentrasi = $this->input->get('konsentrasi');
 
-        if ($konsentrasi1 == "AI") {
-            $konsentrasi == "Kecerdasan Buatan";
-        }
+        // if ($konsentrasi1 == "AI") {
+        //     $konsentrasi == "Kecerdasan Buatan";
+        // }
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
         $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-        //$this->dump($this->data['dokumenTA']);
-        $this->template($this->data, 'Home'); 
+        $this->dump($this->data['dokumenTA']);
+        //$this->template($this->data, 'Home'); 
     }
+
+    public function tampil_pdf($getNim)
+    {
+
+    if (!isset($this->data['username'], $this->data['role']))
+    {
+        $this->session->sess_destroy();
+        $this->flashmsg('Anda harus login dulu!','warning');
+        redirect('login');
+        exit;
+    }
+    else
+    {
+       if (isset($getNim) && !empty($getNim)) 
+       { 
+
+          $fileInfo = $this->tugas_akhir_m->get_data($getNim);
+
+          $uploads_folder = 'assets/File_TugasAkhir/';
+          $file_name = $getNim.'.pdf';
+          $file = '';
+          foreach ($fileInfo as $key => $value) 
+          {
+              $value->url_pdf = base_url().$uploads_folder. $getNim .'pdf'; 
+              $file = $uploads_folder.$file_name; 
+
+          }        
+                  $data['file'] = $file;
+                  $data['nim'] = $getNim;
+                
+
+                  $this->load->view('tampil',$data);
+        } 
+    }
+       
 }
     
+}
 
 ?>
+

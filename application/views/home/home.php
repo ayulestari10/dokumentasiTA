@@ -46,9 +46,9 @@
             <h5 class="my-4">Konsentrasi</h5>
             <div class="list-group">
               <a href="<?php echo base_url('Home') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
-              <a href="<?php echo base_url('Home/konsentrasi/AI') ?>" class="list-group-item" name="Kecerdasan Buatan">Kecerdasan Buatan</a>
+              <a href="<?php echo base_url('Home/konsentrasi/AI') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
               <a href="<?php echo base_url('Home/konsentrasi/basis_data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
-              <a href="<?php echo base_url('Home/konsentrasi/citra') ?>" class="list-group-item" nama="citra" value="citra">Citra</a>
+              <a href="<?php echo base_url('Home/konsentrasi') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
             </div>
           </div>
 
@@ -65,9 +65,7 @@
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div>
             <?php 
-              foreach ($dokumenTA as $key ) {
-                # code...
-              
+              foreach ($dokumenTA as $key ) {             
              ?>
             <div class="card mt-4">
               <div class="card-body">
@@ -81,7 +79,8 @@
                 </div>
                 <div>
                   <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample_<?= $key->NIM ?>" aria-expanded="false" aria-controls="collapseExample_<?= $key->NIM ?>">Abstrak</a>
-                  <a href="<?php echo base_url('Home/download/'."$key->NIM") ?>" class="btn btn-success"><i class="fa fa-download">   </i></a>
+                  <a href="<?php echo base_url('Home/download/'."$key->NIM") ?>" class="btn btn-success"><i class="fa fa-download"></i></a>
+                  <a href="<?php echo base_url('Home/tampil_pdf/'."$key->NIM") ?>" class="btn btn-success">View</a>
 
                   <div class="collapse" id="collapseExample_<?= $key->NIM ?>">
                     <div class="well">
