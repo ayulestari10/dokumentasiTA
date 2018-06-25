@@ -35,9 +35,10 @@
 						</div>
 						<?= form_open('dosen/ubah-password') ?>
 							<div>
+								<input type="hidden" name="nip">
 								<div class="form-group">
 									<label for="NIP">NIP <span class="required">*</span></label>
-									<input type="text" value="198505102015041002" class="form-control" name="nip" disabled>
+									<input type="text" value="<?= $nip ?>" class="form-control" name="nip" disabled>
 								</div>
 								<div class="form-group">
 									<label for="Password">Password <span class="required">*</span></label>
