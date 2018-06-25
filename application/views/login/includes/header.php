@@ -11,7 +11,11 @@
     <title><?= $title ?></title>
 
     <!-- Bootstrap core CSS -->
+    <!-- <link href="<?= base_url('assets/home/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/home/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+     <script src="<?= base_url('assets/home/') ?>vendor/jquery/jquery.min.js"></script>
 
     <!-- Custom fonts for this template -->
     <link href="<?= base_url('assets/home/') ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,7 +28,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/css/main.css">
     
     <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url('assets/login/') ?>assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/login/') ?>assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>"> 
 
     <style>
     .field_title{font-size: 13px;font-family:Arial;width: 300px;margin-top: 10px}

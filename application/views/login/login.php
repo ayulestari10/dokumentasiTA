@@ -1,5 +1,5 @@
 
-<body>
+<body style="margin-top: 8%;">
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<div class="vertical-align-wrap">

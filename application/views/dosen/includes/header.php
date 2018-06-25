@@ -24,6 +24,7 @@
 
     <!-- jQuery -->
     <script src="<?= base_url('assets') ?>/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>"> 
   </head>
 
   <body class="nav-md">
