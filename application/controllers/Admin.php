@@ -276,6 +276,30 @@ class Admin extends MY_Controller
         $this->data['dokumen']  = $this->tugas_akhir_m->get_row(['NIM' => $nim]);
         $this->template($this->data);
     }
+
+    public function download(){
+        $nim = $this->uri->segment(3);
+
+        if (!isset($this->data['username'], $this->data['role']))
+        {
+            $this->session->sess_destroy();
+            $this->flashmsg('Anda harus login dulu!','warning');
+            redirect('login');
+            exit;
+        }
+        else{
+
+            if (file_exists('assets/File_TugasAkhir/'.$nim.'.pdf')) {
+            $this->load->helper('download');
+            force_download('assets/File_TugasAkhir/'.$nim.'.pdf',NULL);
+            redirect('mahasiswa/data-dokumen');
+            }else{
+                $this->flashmsg('File tidak ada !','danger');
+                redirect('mahasiswa/data-dokumen');
+            }
+        }
+        
+    }
 }
 
 ?>
