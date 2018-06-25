@@ -74,7 +74,11 @@
 							</tr>
 							<tr>
 								<th>Dosen Pembimbing</th>
-								<td><?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing1])->nama ?> dan <?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing2])->nama ?></td>
+								<?php if(isset($dokumen->dosen_pembimbing1, $dokumen->dosen_pembimbing2)): ?>
+									<td><?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing1])->nama ?> dan <?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing2])->nama ?></td>
+								<?php else: ?>
+									<td>Belum ada</td>
+								<?php endif; ?>
 							</tr>
 							<tr>
 								<th>Status</th>

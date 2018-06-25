@@ -20,6 +20,9 @@ class MY_Controller extends CI_Controller
 	    elseif($template == 'dosen') {
 	      return $this->load->view('dosen/includes/layout', $data);
 	    }
+	    elseif($template == 'login'){
+	      return $this->load->view('login/includes/layout', $data);
+	    }
 	    else {
 	      return $this->load->view('home/includes/layout', $data);
 	    }

@@ -116,15 +116,18 @@ class Login extends MY_Controller
 		// //$this->template($this->data, 'login');
 		// $this->load->view()
 
-		$data = array(
-            'title' => 'Login'.$this->title,
-            'content' => 'login/login');
 
-        $this->load->view('login/includes/layout',$data);
+		// $data = array(
+  //           'title' => 'Login'.$this->title,
+  //           'content' => 'login/login'
+  //       );
 
-		// $this->data['title'] = 'Login'.$this->title;
-		// $this->data['content']  = 'Home1/home1';
-		// $this->template($this->data, 'home1');
+
+  //       $this->load->view('login/includes/layout',$data);
+
+		$this->data['title'] = 'Login'.$this->title;
+		$this->data['content']  = 'login/login';
+		$this->template($this->data, 'login');
 
 		 
 	}

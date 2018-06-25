@@ -38,7 +38,6 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="<?= base_url('assets/home/') ?>vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url('assets/home/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
