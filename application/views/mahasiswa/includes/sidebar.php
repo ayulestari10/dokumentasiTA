@@ -9,7 +9,7 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="<?= base_url('assets/foto/mahasiswa/'.$this->session->userdata('username').'.jpg') ?>" alt="User" class="img-circle profile_img">
+                        <img src="<?= base_url('assets/foto/mahasiswa/'.$this->session->userdata('username').'.jpg') ?>" alt="User" class="img-circle profile_img" onerror='src="<?= base_url('assets/production/') ?>images/img.jpg"'>
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
