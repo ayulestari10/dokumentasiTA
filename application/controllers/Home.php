@@ -60,18 +60,21 @@ class Home extends MY_Controller
 
         $keyword = $this->input->post('keyword');
 
-        if (!empty($keyword) && isset($keyword)) {
+        if (isset($keyword) && !empty($keyword)) {
 
             $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
             
             if(count($this->data['dokumenTA']) <= 0 ){
                 $this->flashmsg('Dokumen tidak ada!','warning');
+            }else{
+                 $this->flashmsg('Dokumen ditemukan','success');
             }
-
-            $this->data['title']  = 'Home'.$this->title;
-            $this->data['content']  = 'home/home';            
-            $this->template($this->data, 'Home');
         }
+
+        $this->data['title']  = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->template($this->data, 'Home');
+
     }
 
     public function konsentrasi(){
