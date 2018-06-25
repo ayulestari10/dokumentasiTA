@@ -45,7 +45,7 @@ class Mahasiswa extends MY_Controller
         $this->data['dp1'] = $this->dosen_m->getNamaDosen1($this->data['ta']->dosen_pembimbing1);
         $this->data['dp2'] = $this->dosen_m->getNamaDosen2($this->data['ta']->dosen_pembimbing2);
 
-        if($this->POST('id') && $this->POST('delete')){
+        if($this->POST('username') && $this->POST('delete')){
             $nim = $this->data['username'];
             $dataInd = array(
                             'nama'  => NULL,
@@ -257,7 +257,7 @@ class Mahasiswa extends MY_Controller
             $data_mahasiswa = [
                 'password'  => md5($this->POST('password1'))
             ];
-
+            $username = $this->session->userdata('username');
             $this->user_m->update($username,$data_mahasiswa);
 
             $this->flashmsg('Password berhasil diubah.');
