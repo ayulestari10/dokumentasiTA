@@ -48,10 +48,10 @@ class Home extends MY_Controller
             if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
             $this->load->helper('download');
             force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-            redirect('mahasiswa\data_dokumen');
+            redirect('mahasiswa/data-dokumen');
             }else{
                 $this->flashmsg('File tidak ada !','danger');
-                redirect('mahasiswa/data_dokumen');
+                redirect('mahasiswa/data-dokumen');
             }
         }
         
@@ -59,7 +59,7 @@ class Home extends MY_Controller
      
     public function search(){
 
-    $keyword = $this->input->post('keyword');
+        $keyword = $this->input->post('keyword');
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
@@ -68,19 +68,53 @@ class Home extends MY_Controller
         $this->template($this->data, 'Home');
     }
 
-    public function konsentrasi()
-    {
-        $konsentrasi = $this->input->get('konsentrasi');
+    public function konsentrasi(){
+        $konsentrasi = $this->uri->segment(3);
 
-        // if ($konsentrasi1 == "AI") {
-        //     $konsentrasi == "Kecerdasan Buatan";
-        // }
+        if (isset($konsentrasi)) {
+
+            if($konsentrasi == "Semua"){
+                redirect('home');
+                exit;
+            }
+
+            $konsentrasi = str_replace('_', ' ', $konsentrasi);
+            $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
+            
+            if(count($this->data['dokumenTA']) <= 0 ){
+                $this->flashmsg('Dokumen tidak ada!','warning');
+            }
+        }
+        else{
+            $this->flashmsg('Konsentrasi tidak dicantumkan!','danger');
+            redirect('home');
+            exit;
+        }
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
-        $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-        $this->dump($this->data['dokumenTA']);
-        //$this->template($this->data, 'Home'); 
+        $this->template($this->data, 'Home'); 
+    }
+
+    public function tahun_pembuatan(){
+        $tahun = $this->uri->segment(3);
+
+        if (isset($tahun)) {
+            $this->data['dokumenTA'] = $this->tugas_akhir_m->tahun_pembuatan($tahun);
+            
+            if(count($this->data['dokumenTA']) <= 0 ){
+                $this->flashmsg('Dokumen tidak ada!','warning');
+            }
+        }
+        else{
+            $this->flashmsg('Tahun tidak dicantumkan!','danger');
+            redirect('home');
+            exit;
+        }
+
+        $this->data['title']  = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->template($this->data, 'Home'); 
     }
 
     public function tampil_pdf($getNim)

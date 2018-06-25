@@ -35,7 +35,7 @@
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 2013; $x--) {
               ?>
-                <option value="<?php echo $x ?>" name="keyword"><?php echo $x ?></option>
+                <option value="<?= $x ?>"><a href="<?= base_url('Home/tahun_pembuatan/'.$x) ?>"><?= $x ?></a></option>
               <?php
                 }
               ?>
@@ -45,10 +45,10 @@
           <div>
             <h5 class="my-4">Konsentrasi</h5>
             <div class="list-group">
-              <a href="<?php echo base_url('Home') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
-              <a href="<?php echo base_url('Home/konsentrasi/AI') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
-              <a href="<?php echo base_url('Home/konsentrasi/basis_data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
-              <a href="<?php echo base_url('Home/konsentrasi') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
+              <a href="<?php echo base_url('Home/konsentrasi/Semua') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
+              <a href="<?php echo base_url('Home/konsentrasi/Kecerdasan_Buatan') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
+              <a href="<?php echo base_url('Home/konsentrasi/Basis_Data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
+              <a href="<?php echo base_url('Home/konsentrasi/Citra') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
             </div>
           </div>
 
@@ -63,6 +63,9 @@
         </style>
 
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <div>
+           <?= $this->session->flashdata('msg') ?>
+          </div>
           <div>
             <?php 
               foreach ($dokumenTA as $key ) {             
