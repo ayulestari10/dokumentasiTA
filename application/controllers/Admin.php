@@ -91,6 +91,7 @@ class Admin extends MY_Controller
         if($this->POST('delete') && $this->POST('username')){
 
             $this->user_m->delete($this->POST('username'));
+            $this->mahasiswa_m->delete($this->POST('username'));
             $this->flashmsg('<i class="fa fa-check"></i> Data mahasiswa berhasil dihapus');
             exit;
         }
@@ -212,6 +213,7 @@ class Admin extends MY_Controller
         if($this->POST('delete') && $this->POST('username')){
 
             $this->user_m->delete($this->POST('username'));
+            $this->dosen_m->delete($this->POST('username'));
             $this->flashmsg('<i class="fa fa-check"></i> Data dosen berhasil dihapus');
             exit;
         }
