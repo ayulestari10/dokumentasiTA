@@ -67,7 +67,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Foto">Unggah Foto <span class="required">*</span></label><br>
-									<img src="<?= base_url('assets/foto/mahasiswa/'.$this->session->userdata('username').'.jpg') ?>" alt="User" onerror='src="<?= base_url('assets/production/') ?>images/img.jpg"' style="width: 200px; height: 250px;">
+									<img src="<?= base_url('assets/foto/mahasiswa/'.$individu->NIM.'.jpg') ?>" alt="User" onerror='src="<?= base_url('assets/production/') ?>images/img.jpg"' style="width: 200px; height: 250px;">
 									<input type="file" name="foto">
 								</div>
 								<div style="margin-top: 3%;">
