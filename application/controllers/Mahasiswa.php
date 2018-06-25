@@ -64,39 +64,52 @@ class Mahasiswa extends MY_Controller
                 exit;
             }
 
-            $data_profile = [
-                'nama'  => $this->POST('nama'),
-                'jurusan' => $this->POST('jurusan'),
-                'angkatan' => $this->POST('angkatan'),
-                'email'  => $this->POST('email'),
-                'alamat'  => $this->POST('alamat')
-            ];
+            $file_name = $_FILES['foto']['name'];
+            $exe = substr($file_name, -4);
+            $exe2= substr($file_name, -5);
+            //$exe3 = substr($file_name, -4);
 
-            $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
+                    $data_profile = [
+                    'nama'  => $this->POST('nama'),
+                    'jurusan' => $this->POST('jurusan'),
+                    'angkatan' => $this->POST('angkatan'),
+                    'email'  => $this->POST('email'),
+                    'alamat'  => $this->POST('alamat')
+                ];
 
-            if(count($cekNimInd) > 0){
-                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+                $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
 
-                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                    $this->upload($this->data['username'], 'mahasiswa', 'foto');
+                if(count($cekNimInd) > 0){
+                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+
+                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                        $this->upload($this->data['username'], 'mahasiswa', 'foto');
+                    }
+
+                    $this->flashmsg('Data berhasil disimpan!');
+                    redirect('mahasiswa/profile');
+                    exit;
                 }
+                else{
+                    $this->Mahasiswa_m->insert($this->data['username']);
+                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
-                $this->flashmsg('Data berhasil disimpan!');
-                redirect('mahasiswa/profile');
-                exit;
+                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                        $this->upload($this->data['username'], 'mahasiswa', 'foto');
+                    }
+
+                    $this->flashmsg('Data berhasil disimpan!');
+                    redirect('mahasiswa/profile');
+                    exit;
+                }
             }
             else{
-                $this->Mahasiswa_m->insert($this->data['username']);
-                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
-
-                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                    $this->upload($this->data['username'], 'mahasiswa', 'foto');
-                }
-
-                $this->flashmsg('Data berhasil disimpan!');
+                $this->flashmsg('Pilih file jpg/jpeg/png !', 'danger');
                 redirect('mahasiswa/profile');
                 exit;
             }
+            
         }
 
         $this->data['title']        = 'Profile'.$this->title;
@@ -144,22 +157,6 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
-    public function file_check($str){
-        $allowed_mime_type_arr = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-        $mime = get_mime_by_extension($_FILES['file']['name']);
-        if(isset($_FILES['file']['name']) && $_FILES['file']['name']!=""){
-            if(in_array($mime, $allowed_mime_type_arr)){
-                return true;
-            }else{
-                $this->form_validation->set_message('file_check', 'Please select only pdf/gif/jpg/png file.');
-                return false;
-            }
-        }else{
-            $this->form_validation->set_message('file_check', 'Please choose a file to upload.');
-            return false;
-        }
-    }
-
     public function unggah_dokumen()
     {
         $this->data['title']  = 'Mengunggah Dokumen'.$this->title;
@@ -195,8 +192,6 @@ class Mahasiswa extends MY_Controller
                     'required'  => 'Dosen pembimbing 2 tidak boleh kosong'
                 ));
 
-            //$this->form_validation->set_rules('upload', 'Unggah Dokumen', 'callback_file_check');
-
             $this->form_validation->set_rules('abstrak', 'Abstrak', 'trim|required', array(
                     'trim'      => 'Abstrak tidak boleh kosong',
                     'required'  => 'Abstrak tidak boleh kosong'
@@ -206,6 +201,15 @@ class Mahasiswa extends MY_Controller
                 if ($this->form_validation->run() == FALSE){
                     $this->flashmsg(validation_errors(), 'danger');
                     redirect('Mahasiswa/unggah-dokumen');
+                    exit;
+                }
+
+                $file_name = $_FILES['upload']['name'];
+                $exe = substr($file_name, -4);
+
+                if($exe != ".pdf"){
+                    $this->flashmsg('Pilih file pdf !', 'danger');
+                    redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
 
