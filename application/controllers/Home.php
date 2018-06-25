@@ -29,7 +29,6 @@ class Home extends MY_Controller
         $this->data['content']  = 'home/home';
         $this->data['dokumenTA']  = $this->tugas_akhir_m->get_ta();
         $this->template($this->data, 'home');
-        //$this->dump($this->data['dokumenTA']);
     }
 
     public function download(){
@@ -47,10 +46,10 @@ class Home extends MY_Controller
             if (file_exists('assets/File_TugasAkhir/'.$nim.'.pdf')) {
             $this->load->helper('download');
             force_download('assets/File_TugasAkhir/'.$nim.'.pdf',NULL);
-            redirect('mahasiswa/data-dokumen');
+            redirect('home');
             }else{
                 $this->flashmsg('File tidak ada !','danger');
-                redirect('mahasiswa/data-dokumen');
+                redirect('home');
             }
         }
         
@@ -61,11 +60,18 @@ class Home extends MY_Controller
 
         $keyword = $this->input->post('keyword');
 
-        $this->data['title']  = 'Home'.$this->title;
-        $this->data['content']  = 'home/home';
-        $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
-        
-        $this->template($this->data, 'Home');
+        if (!empty($keyword) && isset($keyword)) {
+
+            $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
+            
+            if(count($this->data['dokumenTA']) <= 0 ){
+                $this->flashmsg('Dokumen tidak ada!','warning');
+            }
+
+            $this->data['title']  = 'Home'.$this->title;
+            $this->data['content']  = 'home/home';            
+            $this->template($this->data, 'Home');
+        }
     }
 
     public function konsentrasi(){
@@ -162,7 +168,7 @@ class Home extends MY_Controller
         else
         {
               $this->flashmsg('File tidak ada !','danger');
-              redirect('mahasiswa/data_dokumen');  
+              redirect('home');  
         }
 
     }
