@@ -84,11 +84,12 @@ class Dosen extends MY_Controller
 
     public function data_mahasiswa()
     {
-        $username = $this->session->userdata['username'];
+        $username = $this->session->userdata('username');
 
-        $this->data['title']  = 'Data Mahasiswa'.$this->title;
-        $this->data['content']  = 'dosen/data_mahasiswa';
+        $this->data['title']    = 'Data Mahasiswa'.$this->title;
         $this->data['data_mhs'] =  $this->Dosen_m->get_data_mahasiswa($username);
+        // $this->dump($this->data['data_mhs']);exit;
+        $this->data['content']  = 'dosen/data_mahasiswa';
         $this->template($this->data, 'dosen');
     }
 

@@ -97,7 +97,13 @@ class Admin extends MY_Controller
 
         if($this->POST('username') && $this->POST('get')){
             $this->data['data_mahasiswa'] = $this->user_m->get_row(['username' => $this->POST('username')]);
-            echo json_encode($this->data['data_mahasiswa']);
+            $this->data['mahasiswa'] = $this->mahasiswa_m->get_row(['NIM' => $this->POST('username')]);
+
+            $data_mhs = [
+                'nim'  => $this->data['data_mahasiswa']->username,
+                'nama' => $this->data['mahasiswa']->nama
+            ];
+            echo json_encode($data_mhs);
             exit;
         }
 
@@ -144,16 +150,19 @@ class Admin extends MY_Controller
                 ];
                 $this->user_m->insert($data_mahasiswa);
 
-                $nim = ['nim'   => $this->POST('username')];
-                $this->mahasiswa_m->insert($nim);
-                $this->tugas_akhir_m->insert($nim);
+                $data_mas = [
+                    'NIM'   => $this->POST('username'),
+                    'nama'  => $this->POST('nama')
+                ];
+                $this->mahasiswa_m->insert($data_mas);
+                $this->tugas_akhir_m->insert(['NIM' => $this->POST('username')]);
 
                 $this->flashmsg('Data berhasil disimpan!');
                 redirect('admin/data-mahasiswa');
                 exit;
             }
             else{
-                $this->flashmsg('Username yang digunakan telah ada !', 'danger');
+                $this->flashmsg('Username yang digunakan telah ada!', 'danger');
                 redirect('admin/data-mahasiswa');
                 exit;
             }
@@ -181,10 +190,15 @@ class Admin extends MY_Controller
 
             $username = $this->POST('username_lama');
 
-            $data_mahasiswa = [
+            $data_user = [
                 'password'  => md5($this->POST('password1'))
             ];
-            $this->user_m->update($username, $data_mahasiswa);
+            $this->user_m->update($username, $data_user);
+
+            $data_mahasiswa = [
+                'nama'      => $this->POST('edit_nama')
+            ];
+            $this->mahasiswa_m->update($username, $data_mahasiswa);
 
             $this->flashmsg('Data berhasil diedit!');
             redirect('admin/data-mahasiswa');
@@ -204,7 +218,14 @@ class Admin extends MY_Controller
 
         if($this->POST('username') && $this->POST('get')){
             $this->data['data_dosen'] = $this->user_m->get_row(['username' => $this->POST('username')]);
-            echo json_encode($this->data['data_dosen']);
+            $this->data['dosen'] = $this->dosen_m->get_row(['NIP' => $this->POST('username')]);
+
+            $data_dos = [
+                'nip'  => $this->data['data_dosen']->username,
+                'nama' => $this->data['dosen']->nama
+            ];
+
+            echo json_encode($data_dos);
             exit;
         }
 
@@ -246,20 +267,23 @@ class Admin extends MY_Controller
 
             if(count($cekId) == 0 && count($cekId2) == 0 && count($cekId3) == 0 && count($cekId4) == 0){
                 $data_dosen = [
-                'username'  => $this->POST('username'),
-                'password'  => md5($this->POST('password1'))
+                    'username'  => $this->POST('username'),
+                    'password'  => md5($this->POST('password1'))
                 ];
                 $this->user_m->insert($data_dosen);
 
-                $nip = ['nip'   => $this->POST('username')];
-                $this->dosen_m->insert($nip);
+                $data_dos = [
+                    'NIP'   => $this->POST('username'),
+                    'nama'  => $this->POST('nama')
+                ];
+                $this->dosen_m->insert($data_dos);
 
                 $this->flashmsg('Data berhasil disimpan!');
                 redirect('admin/data-dosen');
                 exit;           
             }
             else{
-                $this->flashmsg('Username yang digunakan telah ada','danger');
+                $this->flashmsg('Username yang digunakan telah ada!','danger');
                 redirect('admin/data-dosen');
                 exit;
             }
@@ -286,10 +310,15 @@ class Admin extends MY_Controller
 
             $username = $this->POST('username_lama');
 
-            $data_dosen = [
+            $data_user = [
                 'password'  => md5($this->POST('password1'))
             ];
-            $this->user_m->update($username, $data_dosen);
+            $this->user_m->update($username, $data_user);
+
+            $data_dosen = [
+                'nama'      => $this->POST('edit_nama')
+            ];
+            $this->dosen_m->update($username, $data_dosen);
 
             $this->flashmsg('Data berhasil diedit!');
             redirect('admin/data-dosen');

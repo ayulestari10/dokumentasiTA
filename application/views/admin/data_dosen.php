@@ -40,6 +40,7 @@
 								<tr>
 									<th>No</th>
 									<th>Username</th>
+									<th>Nama</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -48,6 +49,7 @@
 								<tr>
 									<td><?= $i ?></td>
 									<td><?= $row->username ?></td>
+									<td><?= $this->dosen_m->get_row(['NIP' => $row->username])->nama ?></td>
 									<td>
 										<button class="btn btn-primary" data-toggle="modal" data-target="#edit" onclick="get_data('<?= $row->username ?>')"><i class="fa fa-pencil-square"> Edit</i></button>
 										<button class="btn btn-danger" onclick="delete_data('<?= $row->username ?>')"><i class="fa fa-trash"> Hapus</i></button>
@@ -75,6 +77,10 @@
 					<div class="form-group">
 						<label for="Username">Username <span class="required">* NIP/NIPUS</span></label>
 						<input type="text" class="form-control" name="username" required>
+					</div>
+					<div class="form-group">
+						<label for="Nama">Nama <span class="required">*</span></label>
+						<input type="text" class="form-control" name="nama" required>
 					</div>
 					<div class="form-group">
 						<label for="Password">Password <span class="required">*</span></label>
@@ -107,6 +113,10 @@
 					<div class="form-group">
 						<label for="Username">Username <span class="required">* NIP/NIPUS</span></label>
 						<input type="text" class="form-control" name="edit_username" id="edit_username_lama" disabled>
+					</div>
+					<div class="form-group">
+						<label for="Nama">Nama <span class="required">*</span></label>
+						<input type="text" class="form-control" name="edit_nama" id="edit_nama" required>
 					</div>
 					<div class="form-group">
 						<label for="Password">Password <span class="required">*</span></label>
@@ -147,7 +157,8 @@
                       success: function(response) {
                       		console.log(response);
                           response = JSON.parse(response);
-                          $('#edit_username_lama, #edit_username_lama_hidden').val(response.username);
+                          $('#edit_username_lama, #edit_username_lama_hidden').val(response.nip);
+                          $('#edit_nama').val(response.nama);
                       },
                       error: function(e) {console.log(e.responseText);}
                   });

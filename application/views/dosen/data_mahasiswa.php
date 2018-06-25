@@ -3,7 +3,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3 class="page-header">Data Dokumen Tugas Akhir
+				<h3 class="page-header">Data Mahasiswa
 				</h3>
 			</div>
 			<!-- <div class="title_right">
@@ -63,7 +63,7 @@
 									<td style="text-align: justify; width: 200px;"><?= $key->judulTA ?></td>
 									<td><?= $key->tahun_pembuatan ?></td>
 									<td>
-										<a href="<?= base_url('dosen/detail-dokumen/'."$key->nim") ?>" class="btn btn-info"><i class="fa fa-info"></i> Info</a>
+										<a href="<?= base_url('dosen/detail-dokumen/'."$key->nim") ?>" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
 									</td>
 								</tr>
 								<?php 
