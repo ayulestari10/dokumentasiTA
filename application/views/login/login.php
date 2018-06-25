@@ -5,7 +5,7 @@
 		<div class="vertical-align-wrap">
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
-					<div class="left" style="margin-top: -35%;">
+					<div class="left" style="margin-top: -45%;">
 						<div class="content">
 							<div class="header">
 								<!-- <div class="logo text-center"><img src="<?= base_url('assets/login/') ?>assets/img/logo-dark.png" alt="Klorofil Logo"></div> -->
