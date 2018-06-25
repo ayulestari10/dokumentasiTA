@@ -129,26 +129,35 @@ class Dosen extends MY_Controller
         $username = $this->session->userdata['username'];
 
         if($this->POST('simpan')){
-            if($this->POST('password1') != $this->POST('password2')){
-                $this->flashmsg('Password dan konfirmasi password tidak sama!', 'warning');
+            $this->form_validation->set_rules('password1', 'Password', 'required', array(
+                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong',
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->flashmsg(validation_errors(), 'danger');
                 redirect('dosen/ubah-password');
                 exit;
             }
 
-            $data_mahasiswa = [
+            $data_dosen = [
                 'password'  => md5($this->POST('password1'))
             ];
-            $this->user_m->update($username,$data_mahasiswa);
+            $this->user_m->update($username,$data_dosen);
 
             $this->flashmsg('Password berhasil diubah!');
             redirect('dosen/ubah-password');
             exit;
 
-        }else{
-            $this->data['title']  = 'Ubah Password'.$this->title;
-            $this->data['content']  = 'dosen/ubah_password';
-            $this->template($this->data, 'dosen');
         }
+        //$this->dump($username);exit;
+        $this->data['title']    = 'Ubah Password'.$this->title;
+        $this->data['nip']      = $this->session->userdata('username');
+        $this->data['content']  = 'dosen/ubah_password';
+        $this->template($this->data, 'dosen');
     }
 
     public function download($getNim){
