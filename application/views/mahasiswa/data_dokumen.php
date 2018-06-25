@@ -134,42 +134,55 @@
                     });
                 });
 
-                function delete_data(id){
-		            swal({
-		              title: 'Hapus data tugas akhir ?',
-		              text: "File yang telah dihapus tidak dapat dikembalikan lagi !",
-		              type: 'warning',
-		              showCancelButton: true,
-		              confirmButtonColor: '#3085d6',
-		              cancelButtonColor: '#d33',
-		              confirmButtonText: 'Yes',
-		              cancelButtonText: 'Cancel',
-		              confirmButtonClass: 'btn btn-success',
-		              cancelButtonClass: 'btn btn-danger',
-		              buttonsStyling: false,
-		              reverseButtons: true
-		            }).then((result) => {
-		              if (result.value) {
-		                $.ajax({
-		                    url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
-		                    type: 'POST',
-		                    data: {
-		                        id: id,
-		                        delete: true
-		                    },
-		                    success: function() {
-		                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
-		                    }
-		                });
-		              } 
+          //       function delete_data(id){
+		        //     swal({
+		        //       title: 'Hapus data tugas akhir ?',
+		        //       text: "File yang telah dihapus tidak dapat dikembalikan lagi !",
+		        //       type: 'warning',
+		        //       showCancelButton: true,
+		        //       confirmButtonColor: '#3085d6',
+		        //       cancelButtonColor: '#d33',
+		        //       confirmButtonText: 'Yes',
+		        //       cancelButtonText: 'Cancel',
+		        //       confirmButtonClass: 'btn btn-success',
+		        //       cancelButtonClass: 'btn btn-danger',
+		        //       buttonsStyling: false,
+		        //       reverseButtons: true
+		        //     }).then((result) => {
+		        //       if (result.value) {
+		        //         $.ajax({
+		        //             url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
+		        //             type: 'POST',
+		        //             data: {
+		        //                 id: id,
+		        //                 delete: true
+		        //             },
+		        //             success: function() {
+		        //                window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
+		        //             }
+		        //         });
+		        //       } 
 
-		              else if (result.dismiss === 'cancel') {
-		                swal(                   
-		                  'Batal',
-		                  'Data anda aman :)',
-		                  'error'
-		                )
-		              }
-		            })  
-        		}
+		        //       else if (result.dismiss === 'cancel') {
+		        //         swal(                   
+		        //           'Batal',
+		        //           'Data anda aman :)',
+		        //           'error'
+		        //         )
+		        //       }
+		        //     })  
+        		// }
+        		function delete_data(username) {
+                    $.ajax({
+                        url: '<?= base_url('mahasiswa/data_dokumen') ?>',
+                        type: 'POST',
+                        data: {
+                            username: username,
+                            delete: true
+                        },
+                        success: function() {
+                            window.location = '<?= base_url('mahasiswa/data_dokumen') ?>';
+                        }
+                    });
+                }
             </script>
