@@ -32,7 +32,9 @@ class Home extends MY_Controller
         //$this->dump($this->data['dokumenTA']);
     }
 
-    public function download($getNim){
+    public function download(){
+        $nim = $this->uri->segment(3);
+
         if (!isset($this->data['username'], $this->data['role']))
         {
             $this->session->sess_destroy();
@@ -42,13 +44,13 @@ class Home extends MY_Controller
         }
         else{
 
-            if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
+            if (file_exists('assets/File_TugasAkhir/'.$nim.'.pdf')) {
             $this->load->helper('download');
-            force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-            redirect('mahasiswa\data_dokumen');
+            force_download('assets/File_TugasAkhir/'.$nim.'.pdf',NULL);
+            redirect('mahasiswa/data-dokumen');
             }else{
                 $this->flashmsg('File tidak ada !','danger');
-                redirect('mahasiswa/data_dokumen');
+                redirect('mahasiswa/data-dokumen');
             }
         }
         
@@ -57,7 +59,7 @@ class Home extends MY_Controller
     public function search()
     {
 
-    $keyword = $this->input->post('keyword');
+        $keyword = $this->input->post('keyword');
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
@@ -66,23 +68,66 @@ class Home extends MY_Controller
         $this->template($this->data, 'Home');
     }
 
-    public function konsentrasi()
-    {
-        $konsentrasi = $this->input->get('konsentrasi');
+    public function konsentrasi(){
+        $konsentrasi = $this->uri->segment(3);
 
-        // if ($konsentrasi1 == "AI") {
-        //     $konsentrasi == "Kecerdasan Buatan";
-        // }
+        if (isset($konsentrasi)) {
+
+            if($konsentrasi == "Semua"){
+                redirect('home');
+                exit;
+            }
+
+            $konsentrasi = str_replace('_', ' ', $konsentrasi);
+            $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
+            
+            if(count($this->data['dokumenTA']) <= 0 ){
+                $this->flashmsg('Dokumen tidak ada!','warning');
+            }
+        }
+        else{
+            $this->flashmsg('Konsentrasi tidak dicantumkan!','danger');
+            redirect('home');
+            exit;
+        }
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
-        $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-        //$this->dump($this->data['dokumenTA']);
         $this->template($this->data, 'Home'); 
     }
 
-    public function tampil_pdf($getNim)
+    public function tahun_pembuatan(){
+        if($this->POST('cari')){
+            $this->data['result'] = [];
+            $tahun = $this->POST('tahun');
+
+            $dokumen = $this->tugas_akhir_m->tahun_pembuatan($tahun);
+
+            foreach($dokumen as $row){
+                $this->data['result'] [] = [
+                    'NIM'   => $row->NIM,
+                    'judulTA' => $row->judulTA,
+                    'nama'  => $row->nama,
+                    'konsentrasi' => $row->konsentrasi,
+                    'tahun_pembuatan' => $row->tahun_pembuatan,
+                    'abstrak' => $row->abstrak
+                ];
+            }
+
+            $this->data['response'] = [
+                'result' => $this->data['result']
+            ];
+            echo json_encode($this->data['response']);
+            exit;
+        }
+        $this->data['title']  = 'Home'.$this->title;
+        $this->data['content']  = 'home/home';
+        $this->template($this->data, 'Home'); 
+    }
+
+    public function tampil_pdf()
     {
+        $getNim = $this->uri->segment(3);
 
         if (!isset($this->data['username'], $this->data['role']))
         {

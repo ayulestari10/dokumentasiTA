@@ -28,27 +28,34 @@
       <div class="row">
 
         <div class="col-lg-3">
-          <div>
-            <h5 class="my-4">Tahun</h5>
-            <select class="form-control" name="tahun">
-              <?php
-                $thn_skr = date('Y');
-                for ($x = $thn_skr; $x >= 2013; $x--) {
-              ?>
-                <option value="<?php echo $x ?>" name="keyword"><?php echo $x ?></option>
-              <?php
-                }
-              ?>
-            </select>
+          <div class="row">
+            <div class="col-md-10">
+                <h5 class="my-4">Tahun</h5>
+                <div class="input-group">
+                  <select class="form-control" name="tahun" id="tahun">
+                    <?php
+                      $thn_skr = date('Y');
+                      for ($x = $thn_skr; $x >= 2013; $x--) {
+                    ?>
+                      <option value="<?= $x ?>"><?= $x ?></option>
+                    <?php
+                      }
+                    ?>
+                  </select>
+                  <span class="input-group-addon btn btn-primary" id="search"><i class="fa fa-search"></i></span>     
+                </div>
+            </div>
           </div>
 
-          <div>
-            <h5 class="my-4">Konsentrasi</h5>
-            <div class="list-group">
-              <a href="<?php echo base_url('Home') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
-              <a href="<?php echo base_url('Home/konsentrasi/AI') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
-              <a href="<?php echo base_url('Home/konsentrasi/basis_data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
-              <a href="<?php echo base_url('Home/konsentrasi') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
+          <div class="row" style="margin-top: 15%;">
+            <div class="col-md-10">
+              <h5 class="my-4">Konsentrasi</h5>
+              <div class="list-group">
+                <a href="<?php echo base_url('Home/konsentrasi/Semua') ?>" class="list-group-item" name="Semua">Semua Konsentrasi</a>
+                <a href="<?php echo base_url('Home/konsentrasi/Kecerdasan_Buatan') ?>" class="list-group-item" name="keyword">Kecerdasan Buatan</a>
+                <a href="<?php echo base_url('Home/konsentrasi/Basis_Data') ?>" class="list-group-item" nama="Basis Data">Basis Data</a>
+                <a href="<?php echo base_url('Home/konsentrasi/Citra') ?>" class="list-group-item" name="keyword" value="citra">Citra</a>
+              </div>
             </div>
           </div>
 
@@ -64,6 +71,14 @@
 
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div>
+           <?= $this->session->flashdata('msg') ?>
+          </div>
+          
+          <div id="result-container">
+  
+          </div>
+          
+          <div id="hasil-dokumen">
             <?php 
               foreach ($dokumenTA as $key ) {             
              ?>
@@ -102,3 +117,68 @@
         </div>
       </div>
     </div>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        
+        $('#search').on('click', function() {
+          console.log($('#tahun').val());
+          $.ajax({
+            url: '<?= base_url('home/tahun-pembuatan') ?>',
+            type: 'POST',
+            data: {
+              cari: true,
+              tahun: $('#tahun').val()
+            },
+            success: function(response) {
+              $('#hasil-dokumen').hide();
+              $('#result-container').html('');
+              var html = '';
+              var json = $.parseJSON(response);
+              var tahun = $('#tahun').val();
+
+              if(json.result.length == undefined || json.result.length <= 0){
+                console.log('undefined jok');
+                html += '<div class="alert alert-warning alert-dismissable"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Dokumen tidak ada!</div>';
+              }
+              else{
+                console.log('berhasil jok');
+                for (var i = 0; i < json.result.length; i++) {
+                  html += '<div class="card mt-4">'+
+                            '<div class="card-body">'+
+                              '<h5 class="card-title">'+ json.result[i].judulTA +'</h5>'+
+                              '<div class="authors">'+
+                                '<ul id="myUL" style="list-style: none; margin-left: -5%;">'+
+                                  '<li>Penulis : '+ json.result[i].nama +'</li>'+
+                                  '<li>Konsentrasi : '+ json.result[i].konsentrasi +'</li>'+
+                                  '<li>Tahun : '+ json.result[i].tahun_pembuatan +'</li>'+
+                                '</ul>'+
+                              '</div>'+
+                              '<div>'+
+                                '<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample_<?= $key->NIM ?>" aria-expanded="false" aria-controls="collapseExample_<?= $key->NIM ?>">Abstrak</a>'+
+                                '<a href="<?= base_url('Home/download/') ?>' + json.result[i].NIM +'" class="btn btn-success"><i class="fa fa-download"></i></a>'+
+                                '<a href="<?= base_url('Home/tampil_pdf/') ?>' + json.result[i].NIM +'" class="btn btn-success">View</a>'+
+
+                                '<div class="collapse" id="collapseExample_<?= $key->NIM ?>">'+
+                                  '<div class="well">'+
+                                    '<p class="card-text konten">'+
+                                      json.result[i].abstrak +
+                                    '</p>'+
+                                  '</div>'+
+                                '</div>'+
+                              '</div>'+
+                            '</div>'+
+                          '</div>';
+                }
+              }
+
+              $('#result-container').html(html);
+            },
+            error: function(err) {
+              console.error(err.responseText);
+            }
+          });
+        });
+      });
+    </script>
+

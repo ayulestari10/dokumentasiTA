@@ -21,6 +21,7 @@ class Admin extends MY_Controller
         $this->load->model('user_m');
         $this->load->model('mahasiswa_m');
         $this->load->model('dosen_m');
+        $this->load->model('admin_m');
         $this->load->model('tugas_akhir_m');
 
          // load form_validation library
@@ -34,6 +35,54 @@ class Admin extends MY_Controller
         $this->data['mahasiswa']    = $this->mahasiswa_m->get();
         $this->data['dosen']        = $this->dosen_m->get();
         $this->data['tugas_akhir']  = $this->tugas_akhir_m->get();
+        $this->template($this->data);
+    }
+
+    public function profile(){
+        if($this->POST('simpan')){
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
+                    'trim'      => 'Nama tidak boleh kosong',
+                    'required'  => 'Nama tidak boleh kosong',
+                    'alpha_spaces'     => 'Nama hanya boleh karakter'
+                ));
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
+                    'trim'      => 'Email tidak boleh kosong',
+                    'required'  => 'Email tidak boleh kosong',
+                    'valid_email' => 'Email tidak valid'
+                ));
+            $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
+                    'trim'      => 'Alamat tidak boleh kosong',
+                    'required'  => 'Alamat tidak boleh kosong'
+                ));
+
+            if ($this->form_validation->run() == FALSE){
+                $this->flashmsg(validation_errors(), 'danger');
+                redirect('admin/profile');
+                exit;
+            }
+
+            $data_profile = [
+                'nama'  => $this->POST('nama'),
+                'email'  => $this->POST('email'),
+                'alamat'  => $this->POST('alamat')
+            ];
+
+            $nipus = $this->POST('nipus');
+
+            $this->admin_m->update($nipus, $data_profile);
+            
+            if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                $this->upload($nipus, 'admin', 'foto');
+            }
+
+            $this->flashmsg('Data berhasil disimpan!');
+            redirect('admin/profile');
+            exit;
+        }
+
+        $this->data['title']        = 'Profile'.$this->title;
+        $this->data['content']      = 'admin/profile';
+        $this->data['data']         = $this->admin_m->get_row(['NIPUS' => $this->data['username']]);
         $this->template($this->data);
     }
 
@@ -275,6 +324,30 @@ class Admin extends MY_Controller
         $this->data['content']  = 'admin/detail_dokumen';
         $this->data['dokumen']  = $this->tugas_akhir_m->get_row(['NIM' => $nim]);
         $this->template($this->data);
+    }
+
+    public function download(){
+        $nim = $this->uri->segment(3);
+
+        if (!isset($this->data['username'], $this->data['role']))
+        {
+            $this->session->sess_destroy();
+            $this->flashmsg('Anda harus login dulu!','warning');
+            redirect('login');
+            exit;
+        }
+        else{
+
+            if (file_exists('assets/File_TugasAkhir/'.$nim.'.pdf')) {
+            $this->load->helper('download');
+            force_download('assets/File_TugasAkhir/'.$nim.'.pdf',NULL);
+            redirect('mahasiswa/data-dokumen');
+            }else{
+                $this->flashmsg('File tidak ada !','danger');
+                redirect('mahasiswa/data-dokumen');
+            }
+        }
+        
     }
 }
 

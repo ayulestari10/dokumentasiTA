@@ -12,6 +12,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/home/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="<?= base_url('assets/home/') ?>vendor/jquery/jquery.min.js"></script>
 
     <!-- Custom fonts for this template -->
     <link href="<?= base_url('assets/home/') ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

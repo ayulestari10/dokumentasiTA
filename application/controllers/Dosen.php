@@ -30,6 +30,55 @@ class Dosen extends MY_Controller
     {
         $this->data['title']  = 'Dashboard Dosen'.$this->title;
         $this->data['content']  = 'dosen/dashboard';
+        $this->data['data_mhs'] =  $this->Dosen_m->get_data_mahasiswa($this->data['username']);
+        $this->template($this->data, 'dosen');
+    }
+
+    public function profile(){
+        if($this->POST('simpan')){
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
+                    'trim'      => 'Nama tidak boleh kosong',
+                    'required'  => 'Nama tidak boleh kosong',
+                    'alpha_spaces'     => 'Nama hanya boleh karakter'
+                ));
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
+                    'trim'      => 'Email tidak boleh kosong',
+                    'required'  => 'Email tidak boleh kosong',
+                    'valid_email' => 'Email tidak valid'
+                ));
+            $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
+                    'trim'      => 'Alamat tidak boleh kosong',
+                    'required'  => 'Alamat tidak boleh kosong'
+                ));
+
+            if ($this->form_validation->run() == FALSE){
+                $this->flashmsg(validation_errors(), 'danger');
+                redirect('dosen/profile');
+                exit;
+            }
+
+            $data_profile = [
+                'nama'  => $this->POST('nama'),
+                'email'  => $this->POST('email'),
+                'alamat'  => $this->POST('alamat')
+            ];
+
+            $nip = $this->POST('nip');
+
+            $this->Dosen_m->update($nip, $data_profile);
+            
+            if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                $this->upload($nip, 'dosen', 'foto');
+            }
+
+            $this->flashmsg('Data berhasil disimpan!');
+            redirect('dosen/profile');
+            exit;
+        }
+
+        $this->data['title']        = 'Profile'.$this->title;
+        $this->data['content']      = 'dosen/profile';
+        $this->data['data']         = $this->Dosen_m->get_row(['NIP' => $this->data['username']]);
         $this->template($this->data, 'dosen');
     }
 

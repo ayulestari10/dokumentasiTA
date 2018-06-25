@@ -7,7 +7,7 @@
                 <a href="<?= base_url('dosen/data-mahasiswa') ?>">
                   <div class="tile-stats">
                     <div class="icon"><i class="fa fa-users"></i></div>
-                    <div class="count">_</div>
+                    <div class="count"><?= count($data_mhs) ?></div>
                     <h3>Data mahasiswa</h3>
                   </div>
                 </a>
