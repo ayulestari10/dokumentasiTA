@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '52.187.182.63',
+	'hostname' => 'pudinglab.id',
 	'username' => 'root',
 	'password' => '4kuGanteng',
 	'database' => 'dokumentasita',
