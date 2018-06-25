@@ -12,7 +12,10 @@
             <div class="card-body">
 
                 <div class="panel-body">
-
+                    <div>
+                            <?= $this->session->flashdata('msg') ?>
+                    </div>
+                    
                     <object data="<?php echo base_url().$file; ?>" type="application/pdf" width="100%" height="500px" style="margin-top: 3%">
                         <embed src="<?php echo base_url().$file; ?>" type="application/pdf">
                         </embed>
