@@ -78,7 +78,7 @@ class Mahasiswa extends MY_Controller
                 $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
                 if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                $this->upload($nip, 'dosen', 'foto');
+                $this->upload($this->data['username'], 'mahasiswa', 'foto');
                 }
 
                 $this->flashmsg('Data berhasil disimpan!');
@@ -90,7 +90,7 @@ class Mahasiswa extends MY_Controller
                 $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
                 if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                $this->upload($nip, 'dosen', 'foto');
+                $this->upload($this->data['username'], 'mahasiswa', 'foto');
                 }
 
                 $this->flashmsg('Data berhasil disimpan!');
