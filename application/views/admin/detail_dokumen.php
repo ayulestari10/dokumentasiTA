@@ -102,7 +102,7 @@
 			</div>
 
 			<div class="col-md-2 col-sm-2 col-xs-2">
-				<?php if(file_exists( base_url('assets/File_TugasAkhir/'.$dokumen->NIM.'.pdf') )): ?> 
+				<?php if(file_exists('assets/File_TugasAkhir/'.$dokumen->NIM.'.pdf') ): ?> 
 					<div class="text-center"><h3>Mengunduh Dokumen</h3></div>
 					<a href="<?= base_url('admin/download/'. $dokumen->NIM) ?>" class="btn btn-primary" style="margin-left: 5%;"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i> Download</a>
 				<?php else: ?>

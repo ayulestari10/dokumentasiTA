@@ -105,6 +105,7 @@ class Admin extends MY_Controller
 
             $this->user_m->delete($this->POST('username'));
             $this->mahasiswa_m->delete($this->POST('username'));
+            $this->tugas_akhir_m->delete($this->POST('username'));
             $this->flashmsg('<i class="fa fa-check"></i> Data mahasiswa berhasil dihapus');
             exit;
         }
