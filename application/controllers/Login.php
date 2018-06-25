@@ -118,8 +118,7 @@ class Login extends MY_Controller
 
 		$data = array(
             'title' => 'Login'.$this->title,
-            'content' => 'login/login'
-        );
+            'content' => 'login/login');
 
         $this->load->view('login/includes/layout',$data);
 

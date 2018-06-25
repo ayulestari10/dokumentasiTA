@@ -75,6 +75,22 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
+    public function file_check($str){
+        $allowed_mime_type_arr = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+        $mime = get_mime_by_extension($_FILES['file']['name']);
+        if(isset($_FILES['file']['name']) && $_FILES['file']['name']!=""){
+            if(in_array($mime, $allowed_mime_type_arr)){
+                return true;
+            }else{
+                $this->form_validation->set_message('file_check', 'Please select only pdf/gif/jpg/png file.');
+                return false;
+            }
+        }else{
+            $this->form_validation->set_message('file_check', 'Please choose a file to upload.');
+            return false;
+        }
+    }
+
     public function unggah_dokumen()
     {
         $this->data['title']  = 'Mengunggah Dokumen'.$this->title;
@@ -139,9 +155,7 @@ class Mahasiswa extends MY_Controller
                     'required'  => 'Dosen pembimbing 2 tidak boleh kosong'
                 ));
 
-            // $this->form_validation->set_rules('upload_file', 'Unggah Dokumen', 'required', array(
-            //         'required'  => 'Dokumen tidak boleh kosong'
-            //     ));
+            //$this->form_validation->set_rules('upload', 'Unggah Dokumen', 'callback_file_check');
 
             $this->form_validation->set_rules('abstrak', 'Abstrak', 'trim|required', array(
                     'trim'      => 'Abstrak tidak boleh kosong',
@@ -166,7 +180,7 @@ class Mahasiswa extends MY_Controller
                 $tahun      = $this->POST('tahun');
                 $dp1        = $this->POST('dosen_pembimbing1');
                 $dp2        = $this->POST('dosen_pembimbing2');
-                $file       = $this->POST('upload_file');
+                $file       = $this->POST('upload');
                 $abstrak    = $this->POST('abstrak');
                 $status     = "Belum Terverifikasi";
 
@@ -194,7 +208,7 @@ class Mahasiswa extends MY_Controller
                 if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) > 0){
                     $this->Mahasiswa_m->update($nim, $dataInd);
                     $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim, 'upload_file');
+                    $this->uploadPDF($nim, 'upload');
 
                     $this->flashmsg('Data tugas akhir berhasil disimpan!');
                     redirect('mahasiswa/unggah-dokumen');

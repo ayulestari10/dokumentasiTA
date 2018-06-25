@@ -1292,6 +1292,24 @@ class CI_Form_validation {
 
 	// --------------------------------------------------------------------
 
+	public function file_check($str){
+        $allowed_mime_type_arr = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+        $mime = get_mime_by_extension($_FILES['file']['name']);
+        if(isset($_FILES['file']['name']) && $_FILES['file']['name']!=""){
+            if(in_array($mime, $allowed_mime_type_arr)){
+                return true;
+            }else{
+                $this->form_validation->set_message('file_check', 'Please select only pdf/gif/jpg/png file.');
+                return false;
+            }
+        }else{
+            $this->form_validation->set_message('file_check', 'Please choose a file to upload.');
+            return false;
+        }
+    }
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Alpha-numeric
 	 *

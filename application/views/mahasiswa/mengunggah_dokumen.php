@@ -103,7 +103,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
-									<input type="file" name="upload_file" required>
+									<input type="file" name="upload" required>
 								</div>
 								<div class="form-group">
 									<label for="Abstrak">Abstrak <span class="required">*</span></label>

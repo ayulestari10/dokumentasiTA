@@ -28,7 +28,7 @@
 									<input type="password" class="form-control" name="password" placeholder="Password" value="" >
 								</div>
 								<div class="form-group">
-					                <div style="text-align: left !important;"><h5>Sebagai</h5></div>
+					                <div style="text-align: left !important;"><h6>Sebagai</h6></div>
 					                <select name="role" class="form-control">
 					                  <option value="mahasiswa">Mahasiswa</option>
 					                  <option value="dosen">Dosen</option>

@@ -30,7 +30,7 @@
         <div class="col-lg-3">
           <div>
             <h5 class="my-4">Tahun</h5>
-            <select class="form-control">
+            <select class="form-control" name="tahun">
               <?php
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 2013; $x--) {
