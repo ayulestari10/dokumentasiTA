@@ -32,9 +32,78 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
-    // public function __toString(){
-    //     return $this->nama;sss
-    // }
+    public function profile(){
+        if($this->POST('simpan')){
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
+                    'trim'      => 'Nama tidak boleh kosong',
+                    'required'  => 'Nama tidak boleh kosong',
+                    'alpha_spaces'     => 'Nama hanya boleh karakter'
+                ));
+            $this->form_validation->set_rules('jurusan', 'Jurusan', 'trim|required|alpha_spaces', array(
+                    'trim'      => 'Jurusan tidak boleh kosong',
+                    'required'  => 'Jurusan tidak boleh kosong',
+                    'alpha_spaces'     => 'Jurusan hanya boleh karakter'
+                ));
+            $this->form_validation->set_rules('angkatan', 'Angkatan', 'required|numeric', array(
+                    'required'      => 'Username tidak boleh kosong',  
+                    'numeric'       => 'Username harus angka'
+                ));
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
+                    'trim'      => 'Email tidak boleh kosong',
+                    'required'  => 'Email tidak boleh kosong',
+                    'valid_email' => 'Email tidak valid'
+                ));
+            $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
+                    'trim'      => 'Alamat tidak boleh kosong',
+                    'required'  => 'Alamat tidak boleh kosong'
+                ));
+
+            if ($this->form_validation->run() == FALSE){
+                $this->flashmsg(validation_errors(), 'danger');
+                redirect('mahasiswa/profile');
+                exit;
+            }
+
+            $data_profile = [
+                'nama'  => $this->POST('nama'),
+                'jurusan' => $this->POST('jurusan'),
+                'angkatan' => $this->POST('angkatan'),
+                'email'  => $this->POST('email'),
+                'alamat'  => $this->POST('alamat')
+            ];
+
+            $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+
+            if(count($cekNimInd) > 0){
+                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                $this->upload($nip, 'dosen', 'foto');
+                }
+
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('mahasiswa/profile');
+                exit;
+            }
+            else{
+                $this->Mahasiswa_m->insert($this->data['username']);
+                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                $this->upload($nip, 'dosen', 'foto');
+                }
+
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('mahasiswa/profile');
+                exit;
+            }
+        }
+
+        $this->data['title']        = 'Profile'.$this->title;
+        $this->data['content']      = 'mahasiswa/profile';
+        $this->data['individu']     = $this->Mahasiswa_m->getDatabyNim($this->data['username']); 
+        $this->template($this->data, 'mahasiswa');
+    }
 
     public function data_dokumen()
     {
@@ -96,39 +165,10 @@ class Mahasiswa extends MY_Controller
         $this->data['title']  = 'Mengunggah Dokumen'.$this->title;
         $this->data['content']  = 'mahasiswa/mengunggah_dokumen';
         $this->data['ta'] = $this->tugas_akhir_m->getDatabyNim($this->data['username']);
-        $this->data['individu'] = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
         $this->data['dosen'] = $this->dosen_m->getAll();
 
         if ($this->POST('simpan'))
         {
-            $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
-                    'trim'      => 'Nama tidak boleh kosong',
-                    'required'  => 'Nama tidak boleh kosong',
-                    'alpha_spaces'     => 'Nama hanya boleh karakter'
-                ));
-
-            $this->form_validation->set_rules('jurusan', 'Jurusan', 'trim|required', array(
-                    'trim'      => 'Jurusan tidak boleh kosong',
-                    'required'  => 'Jurusan tidak boleh kosong'
-                ));
-
-            $this->form_validation->set_rules('angkatan', 'Angkatan', 'trim|required|numeric', array(
-                    'trim'      => 'Angkatan tidak boleh kosong',
-                    'required'  => 'Angkatan tidak boleh kosong',
-                    'numeric'   => 'Angkatan harus angka'
-                ));
-
-            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
-                    'trim'      => 'Email tidak boleh kosong',
-                    'required'  => 'Email tidak boleh kosong',
-                    'valid_email' => 'Email tidak valid'
-                ));
-
-            $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
-                    'trim'      => 'Alamat tidak boleh kosong',
-                    'required'  => 'Alamat tidak boleh kosong'
-                ));
-
             $this->form_validation->set_rules('judul', 'Judul', 'trim|required', array(
                     'trim'      => 'Judul tidak boleh kosong',
                     'required'  => 'Judul tidak boleh kosong'
@@ -170,11 +210,6 @@ class Mahasiswa extends MY_Controller
                 }
 
                 $nim        = $this->data['username'];
-                $nama       = $this->POST('nama');
-                $jurusan    = $this->POST('jurusan');
-                $email      = $this->POST('email');
-                $angkatan   = $this->POST('angkatan');
-                $alamat     = $this->POST('alamat');
                 $judul      = $this->POST('judul');
                 $konsentrasi= $this->POST('konsentrasi');
                 $tahun      = $this->POST('tahun');
@@ -183,14 +218,6 @@ class Mahasiswa extends MY_Controller
                 $file       = $this->POST('upload');
                 $abstrak    = $this->POST('abstrak');
                 $status     = "Belum Terverifikasi";
-
-                $dataInd = array(
-                                'nama'  => $nama,
-                                'jurusan' => $jurusan,
-                                'email' => $email,
-                                'angkatan' => $angkatan,
-                                'alamat'    => $alamat
-                            );
 
                 $dataTA = array(
                                 'judulTA' => $judul,
@@ -203,44 +230,18 @@ class Mahasiswa extends MY_Controller
                             );
                 
                 $cekNIM_TA = $this->tugas_akhir_m->getDatabyNim($nim);
-                $cekNIM_Individu = $this->Mahasiswa_m->getDatabyNim($nim);
 
-                if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) > 0){
-                    $this->Mahasiswa_m->update($nim, $dataInd);
+                if(count($cekNIM_TA) > 0){
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');
 
-                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
-                    redirect('mahasiswa/unggah-dokumen');
-                    exit;
-                }
-                else if(count($cekNIM_Individu) == 0 && count($cekNIM_TA) == 0){
-                    $dataNim=array('nim' => $nim);
-                    $this->tugas_akhir_m->insert($dataNim);
-                    $this->Mahasiswa_m->insert($dataNim);
-                    $this->Mahasiswa_m->update($nim, $dataInd);
-                    $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim, 'upload');
-
-                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
-                    redirect('mahasiswa/unggah-dokumen');
-                    exit;
-                }
-                else if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) == 0){
-                    $dataNim=array('nim' => $nim);
-                    $this->tugas_akhir_m->insert($dataNim);
-                    $this->Mahasiswa_m->update($nim, $dataInd);
-                    $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim, 'upload');
-
-                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
+                    $this->flashmsg('Data tugas akhir berhasil disimpan ! Silahkan cek Dokumen Tugas Akhir.');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
                 else{
                     $dataNim=array('nim' => $nim);
-                    $this->Mahasiswa_m->insert($dataNim);
-                    $this->Mahasiswa_m->update($nim, $dataInd);
+                    $this->tugas_akhir_m->insert($dataNim);
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');
 

@@ -3,7 +3,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3 class="page-header">Unggah Dokumen Tugas Akhir
+				<h3 class="page-header">Profile
 				</h3>
 			</div>
 			<!-- <div class="title_right">
@@ -33,58 +33,46 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<?= form_open_multipart('mahasiswa/unggah-dokumen') ?>
+						<?= form_open_multipart('mahasiswa/profile') ?>
 							<div>
 								<div class="form-group">
 									<label for="NIM">NIM <span class="required">*</span></label>
 									<input type="text" value="<?= $this->session->userdata('username') ?>" class="form-control" name="nim" disabled>
 								</div>
 								<div class="form-group">
-									<label for="Judul">Judul <span class="required">*</span></label>
-									<textarea class="form-control" name="judul" required><?= $ta->judulTA ?></textarea>
+									<label for="Nama">Nama <span class="required">*</span></label>
+									<input type="text" class="form-control" name="nama" value="<?= $individu->nama ?>" required>
 								</div>
 								<div class="form-group">
-									<label for="Konsentrasi">Konsentrasi <span class="required">*</span></label>
-									<select name="konsentrasi" class="form-control">
-					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
-					                  <option value="Basis Data">Basis Data</option>
-					                  <option value="Citra">Citra</option>
+									<label for="Jurusan">Jurusan <span class="required">*</span></label>
+									<select name="jurusan" class="form-control" value="<?= $individu->jurusan ?>">
+					                  <option value="Teknik Informatika">Teknik Informatika</option>
 					                </select>
 								</div>
 								<div class="form-group">
-									<label for="Tahun">Tahun<span class="required">*</span></label>
-									<select class="form-control" name="tahun" required>
+									<label for="Angkatan">Angkatan<span class="required">*</span></label>
+									<select class="form-control" name="angkatan" required>
 										<?php for($i = 2018; $i >= 2008; $i--): ?>
 											<option value="<?= $i ?>"><?= $i ?></option>
 										<?php endfor; ?>
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>
-									<select name="dosen_pembimbing1" class="form-control">
-					                	<?php foreach($dosen as $row): ?>
-					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
-					              		<?php endforeach; ?>
-					                </select>
+									<label for="Email">Email <span class="required">*</span></label>
+									<input type="text" class="form-control" name="email" value="<?= $individu->email ?>" required>
 								</div>
 								<div class="form-group">
-									<label for="Dosen Pembimbing 2">Dosen Pembimbing 2 <span class="required">*</span></label>
-									<select name="dosen_pembimbing2" class="form-control">
-					                	<?php foreach($dosen as $row): ?>
-					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
-					              		<?php endforeach; ?>
-					                </select>
+									<label for="Alamat">Alamat <span class="required">*</span></label>
+									<textarea class="form-control" name="alamat" required><?= $individu->alamat ?></textarea>
 								</div>
 								<div class="form-group">
-									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
-									<input type="file" name="upload" required>
+									<label for="Foto">Unggah Foto <span class="required">*</span></label><br>
+									<img src="<?= base_url('assets/foto/mahasiswa/'.$this->session->userdata('username').'.jpg') ?>" alt="User" onerror='src="<?= base_url('assets/production/') ?>images/img.jpg"' style="width: 200px; height: 250px;">
+									<input type="file" name="foto">
 								</div>
-								<div class="form-group">
-									<label for="Abstrak">Abstrak <span class="required">*</span></label>
-									<textarea class="form-control" name="abstrak" required><?= $ta->abstrak ?></textarea>
+								<div style="margin-top: 3%;">
+									<input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
 								</div>
-
-								<input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
 							</div>
 						<?= form_close() ?>
 					</div>
