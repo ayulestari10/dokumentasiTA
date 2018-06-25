@@ -73,11 +73,23 @@
 								<td><?= $dokumen->tahun_pembuatan ?></td>
 							</tr>
 							<tr>
-								<th>Dosen Pembimbing</th>
-								<?php if(isset($dokumen->dosen_pembimbing1, $dokumen->dosen_pembimbing2)): ?>
-									<td><?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing1])->nama ?> dan <?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing2])->nama ?></td>
+								<th>Dosen Pembimbing 1</th>
+								<td>
+								<?php if(isset($dokumen->dosen_pembimbing1) && $dokumen->dosen_pembimbing1 != NULL): ?>
+									<?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing1])->nama ?> 
 								<?php else: ?>
-									<td>Belum ada</td>
+									-
+								</td>
+								<?php endif; ?>
+							</tr>
+							<tr>
+								<th>Dosen Pembimbing 2</th>
+								<td>
+								<?php if(isset($dokumen->dosen_pembimbing2) && $dokumen->dosen_pembimbing2 != NULL): ?>
+									<?= $this->dosen_m->get_row(['NIP' => $dokumen->dosen_pembimbing2])->nama ?> 
+								<?php else: ?>
+									-
+								</td>
 								<?php endif; ?>
 							</tr>
 							<tr>

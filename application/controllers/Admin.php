@@ -377,8 +377,9 @@ class Admin extends MY_Controller
         }
 
         $this->data['title']    = 'Detail Dokumen'.$this->title;
-        $this->data['content']  = 'admin/detail_dokumen';
         $this->data['dokumen']  = $this->tugas_akhir_m->get_row(['NIM' => $nim]);
+        //$this->dump($this->data['dokumen']);exit;
+        $this->data['content']  = 'admin/detail_dokumen';
         $this->template($this->data);
     }
 
