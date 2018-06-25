@@ -185,27 +185,61 @@ class Mahasiswa extends MY_Controller
                 $status     = "Belum Terverifikasi";
 
                 $dataInd = array(
-                            'nama'  => $nama,
-                            'jurusan' => $jurusan,
-                            'email' => $email,
-                            'angkatan' => $angkatan,
-                            'alamat'    => $alamat
-                        );
+                                'nama'  => $nama,
+                                'jurusan' => $jurusan,
+                                'email' => $email,
+                                'angkatan' => $angkatan,
+                                'alamat'    => $alamat
+                            );
 
                 $dataTA = array(
-                            'judulTA' => $judul,
-                            'konsentrasi' => $konsentrasi,
-                            'tahun_pembuatan' => $tahun,
-                            'dosen_pembimbing1' => $dp1,
-                            'dosen_pembimbing2' => $dp2,
-                            'abstrak' => $abstrak,
-                            'status' => $status
-                        );
-
+                                'judulTA' => $judul,
+                                'konsentrasi' => $konsentrasi,
+                                'tahun_pembuatan' => $tahun,
+                                'dosen_pembimbing1' => $dp1,
+                                'dosen_pembimbing2' => $dp2,
+                                'abstrak' => $abstrak,
+                                'status' => $status
+                            );
+                
                 $cekNIM_TA = $this->tugas_akhir_m->getDatabyNim($nim);
                 $cekNIM_Individu = $this->Mahasiswa_m->getDatabyNim($nim);
 
                 if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) > 0){
+                    $this->Mahasiswa_m->update($nim, $dataInd);
+                    $this->tugas_akhir_m->update($nim, $dataTA);
+                    $this->uploadPDF($nim, 'upload');
+
+                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
+                    redirect('mahasiswa/unggah-dokumen');
+                    exit;
+                }
+                else if(count($cekNIM_Individu) == 0 && count($cekNIM_TA) == 0){
+                    $dataNim=array('nim' => $nim);
+                    $this->tugas_akhir_m->insert($dataNim);
+                    $this->Mahasiswa_m->insert($dataNim);
+                    $this->Mahasiswa_m->update($nim, $dataInd);
+                    $this->tugas_akhir_m->update($nim, $dataTA);
+                    $this->uploadPDF($nim, 'upload');
+
+                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
+                    redirect('mahasiswa/unggah-dokumen');
+                    exit;
+                }
+                else if(count($cekNIM_Individu) > 0 && count($cekNIM_TA) == 0){
+                    $dataNim=array('nim' => $nim);
+                    $this->tugas_akhir_m->insert($dataNim);
+                    $this->Mahasiswa_m->update($nim, $dataInd);
+                    $this->tugas_akhir_m->update($nim, $dataTA);
+                    $this->uploadPDF($nim, 'upload');
+
+                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
+                    redirect('mahasiswa/unggah-dokumen');
+                    exit;
+                }
+                else{
+                    $dataNim=array('nim' => $nim);
+                    $this->Mahasiswa_m->insert($dataNim);
                     $this->Mahasiswa_m->update($nim, $dataInd);
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');

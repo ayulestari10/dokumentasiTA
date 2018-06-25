@@ -131,19 +131,33 @@ class Admin extends MY_Controller
                 exit;
             }
 
-            $data_mahasiswa = [
-                'username'  => $this->POST('username'),
-                'password'  => md5($this->POST('password1'))
-            ];
-            $this->user_m->insert($data_mahasiswa);
+            $id = $this->POST('username');
+            $cekId = $this->user_m->getDatabyNim($id);
+            $cekId2 = $this->mahasiswa_m->getDatabyNim($id);
+            $cekId3 = $this->admin_m->getDatabyNim($id);
+            $cekId4 = $this->dosen_m->getDatabyNim($id);
 
-            $nim = ['nim'   => $this->POST('username')];
-            $this->mahasiswa_m->insert($nim);
-            $this->tugas_akhir_m->insert($nim);
+            if(count($cekId) == 0 && count($cekId2) == 0 && count($cekId3) == 0 && count($cekId4) == 0 ){
+                $data_mahasiswa = [
+                    'username'  => $this->POST('username'),
+                    'password'  => md5($this->POST('password1'))
+                ];
+                $this->user_m->insert($data_mahasiswa);
 
-            $this->flashmsg('Data berhasil disimpan!');
-            redirect('admin/data-mahasiswa');
-            exit;
+                $nim = ['nim'   => $this->POST('username')];
+                $this->mahasiswa_m->insert($nim);
+                $this->tugas_akhir_m->insert($nim);
+
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('admin/data-mahasiswa');
+                exit;
+            }
+            else{
+                $this->flashmsg('Username yang digunakan telah ada !', 'danger');
+                redirect('admin/data-mahasiswa');
+                exit;
+            }
+            
         }
     }
 
@@ -224,18 +238,31 @@ class Admin extends MY_Controller
                 exit;
             }
 
-            $data_dosen = [
+            $id = $this->POST('username');
+            $cekId = $this->user_m->getDatabyNim($id);
+            $cekId2 = $this->mahasiswa_m->getDatabyNim($id);
+            $cekId3 = $this->admin_m->getDatabyNim($id);
+            $cekId4 = $this->dosen_m->getDatabyNim($id);
+
+            if(count($cekId) == 0 && count($cekId2) == 0 && count($cekId3) == 0 && count($cekId4) == 0){
+                $data_dosen = [
                 'username'  => $this->POST('username'),
                 'password'  => md5($this->POST('password1'))
-            ];
-            $this->user_m->insert($data_dosen);
+                ];
+                $this->user_m->insert($data_dosen);
 
-            $nip = ['nip'   => $this->POST('username')];
-            $this->dosen_m->insert($nip);
+                $nip = ['nip'   => $this->POST('username')];
+                $this->dosen_m->insert($nip);
 
-            $this->flashmsg('Data berhasil disimpan!');
-            redirect('admin/data-dosen');
-            exit;
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('admin/data-dosen');
+                exit;           
+            }
+            else{
+                $this->flashmsg('Username yang digunakan telah ada','danger');
+                redirect('admin/data-dosen');
+                exit;
+            }
         }
     }
 

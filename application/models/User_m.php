@@ -19,4 +19,9 @@ class User_m extends MY_Model
 		]);
 		return $result;
 	}
+	public function getDatabyNim($nim){
+		$this->db->where($this->data['primary_key'], $nim);
+		$query = $this->db->get($this->data['table_name']);
+		return $query->row();
+	}
 }
