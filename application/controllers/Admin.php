@@ -61,23 +61,36 @@ class Admin extends MY_Controller
                 exit;
             }
 
-            $data_profile = [
+            $file_name = $_FILES['foto']['name'];
+            $exe = substr($file_name, -4);
+            $exe2= substr($file_name, -5);
+
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
+                $data_profile = [
                 'nama'  => $this->POST('nama'),
                 'email'  => $this->POST('email'),
                 'alamat'  => $this->POST('alamat')
-            ];
+                ];
 
-            $nipus = $this->POST('nipus');
+                $nipus = $this->POST('nipus');
 
-            $this->admin_m->update($nipus, $data_profile);
-            
-            if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                $this->upload($nipus, 'admin', 'foto');
+                $this->admin_m->update($nipus, $data_profile);
+                
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                    $this->upload($nipus, 'admin', 'foto');
+                }
+
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('admin/profile');
+                exit;
+            }
+            else{
+                $this->flashmsg('Pilih file jpg/jpeg/png !','danger');
+                redirect('admin/profile');
+                exit;
             }
 
-            $this->flashmsg('Data berhasil disimpan!');
-            redirect('admin/profile');
-            exit;
+            
         }
 
         $this->data['title']        = 'Profile'.$this->title;

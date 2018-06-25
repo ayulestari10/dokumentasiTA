@@ -57,23 +57,34 @@ class Dosen extends MY_Controller
                 exit;
             }
 
-            $data_profile = [
+            $file_name = $_FILES['foto']['name'];
+            $exe = substr($file_name, -4);
+            $exe2= substr($file_name, -5);
+
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
+                $data_profile = [
                 'nama'  => $this->POST('nama'),
                 'email'  => $this->POST('email'),
                 'alamat'  => $this->POST('alamat')
-            ];
+                ];
 
-            $nip = $this->POST('nip');
+                $nip = $this->POST('nip');
 
-            $this->Dosen_m->update($nip, $data_profile);
-            
-            if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                $this->upload($nip, 'dosen', 'foto');
+                $this->Dosen_m->update($nip, $data_profile);
+                
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                    $this->upload($nip, 'dosen', 'foto');
+                }
+
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('dosen/profile');
+                exit;
             }
-
-            $this->flashmsg('Data berhasil disimpan!');
-            redirect('dosen/profile');
-            exit;
+            else{
+                $this->flashmsg('Pilih file jpg/jpeg/png !','danger');
+                redirect('dosen/profile');
+                exit;
+            }            
         }
 
         $this->data['title']        = 'Profile'.$this->title;
