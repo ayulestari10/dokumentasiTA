@@ -31,6 +31,13 @@ class Home extends MY_Controller
         $this->template($this->data, 'home');
     }
 
+    public function coba()
+    {
+        $this->data['title']  = 'coba'.$this->title;
+        $this->data['content']  = 'login2/login2';
+        $this->template($this->data, 'login2');
+    }
+
     public function download(){
         $nim = $this->uri->segment(3);
 

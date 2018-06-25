@@ -23,6 +23,9 @@ class MY_Controller extends CI_Controller
 	    elseif($template == 'login'){
 	      return $this->load->view('login/includes/layout', $data);
 	    }
+	    elseif($template == 'login2'){
+	      return $this->load->view('login2/includes/layout', $data);
+	    }
 	    else {
 	      return $this->load->view('home/includes/layout', $data);
 	    }
