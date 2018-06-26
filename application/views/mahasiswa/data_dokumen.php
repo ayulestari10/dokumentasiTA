@@ -6,16 +6,6 @@
 				<h3 class="page-header">Data Dokumen Tugas Akhir
 				</h3>
 			</div>
-			<!-- <div class="title_right">
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<div class="clearfix"></div>
 		
@@ -24,7 +14,7 @@
 		<div class="">
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-10 col-sm-10 col-xs-10">
+			<div class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
 				<div class="x_panel">
 					<div class="x_title">
 						<div>
@@ -35,7 +25,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<table class="table table-striped table-bordered">
+						<table id="datatable" class="table table-striped table-bordered table-hover">
 							<tr>
 								<th style="width: 180px">NIM</th>
 								<td><?= $username ?></td>
@@ -95,9 +85,11 @@
 				</div>
 			</div>
 
-			<div class="col-md-2 col-sm-2 col-xs-2">
-				<a href="<?= base_url('mahasiswa/download_file/'."$username")?>" class="btn btn-info btn-sm">Unduh Berkas <i class="fa fa-download"></i></a>
-				<button class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
+			<div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
+				<div style="padding: 2%;">
+					<a href="<?= base_url('mahasiswa/download_file/'."$username")?>" class="btn btn-info btn-sm">Unduh Berkas <i class="fa fa-download"></i></a>
+					<button class="btn btn-danger btn-circle" style="padding-bottom: 5px; padding-top: 5px; padding-right: 27px; padding-left: 27px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
+				</div>
 			</div>
 		</div>
 

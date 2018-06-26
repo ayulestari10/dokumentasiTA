@@ -1,7 +1,7 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            &copy; Dokumentasi TA 2018. All Rights Reserved.
+            &copy; Dokumentasi TA 2018. All Rights Reserved. 
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -9,12 +9,23 @@
       </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-contoh').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+    <!-- DataTables JavaScript -->
+    <script src="<?= base_url('assets') ?>/vendors/datatables/js/jquery.dataTables.js"></script>
+    <script src="<?= base_url('assets') ?>/vendors/datatables-plugins/dataTables.bootstrap.js"></script>
+    <script src="<?= base_url('assets') ?>/vendors/datatables-responsive/dataTables.responsive.js"></script>
+
     <!-- DataTables -->
-    <script src="<?= base_url('assets') ?>/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="<?= base_url('assets') ?>/vendors/datatables.net/js/jquery.dataTables.min.js"></script> -->
     <!-- ChartJS -->
     <script src="<?= base_url('assets') ?>/vendors/Chart.js/dist/Chart.js"></script>
-    <!-- Bootstrap -->
-    <script src="<?= base_url('assets') ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="<?= base_url('assets') ?>/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -41,8 +52,5 @@
     
     <!-- Custom Theme Scripts -->
     <script src="<?= base_url('assets') ?>/build/js/custom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-    <script src="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.css">
   </body>
 </html>
