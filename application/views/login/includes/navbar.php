@@ -13,8 +13,11 @@
               <a class="nav-link" href="<?= base_url('home') ?>">Home</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="<?= base_url('login') ?>">Login
-
+              <?php if(isset($username)):  ?>
+                  <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
+              <?php else: ?>
+                  <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+              <?php endif; ?>
               </a>
             </li>
           </ul>
