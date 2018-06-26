@@ -15,7 +15,7 @@
 		<div class="">
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-10 col-sm-10 col-xs-10">
+			<div class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
 				<div class="x_panel">
 					<div class="x_title">
 						<div>
@@ -56,21 +56,48 @@
 									<td><?php echo $detail->tahun_pembuatan; ?></td>
 								</tr>
 								<tr>
-									<th>Dosen Pembimbing1</th>
-									<td><?php echo $dp1->nama; ?></td>
+									<th>Dosen Pembimbing 1</th>
+									<td>
+									<?php
+										if ($dp1 == NULL)
+											echo NULL;
+									 	else
+									 		echo "$dp1->nama"
+									?>
+									</td>
 								</tr>
 								<tr>
-									<th>Dosen Pembimbing2</th>
-									<td><?php echo $dp2->nama; ?></td>
+									<th>Dosen Pembimbing 2</th>
+									<td>
+									<?php
+										if ($dp2 == NULL)
+											echo NULL;
+									 	else
+									 		echo "$dp2->nama"
+									?>
+									</td>
 								</tr>
+								<tr>
+									<th>Status</th>
+									<td><?= $detail->status ?></td>
+								</tr>
+
 						</table>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-2 col-sm-2 col-xs-2">
-				<div class="text-center"><h3>Mengunduh Dokumen</h3></div>
-				<a href="<?= base_url('Dosen/download/'."$detail->nim") ?>" class="btn btn-primary" style="margin-left: 5%;"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i> Download</a>
+			<div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
+
+				<?php if(file_exists('assets/File_TugasAkhir/'.$detail->nim.'.pdf') ): ?> 
+					<div style="margin: 0 auto;">
+						<div><h3>Mengunduh Dokumen</h3></div>
+						<a href="<?= base_url('dosen/download/'. $detail->nim) ?>" class="btn btn-primary"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i> Download</a>
+					</div>
+				<?php else: ?>
+					<div class="text-center"><h3>Dokumen belum tersedia</h3></div>
+					<a href="#" class="btn btn-primary" style="margin-left:30%;"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i></a>
+				<?php endif; ?>
 			</div>
 
 		</div>

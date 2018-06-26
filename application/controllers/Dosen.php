@@ -104,12 +104,20 @@ class Dosen extends MY_Controller
         $this->template($this->data, 'dosen');
     }
 
-    public function detail_dokumen($nim)
+    public function detail_dokumen()
     {   
+        $nim = $this->uri->segment(3);
+
+        if(!isset($nim)){
+            $this->flashmsg('<i class="fa fa-close"></i> NIM tidak dicantumkan', 'danger');
+            redirect('dosen/data-mahasiswa');
+            exit;
+        }
         
-        $this->data['title']  = 'Detail Dokumen'.$this->title;
+        $this->data['title']    = 'Detail Dokumen'.$this->title;
         $this->data['content']  = 'dosen/detail_dokumen';
-        $this->data['detail']  = $this->Dosen_m->detail_ta($nim);
+        // $this->data['detail']   = $this->Dosen_m->detail_ta($nim);
+        $this->data['detail']   = $this->mahasiswa_m->getMhsTA($nim);
         $this->data['dp1'] = $this->Dosen_m->getNamaDosen1($this->data['detail']->dosen_pembimbing1);
         $this->data['dp2'] = $this->Dosen_m->getNamaDosen2($this->data['detail']->dosen_pembimbing2);
         //$this->dump($this->data['detail']);
