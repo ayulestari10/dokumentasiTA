@@ -35,7 +35,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table id="datatable" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>No</th>

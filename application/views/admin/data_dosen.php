@@ -35,7 +35,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table width="100%" id="dataTables-example"class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>No</th>
@@ -139,6 +139,7 @@
 </div>
 
             <script>
+            	
                 $(document).ready(function() {
                     $('#dataTables-example').DataTable({
                         responsive: true

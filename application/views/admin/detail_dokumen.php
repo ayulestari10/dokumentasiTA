@@ -6,30 +6,15 @@
 				<h3 class="page-header">Detail Data Dokumen Tugas Akhir
 				</h3>
 			</div>
-			<!-- <div class="title_right">
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-10 col-sm-10 col-xs-10">
+			<div class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
 				<div class="x_panel">
 					<div class="x_title">
 						<div>
 							<!-- <h2>Detail Data Dokumen Tugas Akhir</h2> -->
 						</div>
-						<!-- <ul class="nav navbar-right panel_toolbox">
-							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-							<li><a class="close-link"><i class="fa fa-close"></i></a></li>
-						</ul>
-						<div class="clearfix"></div> -->
 					</div>
 					<div class="x_content">
 						<div>
@@ -103,10 +88,12 @@
 				</div>
 			</div>
 
-			<div class="col-md-2 col-sm-2 col-xs-2">
+			<div class="col-md-2 col-sm-2 col-xs-10 col-lg-2">
 				<?php if(file_exists('assets/File_TugasAkhir/'.$dokumen->NIM.'.pdf') ): ?> 
-					<div class="text-center"><h3>Mengunduh Dokumen</h3></div>
-					<a href="<?= base_url('admin/download/'. $dokumen->NIM) ?>" class="btn btn-primary" style="margin-left: 5%;"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i> Download</a>
+					<div style="margin: 0 auto;">
+						<div class="text-center"><h3>Mengunduh Dokumen</h3></div>
+						<a href="<?= base_url('admin/download/'. $dokumen->NIM) ?>" class="btn btn-primary"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i> Download</a>
+					</div>
 				<?php else: ?>
 					<div class="text-center"><h3>Dokumen belum tersedia</h3></div>
 					<a href="#" class="btn btn-primary" style="margin-left:30%;"> <i class="fa fa-file-pdf-o" style="font-size: 60px;"></i></a>
