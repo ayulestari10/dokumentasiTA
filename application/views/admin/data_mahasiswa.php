@@ -6,20 +6,10 @@
 				<h3 class="page-header">Data Mahasiswa <button class="btn btn-success" data-toggle="modal" data-target="#add"><i class="fa fa-plus"></i></button>
 				</h3>
 			</div>
-			<!-- <div class="title_right">
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
 						<div>
@@ -35,7 +25,7 @@
 						<div>
 							<?= $this->session->flashdata('msg') ?>
 						</div>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table width="100%" id="dataTables-example"class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>No</th>
@@ -63,6 +53,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<style type="text/css">.required{color: #a94442;}</style>
 	<div class="modal fade" tabindex="-1" role="dialog" id="add">

@@ -9,12 +9,23 @@
       </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-contoh').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+    <!-- DataTables JavaScript -->
+    <script src="<?= base_url('assets') ?>/vendors/datatables/js/jquery.dataTables.js"></script>
+    <script src="<?= base_url('assets') ?>/vendors/datatables-plugins/dataTables.bootstrap.js"></script>
+    <script src="<?= base_url('assets') ?>/vendors/datatables-responsive/dataTables.responsive.js"></script>
+
     <!-- DataTables -->
-    <script src="<?= base_url('assets') ?>/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="<?= base_url('assets') ?>/vendors/datatables.net/js/jquery.dataTables.min.js"></script> -->
     <!-- ChartJS -->
     <script src="<?= base_url('assets') ?>/vendors/Chart.js/dist/Chart.js"></script>
-    <!-- Bootstrap -->
-    <script src="<?= base_url('assets') ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="<?= base_url('assets') ?>/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
