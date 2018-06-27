@@ -173,43 +173,47 @@
         		// }
 
         		function delete_data(id){
-            swal({
-              title: 'Are you sure to delete data?',
-              text: "You will not be able to return this!",
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes',
-              cancelButtonText: 'Cancel',
-              confirmButtonClass: 'btn btn-success',
-              cancelButtonClass: 'btn btn-danger',
-              buttonsStyling: false,
-              reverseButtons: true
-            }).then((result) => {
-              if (result.value) {
-                $.ajax({
-                    url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
-                    type: 'POST',
-                    data: {
-                        id: id,
-                        delete: true
-                    },
-                    success: function() {
-                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
-                    }
-                });
-              } 
-
-              else if (result.dismiss === 'cancel') {
-                swal(                   
-                  'Canceled!',
-                  'Your data is safe! :)',
-                  'error'
-                )
-              }
-            })  
-        }
+					swal({
+					  title: 'Apakah anda yakin?',
+					  text: 'Data tugas akhir tidak dapat dilihat kembali !',
+					  type: 'warning',
+					  showCancelButton: true,
+					  confirmButtonText: 'Hapus',
+					  cancelButtonText: 'Batal',
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonClass: 'btn btn-success',
+					  cancelButtonClass: 'btn btn-danger',
+					  reverseButtons: true
+					}).then((result) => {
+					  if (result.value) {
+					  	$.ajax({
+					  		url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
+		                    type: 'POST',
+		                    data: {
+		                        id: id,
+		                        delete: true
+		                    },
+		                    success: function() {
+		                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
+		                    }
+					  	});
+					    // swal(
+					    //   'Deleted!',
+					    //   'Your imaginary file has been deleted.',
+					    //   'success'
+					    // )
+					  // For more information about handling dismissals please visit
+					  // https://sweetalert2.github.io/#handling-dismissals
+					  } else if (result.dismiss === 'cancel') {
+					    swal(
+					      'Batal',
+					      'Data aman :)',
+					      'error'
+					    )
+					  }
+					})  
+        		}
 
         		// function delete_data(username) {
           //           $.ajax({

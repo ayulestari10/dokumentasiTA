@@ -38,8 +38,8 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
     <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+     -->
     <script src="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />

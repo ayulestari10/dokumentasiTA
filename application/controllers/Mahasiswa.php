@@ -238,7 +238,7 @@ class Mahasiswa extends MY_Controller
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');
 
-                    $this->flashmsg('Data tugas akhir berhasil disimpan ! Silahkan cek Dokumen Tugas Akhir.');
+                    $this->flashmsg('Data tugas akhir berhasil disimpan ! Silahkan cek Dokumen Tugas Akhir.', 'success');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
