@@ -64,45 +64,46 @@ class Mahasiswa extends MY_Controller
                 exit;
             }
 
-            $file_name = $_FILES['foto']['name'];
-            $exe = substr($file_name, -4);
-            $exe2= substr($file_name, -5);
-            //$exe3 = substr($file_name, -4);
-
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
-                    $data_profile = [
+            $data_profile = [
                     'nama'  => $this->POST('nama'),
                     'jurusan' => $this->POST('jurusan'),
                     'angkatan' => $this->POST('angkatan'),
                     'email'  => $this->POST('email'),
                     'alamat'  => $this->POST('alamat')
-                ];
+            ];
 
-                $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+            $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
 
-                if(count($cekNimInd) > 0){
-                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+            if(count($cekNimInd) > 0){
+                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
-                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                        $this->upload($this->data['username'], 'mahasiswa', 'foto');
-                    }
-
-                    $this->flashmsg('Data berhasil disimpan!');
-                    redirect('mahasiswa/profile');
-                    exit;
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                    $this->upload($this->data['username'], 'mahasiswa', 'foto');
                 }
-                else{
-                    $this->Mahasiswa_m->insert($this->data['username']);
-                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
-                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('mahasiswa/profile');
+                exit;
+            }
+            
+            else{
+                $this->Mahasiswa_m->insert($this->data['username']);
+                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+
+                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
                         $this->upload($this->data['username'], 'mahasiswa', 'foto');
-                    }
-
-                    $this->flashmsg('Data berhasil disimpan!');
-                    redirect('mahasiswa/profile');
-                    exit;
                 }
+                $this->flashmsg('Data berhasil disimpan!');
+                redirect('mahasiswa/profile');
+                exit;
+                }
+
+            $file_name = $_FILES['foto']['name'];
+            $exe = substr($file_name, -4);
+            $exe2= substr($file_name, -5);
+
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
+                   
             }
             else{
                 $this->flashmsg('Pilih file jpg/jpeg/png !', 'danger');
