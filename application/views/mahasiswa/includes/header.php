@@ -35,6 +35,8 @@
 
     <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>">
     <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+    <script src="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
     <script src="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="<?= base_url('assets') ?>/sweetalert2/dist/sweetalert2.min.css">
