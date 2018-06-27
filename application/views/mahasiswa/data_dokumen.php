@@ -7,8 +7,7 @@
 				</h3>
 			</div>
 		</div>
-		<div class="clearfix"></div>
-		
+	<div class="clearfix"></div>
 	</div>
 
 		<div class="">
@@ -65,7 +64,7 @@
 										echo NULL;
 								 	else
 								 		echo "$dp1->nama" ?>
-								 </td>
+								</td>
 							</tr>
 							<tr>
 								<th>Dosen Pembimbing 2</th>
@@ -84,7 +83,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<?php if (file_exists('assets/File_TugasAkhir/'.$username.'.pdf')) { ?>
 				<a href="<?= base_url('mahasiswa/download_file/'."$username")?>" class="btn btn-info btn-md">Unduh Berkas <i class="fa fa-download"></i></a>
@@ -110,15 +109,12 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 abstrak">
 				<div class="text-center"><h3><strong>Abstrak</strong></h3></div>
 				<hr>
-
 				<div class="konten_abstrak">
 					<p><?= "$ta->abstrak" ?></p>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </div>
 
             <script>
@@ -128,55 +124,56 @@
                     });
                 });
 
-          //       function delete_data(id){
-		        //     swal({
-		        //       title: 'Hapus data tugas akhir ?',
-		        //       text: "File yang telah dihapus tidak dapat dikembalikan lagi !",
-		        //       type: 'warning',
-		        //       showCancelButton: true,
-		        //       confirmButtonColor: '#3085d6',
-		        //       cancelButtonColor: '#d33',
-		        //       confirmButtonText: 'Yes',
-		        //       cancelButtonText: 'Cancel',
-		        //       confirmButtonClass: 'btn btn-success',
-		        //       cancelButtonClass: 'btn btn-danger',
-		        //       buttonsStyling: false,
-		        //       reverseButtons: true
-		        //     }).then((result) => {
-		        //       if (result.value) {
-		        //         $.ajax({
-		        //             url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
-		        //             type: 'POST',
-		        //             data: {
-		        //                 id: id,
-		        //                 delete: true
-		        //             },
-		        //             success: function() {
-		        //                window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
-		        //             }
-		        //         });
-		        //       } 
+                function delete_data(id){
+		            swal({
+		              title: 'Hapus data tugas akhir ?',
+		              text: "Hanya akan menghapus data tugas akhir",
+		              type: 'warning',
+		              showCancelButton: true,
+		              confirmButtonColor: '#3085d6',
+		              cancelButtonColor: '#d33',
+		              confirmButtonText: 'Yes',
+		              cancelButtonText: 'Cancel',
+		              confirmButtonClass: 'btn btn-success',
+		              cancelButtonClass: 'btn btn-danger',
+		              buttonsStyling: false,
+		              reverseButtons: true
+		            }).then((result) => {
+		              if (result.value) {
+		                $.ajax({
+		                    url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
+		                    type: 'POST',
+		                    data: {
+		                        id: id,
+		                        delete: true
+		                    },
+		                    success: function() {
+		                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
+		                    }
+		                });
+		              } 
 
-		        //       else if (result.dismiss === 'cancel') {
-		        //         swal(                   
-		        //           'Batal',
-		        //           'Data anda aman :)',
-		        //           'error'
-		        //         )
-		        //       }
-		        //     })  
-        		// }
-        		function delete_data(username) {
-                    $.ajax({
-                        url: '<?= base_url('mahasiswa/data_dokumen') ?>',
-                        type: 'POST',
-                        data: {
-                            username: username,
-                            delete: true
-                        },
-                        success: function() {
-                            window.location = '<?= base_url('mahasiswa/data_dokumen') ?>';
-                        }
-                    });
-                }
+		              else if (result.dismiss === 'cancel') {
+		                swal(                   
+		                  'Batal',
+		                  'Data anda aman :)',
+		                  'error'
+		                )
+		              }
+		            })  
+        		}
+
+        		// function delete_data(username) {
+          //           $.ajax({
+          //               url: '<?= base_url('mahasiswa/data_dokumen') ?>',
+          //               type: 'POST',
+          //               data: {
+          //                   username: username,
+          //                   delete: true
+          //               },
+          //               success: function() {
+          //                   window.location = '<?= base_url('mahasiswa/data_dokumen') ?>';
+          //               }
+          //           });
+          //       }
             </script>

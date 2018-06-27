@@ -65,7 +65,7 @@ class Admin extends MY_Controller
             $exe = substr($file_name, -4);
             $exe2= substr($file_name, -5);
 
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg" || $exe == NULL){
                 $data_profile = [
                 'nama'  => $this->POST('nama'),
                 'email'  => $this->POST('email'),

@@ -64,46 +64,44 @@ class Mahasiswa extends MY_Controller
                 exit;
             }
 
-            $data_profile = [
+            $file_name = $_FILES['foto']['name'];
+            $exe = substr($file_name, -4);
+            $exe2= substr($file_name, -5);
+
+            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg" || $exe == NULL){
+                    $data_profile = [
                     'nama'  => $this->POST('nama'),
                     'jurusan' => $this->POST('jurusan'),
                     'angkatan' => $this->POST('angkatan'),
                     'email'  => $this->POST('email'),
                     'alamat'  => $this->POST('alamat')
-            ];
+                ];
 
-            $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
+                $cekNimInd = $this->Mahasiswa_m->getDatabyNim($this->data['username']);
 
-            if(count($cekNimInd) > 0){
-                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
+                if(count($cekNimInd) > 0){
+                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
-                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
-                    $this->upload($this->data['username'], 'mahasiswa', 'foto');
-                }
-
-                $this->flashmsg('Data berhasil disimpan!');
-                redirect('mahasiswa/profile');
-                exit;
-            }
-            
-            else{
-                $this->Mahasiswa_m->insert($this->data['username']);
-                $this->Mahasiswa_m->update($this->data['username'], $data_profile);
-
-                if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
                         $this->upload($this->data['username'], 'mahasiswa', 'foto');
-                }
-                $this->flashmsg('Data berhasil disimpan!');
-                redirect('mahasiswa/profile');
-                exit;
-                }
+                    }
 
-            $file_name = $_FILES['foto']['name'];
-            $exe = substr($file_name, -4);
-            $exe2= substr($file_name, -5);
+                    $this->flashmsg('Data berhasil disimpan!');
+                    redirect('mahasiswa/profile');
+                    exit;
+                }
+                else{
+                    $this->Mahasiswa_m->insert($this->data['username']);
+                    $this->Mahasiswa_m->update($this->data['username'], $data_profile);
 
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg"){
-                   
+                    if(!empty($_FILES) && $_FILES['foto']['error'] == 0) {
+                        $this->upload($this->data['username'], 'mahasiswa', 'foto');
+                    }
+
+                    $this->flashmsg('Data berhasil disimpan!');
+                    redirect('mahasiswa/profile');
+                    exit;
+                }
             }
             else{
                 $this->flashmsg('Pilih file jpg/jpeg/png !', 'danger');
@@ -128,15 +126,15 @@ class Mahasiswa extends MY_Controller
         $this->data['dp1'] = $this->dosen_m->getNamaDosen1($this->data['ta']->dosen_pembimbing1);
         $this->data['dp2'] = $this->dosen_m->getNamaDosen2($this->data['ta']->dosen_pembimbing2);
 
-        if($this->POST('username') && $this->POST('delete')){
+        if($this->POST('id') && $this->POST('delete')){
             $nim = $this->data['username'];
-            $dataInd = array(
-                            'nama'  => NULL,
-                            'jurusan' => NULL,
-                            'email' => NULL,
-                            'angkatan' => NULL,
-                            'alamat'    => NULL
-                        );
+            // $dataInd = array(
+            //                 'nama'  => NULL,
+            //                 'jurusan' => NULL,
+            //                 'email' => NULL,
+            //                 'angkatan' => NULL,
+            //                 'alamat'    => NULL
+            //             );
             $dataTA = array(
                             'judulTA' => NULL,
                             'konsentrasi' => NULL,
@@ -148,7 +146,7 @@ class Mahasiswa extends MY_Controller
                         );
             $this->load->helper('file');
             unlink('assets/File_TugasAkhir/'.$nim.'.pdf');
-            $this->Mahasiswa_m->update($nim, $dataInd);
+            //$this->Mahasiswa_m->update($nim, $dataInd);
             $this->tugas_akhir_m->update($nim, $dataTA);
             $this->flashmsg('Data berhasil dihapus', 'success');
             redirect('Mahasiswa\data_dokumen');
