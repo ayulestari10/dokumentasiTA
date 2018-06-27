@@ -24,7 +24,11 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+              <?php if(isset($username)):  ?>
+                  <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
+              <?php else: ?>
+                  <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+              <?php endif; ?>
             </li>
           </ul>
         </div>

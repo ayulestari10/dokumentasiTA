@@ -1,7 +1,6 @@
 
   <body>
 
-     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="<?= base_url('home') ?>">Dokumentasi TA</a>
@@ -11,12 +10,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="<?= base_url('home') ?>">Home
-                
-              </a>
+              <a class="nav-link" href="<?= base_url('home') ?>">Home</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="<?= base_url('login') ?>">Login
+              <?php if(isset($username)):  ?>
+                  <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
+              <?php else: ?>
+                  <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+              <?php endif; ?>
               </a>
             </li>
           </ul>

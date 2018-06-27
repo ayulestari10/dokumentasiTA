@@ -1,37 +1,39 @@
-<!doctype html>
-<html lang="en" class="fullscreen-bg">
+<!DOCTYPE html>
+<html lang="en">
 
-<head>
-    <title><?= $title ?></title>
+  <head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?= $title ?></title>
+
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/home/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <script src="<?= base_url('assets/home/') ?>vendor/jquery/jquery.min.js"></script>
-    <!-- Custom styles for this template -->
-    <link href="<?= base_url('assets/home/') ?>css/landing-page.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript -->
     <script src="<?= base_url('assets/home/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/vendor/linearicons/style.css">
-    <!-- MAIN CSS -->
+    <!-- Custom fonts for this template -->
+    <link href="<?= base_url('assets/home/') ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/home/') ?>vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="<?= base_url('assets/home/') ?>css/landing-page.css" rel="stylesheet">
+
     <link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/css/main.css">
-    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-    <link rel="stylesheet" href="<?= base_url('assets/login/') ?>assets/css/demo.css">
-    <!-- GOOGLE FONTS -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet"> -->
-    <!-- ICONS -->
+    
     <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url('assets/login/') ?>assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/login/') ?>assets/img/favicon.png">
 
-     <style>
+    <style>
     .field_title{font-size: 13px;font-family:Arial;width: 300px;margin-top: 10px}
     .form_error{font-size: 13px;font-family:Arial;color:red;font-style:italic}
     </style>
-</head>
 
-<body>
+</head>

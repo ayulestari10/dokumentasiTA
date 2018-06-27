@@ -13,7 +13,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="<?= base_url('mahasiswa/profile') ?>"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        <?php if(isset($username)):  ?>
+                            <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+                        <?php else: ?>
+                            <li><a href="<?= base_url('login') ?>"><i class="fa fa-sign-in"></i> Login</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
                 <!-- <li><a href="<?= base_url() ?>"></a></li> -->

@@ -11,7 +11,6 @@
 
     <!-- Bootstrap -->
     <link href="<?= base_url('assets') ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="<?=  base_url('assets') ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Font Awesome -->
     <link href="<?= base_url('assets') ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -24,6 +23,16 @@
 
     <!-- jQuery -->
     <script src="<?= base_url('assets') ?>/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="<?= base_url('assets') ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <!-- DataTables CSS -->
+    <link href="<?= base_url('assets') ?>/vendors/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="<?= base_url('assets') ?>/vendors/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
     <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>"> 
   </head>
 
