@@ -95,37 +95,3 @@
 
 	
 </div>
-
-            <script>
-
-                function get_data(id_user) {
-                  $.ajax({
-                      url: '<?= base_url('admin/user') ?>',
-                      type: 'POST',
-                      data: {
-                          id_user: id_user,
-                          get: true
-                      },
-                      success: function(response) {
-                          response = JSON.parse(response);
-                          $('#edit_username').val(response.username);
-                          $('#edit_id_user').val(id_user);
-                      },
-                      error: function(e) {console.log(e.responseText);}
-                  });
-                }
-
-                function delete_data(id_user) {
-                    $.ajax({
-                        url: '<?= base_url('admin/user') ?>',
-                        type: 'POST',
-                        data: {
-                            id_user: id_user,
-                            delete: true
-                        },
-                        success: function() {
-                            window.location = '<?= base_url('admin/user') ?>';
-                        }
-                    });
-                }
-            </script>

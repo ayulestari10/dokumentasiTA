@@ -20,6 +20,8 @@
 							<!-- <h2>Detail Data Dokumen Tugas Akhir</h2> -->
 						</div>
 					</div>
+					<style type="text/css">.bverifikasi{color: #FF0000;}</style>
+					<style type="text/css">.verifikasi{color: #0091FF;}</style>
 					<div class="x_content">
 						<div>
 							<?= $this->session->flashdata('msg') ?>
@@ -77,7 +79,11 @@
 							</tr>
 							<tr>
 								<th>Status</th>
-								<td><?= "$ta->status" ?></td>
+								<?php if ($ta->status == 'Terverifikasi') {?>
+								<td class="verifikasi"><?= "$ta->status" ?></td>
+								<?php } else {?>
+								<td class="bverifikasi"><?= "$ta->status" ?></td>
+								<?php } ?>
 							</tr>
 						</table>
 					</div>
@@ -90,7 +96,11 @@
 				<?php } else { ?>
 				<button class="btn btn-info btn-md" disabled>Unduh Berkas <i class="fa fa-download"></i></button>
 				<?php } ?>
+				<?php if($ta->judulTA != NULL && $ta->konsentrasi != NULL && $ta->tahun_pembuatan != NULL || $dp1 != NULL || $dp2 != NULL) {?>
 				<button class="btn btn-danger btn-md" style="padding-bottom: 5px; padding-top: 5px; padding-right: 37px; padding-left: 37px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
+				<?php } else {?>
+				<button class="btn btn-danger btn-md" style="padding-bottom: 5px; padding-top: 5px; padding-right: 37px; padding-left: 37px;" disabled>Hapus <i class="fa fa-trash"></i></button>
+				<?php } ?>
 			</div>
 		</div>
 
@@ -124,44 +134,82 @@
                     });
                 });
 
-                function delete_data(id){
-		            swal({
-		              title: 'Hapus data tugas akhir ?',
-		              text: "Hanya akan menghapus data tugas akhir",
-		              type: 'warning',
-		              showCancelButton: true,
-		              confirmButtonColor: '#3085d6',
-		              cancelButtonColor: '#d33',
-		              confirmButtonText: 'Yes',
-		              cancelButtonText: 'Cancel',
-		              confirmButtonClass: 'btn btn-success',
-		              cancelButtonClass: 'btn btn-danger',
-		              buttonsStyling: false,
-		              reverseButtons: true
-		            }).then((result) => {
-		              if (result.value) {
-		                $.ajax({
-		                    url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
-		                    type: 'POST',
-		                    data: {
-		                        id: id,
-		                        delete: true
-		                    },
-		                    success: function() {
-		                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
-		                    }
-		                });
-		              } 
+          //       function delete_data(id){
+		        //     swal({
+		        //       title: 'Hapus data tugas akhir ?',
+		        //       text: "Hanya akan menghapus data tugas akhir",
+		        //       type: 'warning',
+		        //       showCancelButton: true,
+		        //       confirmButtonColor: '#3085d6',
+		        //       cancelButtonColor: '#d33',
+		        //       confirmButtonText: 'Yes',
+		        //       cancelButtonText: 'Cancel',
+		        //       confirmButtonClass: 'btn btn-success',
+		        //       cancelButtonClass: 'btn btn-danger',
+		        //       buttonsStyling: false,
+		        //       reverseButtons: true
+		        //     }).then((result) => {
+		        //       if (result.value) {
+		        //         $.ajax({
+		        //             url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
+		        //             type: 'POST',
+		        //             data: {
+		        //                 id: id,
+		        //                 delete: true
+		        //             },
+		        //             success: function() {
+		        //                window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
+		        //             }
+		        //         });
+		        //       } 
+		        //       else if (result.dismiss === 'cancel') {
+		        //         swal(                   
+		        //           'Batal',
+		        //           'Data anda aman :)',
+		        //           'error'
+		        //         )
+		        //       }
+		        //     })  
+        		// }
 
-		              else if (result.dismiss === 'cancel') {
-		                swal(                   
-		                  'Batal',
-		                  'Data anda aman :)',
-		                  'error'
-		                )
-		              }
-		            })  
-        		}
+        		function delete_data(id){
+            swal({
+              title: 'Are you sure to delete data?',
+              text: "You will not be able to return this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes',
+              cancelButtonText: 'Cancel',
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              buttonsStyling: false,
+              reverseButtons: true
+            }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                    url: '<?= base_url('Mahasiswa/data_dokumen') ?>',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        delete: true
+                    },
+                    success: function() {
+                       window.location = '<?= base_url('Mahasiswa/data_dokumen') ?>';
+                    }
+                });
+              } 
+
+              else if (result.dismiss === 'cancel') {
+                swal(                   
+                  'Canceled!',
+                  'Your data is safe! :)',
+                  'error'
+                )
+              }
+            })  
+        }
 
         		// function delete_data(username) {
           //           $.ajax({
