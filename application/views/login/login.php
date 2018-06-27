@@ -31,7 +31,7 @@
 
 
 
-
+<!--  -->
 <body style="margin-top: 8%;">
 	<!-- WRAPPER -->
 	<div id="wrapper">
@@ -39,7 +39,7 @@
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
-						<div class="content">
+						<div class="content" style="width: 95% !important;">
 							<div class="header">
 								<!-- <div class="logo text-center"><img src="<?= base_url('assets/login/') ?>assets/img/logo-dark.png" alt="Klorofil Logo"></div> -->
 								<h4><strong>Login Dokumentasi TA</strong></h4>
