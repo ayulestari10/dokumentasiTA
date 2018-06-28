@@ -41,17 +41,17 @@ class Tugas_akhir_m extends MY_Model
    	public function get_ta()
 	{
 		$query = $this->db->query('
-			SELECT tugas_akhir.NIM, tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak 
+			SELECT tugas_akhir.NIM, tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak, tugas_akhir.status
 			FROM mahasiswa 
 			INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM 
-			WHERE tugas_akhir.judulTA != "" 
-			OR tugas_akhir.judulTA != NULL 
-			OR tugas_akhir.konsentrasi != NULL 
-			OR tugas_akhir.tahun_pembuatan != NULL 
-			OR tugas_akhir.judulTA != "" 
+			WHERE tugas_akhir.status = "Terverifikasi" 
+			AND ( tugas_akhir.judulTA != "" 
 			OR tugas_akhir.konsentrasi != "" 
 			OR tugas_akhir.tahun_pembuatan != ""
-			ORDER BY tugas_akhir.tahun_pembuatan DESC');
+            OR tugas_akhir.judulTA != NULL 
+			OR tugas_akhir.konsentrasi != NULL 
+			OR tugas_akhir.tahun_pembuatan != NULL)
+            ORDER BY tugas_akhir.tahun_pembuatan DESC');
 
 		return $query->result();
 	}

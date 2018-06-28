@@ -71,7 +71,7 @@
 
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div>
-           <?= $this->session->flashdata('msg') ?>
+           <?= $this->session->flashdata('message') ?>
           </div>
           
           <div id="result-container">

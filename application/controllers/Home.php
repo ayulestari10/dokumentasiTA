@@ -25,9 +25,9 @@ class Home extends MY_Controller
 
     public function index()
     {
+        $this->data['dokumenTA']  = $this->tugas_akhir_m->get_ta();
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
-        $this->data['dokumenTA']  = $this->tugas_akhir_m->get_ta();
         $this->template($this->data, 'home');
     }
 
@@ -72,9 +72,12 @@ class Home extends MY_Controller
             $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
             
             if(count($this->data['dokumenTA']) <= 0 ){
-                $this->flashmsg('Dokumen tidak ada!','warning');
+                // $this->flashmsg('Dokumen tidak ada!','warning');
+                $this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:center;">Dokumen tidak ada!</div>');
+           
             }else{
-                 $this->flashmsg('Dokumen ditemukan','success');
+                 // $this->flashmsg('Dokumen ditemukan','success');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:center;">Dokumen ditemukan</div>');
             }
         }
 
@@ -98,7 +101,7 @@ class Home extends MY_Controller
             $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
             
             if(count($this->data['dokumenTA']) <= 0 ){
-                $this->flashmsg('Dokumen tidak ada!','warning');
+               $this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:center;">Dokumen tidak ada!</div>');
             }
         }
         else{
@@ -110,6 +113,8 @@ class Home extends MY_Controller
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
         $this->template($this->data, 'Home'); 
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:center;">Dokumen ditemukan</div>');
     }
 
     public function tahun_pembuatan(){
