@@ -23,13 +23,25 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item" ">
-              <?php if(isset($username)):  ?>
-                  <a class="nav-link" href="<?= base_url('login') ?>">Dashboard</a>
-                  <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
-              <?php else: ?>
-                  <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
-              <?php endif; ?>
+            <?php if(isset($username)):  ?>
+                <?php $role = $this->session->userdata('role'); ?>
+
+                <?php if($role == "admin"):  ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('admin') ?>">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('logout') ?>">Logout</a></li>
+                <?php elseif($role == "mahasiswa"):  ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('mahasiswa') ?>">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('logout') ?>">Logout</a></li>
+                <?php elseif($role == "dosen"):  ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('dosen') ?>">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('logout') ?>">Logout</a></li>
+                <?php else: ?>
+                    <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+                <?php endif; ?>
+
+            <?php else: ?>
+                <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
+            <?php endif; ?>
             </li>
           </ul>
         </div>

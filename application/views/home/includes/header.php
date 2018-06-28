@@ -22,5 +22,6 @@
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url('assets/home/') ?>css/landing-page.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>"> 
 
   </head>
