@@ -17,14 +17,15 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto" style="margin-left: -20%; margin-right: -10%;">
             <li class="nav-item active">
-              <a class="nav-link" href="<?= base_url('home') ?>">Home
+              <a class="nav-link" href="<?= base_url('home') ?>" >Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" ">
               <?php if(isset($username)):  ?>
+                  <a class="nav-link" href="<?= base_url('login') ?>">Dashboard</a>
                   <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
               <?php else: ?>
                   <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
