@@ -165,17 +165,52 @@
                   });
                 }
 
-                function delete_data(username) {
-                    $.ajax({
-                        url: '<?= base_url('admin/data-dosen') ?>',
-                        type: 'POST',
-                        data: {
-                            username: username,
-                            delete: true
-                        },
-                        success: function() {
-                            window.location = '<?= base_url('admin/data-dosen') ?>';
-                        }
-                    });
-                }
+                function delete_data(id){
+					swal({
+					  title: 'Apakah anda yakin?',
+					  text: 'Data mahasiswa tidak dapat dilihat kembali !',
+					  type: 'warning',
+					  showCancelButton: true,
+					  confirmButtonText: 'Hapus',
+					  cancelButtonText: 'Batal',
+					  cancelButtonColor: '#d33',
+					  confirmButtonClass: 'btn btn-success',
+					  cancelButtonClass: 'btn btn-danger',
+					  reverseButtons: true
+					}).then((result) => {
+					  if (result.value) {
+					  	$.ajax({
+					  		url: '<?= base_url('admin/data-dosen') ?>',
+		                    type: 'POST',
+		                    data: {
+		                        id: id,
+		                        delete: true
+		                    },
+		                    success: function() {
+		                       window.location = '<?= base_url('admin/data-dosen') ?>';
+		                    }
+					  	});
+					  } else if (result.dismiss === 'cancel') {
+					    swal(
+					      'Batal',
+					      'Data aman :)',
+					      'error'
+					    )
+					  }
+					})  
+        		}
+                
+                // function delete_data(username) {
+                //     $.ajax({
+                //         url: '<?= base_url('admin/data-dosen') ?>',
+                //         type: 'POST',
+                //         data: {
+                //             username: username,
+                //             delete: true
+                //         },
+                //         success: function() {
+                //             window.location = '<?= base_url('admin/data-dosen') ?>';
+                //         }
+                //     });
+                // }
             </script>

@@ -149,7 +149,6 @@ class Mahasiswa extends MY_Controller
             //$this->Mahasiswa_m->update($nim, $dataInd);
             $this->tugas_akhir_m->update($nim, $dataTA);
             $this->flashmsg('Data berhasil dihapus', 'success');
-            redirect('Mahasiswa\data_dokumen');
             exit;
         }
 

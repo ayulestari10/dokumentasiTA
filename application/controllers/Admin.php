@@ -101,11 +101,11 @@ class Admin extends MY_Controller
 
     public function data_mahasiswa(){
 
-        if($this->POST('delete') && $this->POST('username')){
+        if($this->POST('delete') && $this->POST('id')){
 
-            $this->user_m->delete($this->POST('username'));
-            $this->mahasiswa_m->delete($this->POST('username'));
-            $this->tugas_akhir_m->delete($this->POST('username'));
+            $this->user_m->delete($this->POST('id'));
+            $this->mahasiswa_m->delete($this->POST('id'));
+            $this->tugas_akhir_m->delete($this->POST('id'));
             $this->flashmsg('<i class="fa fa-check"></i> Data mahasiswa berhasil dihapus');
             exit;
         }
@@ -224,10 +224,10 @@ class Admin extends MY_Controller
     public function data_dosen()
     {
 
-        if($this->POST('delete') && $this->POST('username')){
+        if($this->POST('delete') && $this->POST('id')){
 
-            $this->user_m->delete($this->POST('username'));
-            $this->dosen_m->delete($this->POST('username'));
+            $this->user_m->delete($this->POST('id'));
+            $this->dosen_m->delete($this->POST('id'));
             $this->flashmsg('<i class="fa fa-check"></i> Data dosen berhasil dihapus');
             exit;
         }
@@ -361,7 +361,7 @@ class Admin extends MY_Controller
             exit;
         }
 
-        if($this->POST('delete') && $this->POST('NIM')){
+        if($this->POST('delete') && $this->POST('id')){
             $edit_data = [
                 'judulTA'           => NULL,
                 'konsentrasi'       => NULL,
@@ -372,7 +372,7 @@ class Admin extends MY_Controller
                 'dosen_pembimbing2' => NULL
 
             ];
-            $this->tugas_akhir_m->update($this->POST('NIM'), $edit_data);
+            $this->tugas_akhir_m->update($this->POST('id'), $edit_data);
             $this->flashmsg('<i class="fa fa-check"></i> Data tugas akhir berhasil dihapus');
             exit;
         }
