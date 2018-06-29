@@ -35,27 +35,27 @@ class Mahasiswa extends MY_Controller
     public function profile(){
         if($this->POST('simpan')){
             $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
-                    'trim'      => 'Nama tidak boleh kosong',
-                    'required'  => 'Nama tidak boleh kosong',
-                    'alpha_spaces'     => 'Nama hanya boleh karakter'
+                    'trim'      => 'Nama tidak boleh kosong!',
+                    'required'  => 'Nama tidak boleh kosong!',
+                    'alpha_spaces'     => 'Nama hanya boleh karakter!'
                 ));
             $this->form_validation->set_rules('jurusan', 'Jurusan', 'trim|required|alpha_spaces', array(
-                    'trim'      => 'Jurusan tidak boleh kosong',
-                    'required'  => 'Jurusan tidak boleh kosong',
-                    'alpha_spaces'     => 'Jurusan hanya boleh karakter'
+                    'trim'      => 'Jurusan tidak boleh kosong!',
+                    'required'  => 'Jurusan tidak boleh kosong!',
+                    'alpha_spaces'     => 'Jurusan hanya boleh karakter!'
                 ));
             $this->form_validation->set_rules('angkatan', 'Angkatan', 'required|numeric', array(
-                    'required'      => 'Username tidak boleh kosong',  
-                    'numeric'       => 'Username harus angka'
+                    'required'      => 'Username tidak boleh kosong!',  
+                    'numeric'       => 'Username harus angka!'
                 ));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
-                    'trim'      => 'Email tidak boleh kosong',
-                    'required'  => 'Email tidak boleh kosong',
-                    'valid_email' => 'Email tidak valid'
+                    'trim'      => 'Email tidak boleh kosong!',
+                    'required'  => 'Email tidak boleh kosong!',
+                    'valid_email' => 'Email tidak valid!'
                 ));
             $this->form_validation->set_rules('alamat', 'alamat', 'trim|required', array(
-                    'trim'      => 'Alamat tidak boleh kosong',
-                    'required'  => 'Alamat tidak boleh kosong'
+                    'trim'      => 'Alamat tidak boleh kosong!',
+                    'required'  => 'Alamat tidak boleh kosong!'
                 ));
 
             if ($this->form_validation->run() == FALSE){
@@ -104,7 +104,7 @@ class Mahasiswa extends MY_Controller
                 }
             }
             else{
-                $this->flashmsg('Pilih file jpg/jpeg/png !', 'danger');
+                $this->flashmsg('Pilih file jpg/jpeg/png!', 'danger');
                 redirect('mahasiswa/profile');
                 exit;
             }
@@ -128,13 +128,6 @@ class Mahasiswa extends MY_Controller
 
         if($this->POST('id') && $this->POST('delete')){
             $nim = $this->data['username'];
-            // $dataInd = array(
-            //                 'nama'  => NULL,
-            //                 'jurusan' => NULL,
-            //                 'email' => NULL,
-            //                 'angkatan' => NULL,
-            //                 'alamat'    => NULL
-            //             );
             $dataTA = array(
                             'judulTA' => NULL,
                             'konsentrasi' => NULL,
@@ -146,9 +139,8 @@ class Mahasiswa extends MY_Controller
                         );
             $this->load->helper('file');
             unlink('assets/File_TugasAkhir/'.$nim.'.pdf');
-            //$this->Mahasiswa_m->update($nim, $dataInd);
             $this->tugas_akhir_m->update($nim, $dataTA);
-            $this->flashmsg('Data berhasil dihapus', 'success');
+            $this->flashmsg('Data berhasil dihapus!', 'success');
             exit;
         }
 
@@ -178,34 +170,34 @@ class Mahasiswa extends MY_Controller
         if ($this->POST('simpan'))
         {
             $this->form_validation->set_rules('judul', 'Judul', 'trim|required', array(
-                    'trim'      => 'Judul tidak boleh kosong',
-                    'required'  => 'Judul tidak boleh kosong'
+                    'trim'      => 'Judul tidak boleh kosong!',
+                    'required'  => 'Judul tidak boleh kosong!'
                 ));
 
             $this->form_validation->set_rules('konsentrasi', 'Konsentrasi', 'trim|required', array(
-                    'trim'      => 'Konsentrasi tidak boleh kosong',
-                    'required'  => 'Konsentrasi tidak boleh kosong'
+                    'trim'      => 'Konsentrasi tidak boleh kosong!',
+                    'required'  => 'Konsentrasi tidak boleh kosong!'
                 ));
 
             $this->form_validation->set_rules('tahun', 'Tahun', 'trim|required|numeric', array(
-                    'trim'      => 'Tahun tidak boleh kosong',
-                    'required'  => 'Tahun tidak boleh kosong',
+                    'trim'      => 'Tahun tidak boleh kosong!',
+                    'required'  => 'Tahun tidak boleh kosong!',
                     'numeric'   => 'Tahun harus angka'
                 ));
 
             $this->form_validation->set_rules('dosen_pembimbing1', 'Dosen Pembimbing 1', 'trim|required', array(
-                    'trim'      => 'Dosen pembimbing 1 tidak boleh kosong',
-                    'required'  => 'Dosen pembimbing 1 tidak boleh kosong'
+                    'trim'      => 'Dosen pembimbing 1 tidak boleh kosong!',
+                    'required'  => 'Dosen pembimbing 1 tidak boleh kosong!'
                 ));
 
             $this->form_validation->set_rules('dosen_pembimbing2', 'Dosen Pembimbing 2', 'trim|required', array(
-                    'trim'      => 'Dosen pembimbing 2 tidak boleh kosong',
-                    'required'  => 'Dosen pembimbing 2 tidak boleh kosong'
+                    'trim'      => 'Dosen pembimbing 2 tidak boleh kosong!',
+                    'required'  => 'Dosen pembimbing 2 tidak boleh kosong!'
                 ));
 
             $this->form_validation->set_rules('abstrak', 'Abstrak', 'trim|required', array(
-                    'trim'      => 'Abstrak tidak boleh kosong',
-                    'required'  => 'Abstrak tidak boleh kosong'
+                    'trim'      => 'Abstrak tidak boleh kosong!',
+                    'required'  => 'Abstrak tidak boleh kosong!'
                 ));
 
 
@@ -219,7 +211,7 @@ class Mahasiswa extends MY_Controller
                 $exe = substr($file_name, -4);
 
                 if($exe != ".pdf"){
-                    $this->flashmsg('Pilih file pdf !', 'danger');
+                    $this->flashmsg('Pilih file pdf!', 'danger');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
@@ -250,7 +242,7 @@ class Mahasiswa extends MY_Controller
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');
 
-                    $this->flashmsg('Data tugas akhir berhasil disimpan ! Silahkan cek Dokumen Tugas Akhir.', 'success');
+                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir!', 'success');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
@@ -260,7 +252,7 @@ class Mahasiswa extends MY_Controller
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     $this->uploadPDF($nim, 'upload');
 
-                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir.');
+                    $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir!');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
                 }
@@ -276,7 +268,7 @@ class Mahasiswa extends MY_Controller
             force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
             redirect('mahasiswa/data_dokumen');
         }else{
-            $this->flashmsg('File tidak ada !','danger');
+            $this->flashmsg('File tidak ada!','danger');
             redirect('mahasiswa/data_dokumen');
         }
         
@@ -289,12 +281,12 @@ class Mahasiswa extends MY_Controller
 
         if($this->POST('simpan')){
             
-            $this->form_validation->set_rules('password1', 'Password', 'required', array(
-                    'required'      => 'Password tidak boleh kosong'));
+            $this->form_validation->set_rules('password1', 'Password', 'trim|required', array(
+                    'required'      => 'Password tidak boleh kosong!'));
 
-            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
-                    'required'      => 'Konfirmasi password tidak boleh kosong',
-                    'matches'       => 'Password dan konfirmasi password harus sama'
+            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'trim|required|matches[password1]', array(
+                    'required'      => 'Konfirmasi password tidak boleh kosong!',
+                    'matches'       => 'Password dan konfirmasi password harus sama!'
                 ));
 
             if ($this->form_validation->run() == FALSE)
@@ -310,7 +302,7 @@ class Mahasiswa extends MY_Controller
             $username = $this->session->userdata('username');
             $this->user_m->update($username,$data_mahasiswa);
 
-            $this->flashmsg('Password berhasil diubah.');
+            $this->flashmsg('Password berhasil diubah!');
             redirect('Mahasiswa/ubah-password');
             exit;
         }
