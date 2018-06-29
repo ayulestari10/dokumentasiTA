@@ -56,7 +56,7 @@
 								<td><?= $dokumen->konsentrasi ?></td>
 							</tr>
 							<tr>
-								<th>Tahun Pembuatan</th>
+								<th>Tahun Lulus</th>
 								<td><?= $dokumen->tahun_pembuatan ?></td>
 							</tr>
 							<tr>
