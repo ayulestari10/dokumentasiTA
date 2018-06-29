@@ -22,6 +22,8 @@
 							<!-- <h2>Detail Data Dokumen Tugas Akhir</h2> -->
 						</div>
 					</div>
+					<style type="text/css">.bverifikasi{color: #FF0000;}</style>
+					<style type="text/css">.verifikasi{color: #0091FF;}</style>
 					<div class="x_content">
 						<div>
 							<?= $this->session->flashdata('msg') ?>
@@ -79,7 +81,11 @@
 								</tr>
 								<tr>
 									<th>Status</th>
-									<td><?= $detail->status ?></td>
+									<?php if ($detail->status == 'Terverifikasi') {?>
+									<td class="verifikasi"><?= "$detail->status" ?></td>
+									<?php } else {?>
+									<td class="bverifikasi"><?= "$detail->status" ?></td>
+									<?php } ?>
 								</tr>
 
 						</table>
