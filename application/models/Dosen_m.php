@@ -75,5 +75,13 @@ class Dosen_m extends MY_Model
 		return $query->row();
 	}
 
+	public function getDosen1(){
+		$query = $this->db->query('select distinct dosen.nama, dosen.NIP from dosen inner join tugas_akhir on dosen.NIP = tugas_akhir.dosen_pembimbing1 where dosen.NIP != tugas_akhir.dosen_pembimbing2;');
+		return $query->result();
+	}
 
+	public function getDosen2(){
+		$query = $this->db->query('select distinct dosen.nama, dosen.NIP from dosen inner join tugas_akhir on dosen.NIP = tugas_akhir.dosen_pembimbing2 where dosen.NIP != tugas_akhir.dosen_pembimbing1;');
+		return $query->result();
+	}
 }

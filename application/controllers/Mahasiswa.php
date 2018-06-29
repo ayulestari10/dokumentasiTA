@@ -161,6 +161,19 @@ class Mahasiswa extends MY_Controller
         $this->data['content']  = 'mahasiswa/mengunggah_dokumen';
         $this->data['ta'] = $this->tugas_akhir_m->getDatabyNim($this->data['username']);
         $this->data['dosen'] = $this->dosen_m->getAll();
+        $this->data['dosen1'] = $this->dosen_m->getDosen1();
+        $this->data['dosen2'] = $this->dosen_m->getDosen2();
+        $this->data['konsentrasi'] = [
+            'Basis Data' => 'Basis Data', 
+            'Pengolahan Citra' => 'Pengolahan Citra', 
+            'Kecerdasan Buatan' => 'Kecerdasan Buatan'
+        ];
+        $tahun_skrg = date('Y');
+        $this->data['tahun'] = [];
+        for($i = (int)$tahun_skrg; $i >= 2008; $i--)
+        {
+            $this->data['tahun'][$i] = $i;
+        }
 
         if ($this->POST('simpan'))
         {
