@@ -113,16 +113,20 @@
 			}
 		</style>
 
+		<?php if(isset($detail->abstrak)): ?>
+
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 abstrak">
 				<div class="text-center"><h3><strong>Abstrak</strong></h3></div>
 				<hr>
 
 				<div class="konten_abstrak">
-					<p><?= "$detail->abstrak" ?></p>
+					<p><?= $detail->abstrak ?></p>
 				</div>
 			</div>
 		</div>
+
+		<?php endif; ?>
 
 	</div>
 

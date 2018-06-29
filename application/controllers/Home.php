@@ -31,13 +31,6 @@ class Home extends MY_Controller
         $this->template($this->data, 'home');
     }
 
-    public function coba()
-    {
-        $this->data['title']  = 'coba'.$this->title;
-        $this->data['content']  = 'login2/login2';
-        $this->template($this->data, 'login2');
-    }
-
     public function download(){
         $nim = $this->uri->segment(3);
 
@@ -67,17 +60,25 @@ class Home extends MY_Controller
 
         $keyword = $this->input->post('keyword');
 
-        if (isset($keyword) && !empty($keyword)) {
-
-            $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
-            
-            if(count($this->data['dokumenTA']) <= 0 ){
-                // $this->flashmsg('Dokumen tidak ada!','warning');
-                $this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:left;">Dokumen tidak ada!</div>');
-           
-            }else{
-                 // $this->flashmsg('Dokumen ditemukan','success');
-                $this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:left;">Dokumen ditemukan</div>');
+        if (isset($keyword)) {
+            if(strlen($keyword) > 0){
+                $this->data['dokumenTA'] = $this->tugas_akhir_m->search($keyword);
+                
+                if(count($this->data['dokumenTA']) <= 0 ){
+                    $this->flashmsg('Dokumen tidak ada!', 'warning', 'message2');
+                    redirect('home/search');
+                    exit;
+                    //$this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:left;">Dokumen tidak ada!</div>');
+               
+                }else{
+                    $this->flashmsg('Dokumen ditemukan!','success', 'message2');
+                    //$this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:left;">Dokumen ditemukan</div>');
+                }
+            }
+            else {
+                $this->flashmsg('Kata kunci tidak boleh kosong!', 'danger', 'message2');
+                redirect('home/search');
+                exit;
             }
         }
 
@@ -93,51 +94,61 @@ class Home extends MY_Controller
         if (isset($konsentrasi)) {
 
             if($konsentrasi == "Semua"){
+                $this->flashmsg('Dokumen ditemukan!','success', 'message2');
                 redirect('home');
                 exit;
             }
-
-            $konsentrasi = str_replace('_', ' ', $konsentrasi);
-            $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
-            
-            if(count($this->data['dokumenTA']) <= 0 ){
-               $this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:left;">Dokumen tidak ada!</div>');
+            else{
+                $konsentrasi = str_replace('_', ' ', $konsentrasi);
+                $this->data['dokumenTA'] = $this->tugas_akhir_m->konsentrasi($konsentrasi);
+                
+                if(count($this->data['dokumenTA']) <= 0 ){
+                    $this->flashmsg('Dokumen tidak ada!','warning', 'message2');
+                    redirect('home/search');
+                    exit;
+                }
+                else{
+                    $this->flashmsg('Dokumen ditemukan!','success', 'message2');
+                }
             }
+
+            
         }
         else{
-            $this->flashmsg('Konsentrasi tidak dicantumkan!','danger');
-            redirect('home');
+            $this->flashmsg('Konsentrasi tidak dicantumkan!','danger', 'message2');
+            redirect('home/search');
             exit;
         }
 
         $this->data['title']  = 'Home'.$this->title;
         $this->data['content']  = 'home/home';
         $this->template($this->data, 'Home'); 
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:left;">Dokumen ditemukan</div>');
     }
 
     public function tahun_pembuatan(){
         if($this->POST('cari')){
-            $this->data['result'] = [];
+            $this->data['response']['result'] = [];
             $tahun = $this->POST('tahun');
 
             $dokumen = $this->tugas_akhir_m->tahun_pembuatan($tahun);
 
-            foreach($dokumen as $row){
-                $this->data['result'] [] = [
-                    'NIM'   => $row->NIM,
-                    'judulTA' => $row->judulTA,
-                    'nama'  => $row->nama,
-                    'konsentrasi' => $row->konsentrasi,
-                    'tahun_pembuatan' => $row->tahun_pembuatan,
-                    'abstrak' => $row->abstrak
+            if(count($dokumen) > 0){
+                foreach($dokumen as $row){
+                    $this->data['result'] [] = [
+                        'NIM'   => $row->NIM,
+                        'judulTA' => $row->judulTA,
+                        'nama'  => $row->nama,
+                        'konsentrasi' => $row->konsentrasi,
+                        'tahun_pembuatan' => $row->tahun_pembuatan,
+                        'abstrak' => $row->abstrak
+                    ];
+                }
+
+                $this->data['response'] = [
+                    'result' => $this->data['result']
                 ];
             }
 
-            $this->data['response'] = [
-                'result' => $this->data['result']
-            ];
             echo json_encode($this->data['response']);
             exit;
         }

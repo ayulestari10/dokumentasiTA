@@ -1,36 +1,3 @@
-<!-- <style type="text/css">
-	@media screen and (min-width: 800px) {
-
-	}
-
-	/* Extra Small devices (tablets, 768px and down) */
-	@media (max-width: 767px){ 
-	}
-
-	@media (min-width: 421px) and (max-width: 767px){ 
-
-	}
-
-	/*Small devices Tablets(≥768px)*/
-	@media (min-width: 768px) and (max-width: 991px){
-	
-	}
-
-	/* Medium devices Desktops (≥992px) */
-	@media (min-width: 992px) and (max-width: 1199px){
-
-	}
-
-	/* Large devices Desktops (≥1200px) */
-	@media (min-width: 1201px) and (max-width: 2000px){ 
-
-	}
-
-
-</style> -->
-
-
-
 <!--  -->
 <body style="margin-top: 8%;">
 	<!-- WRAPPER -->
@@ -41,7 +8,7 @@
 					<div class="left">
 						<div class="content" style="width: 95% !important;">
 							<div class="header">
-								<!-- <div class="logo text-center"><img src="<?= base_url('assets/login/') ?>assets/img/logo-dark.png" alt="Klorofil Logo"></div> -->
+								<div class="logo text-center"><img src="<?= base_url('assets/logo.png') ?>" alt="Logo" style="width: 50px; height: 50px;"></div>
 								<h4><strong>Login Dokumentasi TA</strong></h4>
 							</div>
 							<div>
