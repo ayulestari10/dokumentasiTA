@@ -16,6 +16,8 @@
 							<!-- <h2>Detail Data Dokumen Tugas Akhir</h2> -->
 						</div>
 					</div>
+					<style type="text/css">.bverifikasi{color: #FF0000;}</style>
+					<style type="text/css">.verifikasi{color: #0091FF;}</style>
 					<div class="x_content">
 						<div>
 							<?= $this->session->flashdata('msg') ?>
@@ -54,7 +56,7 @@
 								<td><?= $dokumen->konsentrasi ?></td>
 							</tr>
 							<tr>
-								<th>Tahun Pembuatan</th>
+								<th>Tahun Lulus</th>
 								<td><?= $dokumen->tahun_pembuatan ?></td>
 							</tr>
 							<tr>
@@ -81,7 +83,11 @@
 							</tr>
 							<tr>
 								<th>Status</th>
-								<td><?= $dokumen->status ?></td>
+								<?php if ($dokumen->status == 'Terverifikasi') {?>
+								<td class="verifikasi"><?= "$dokumen->status" ?></td>
+								<?php } else {?>
+								<td class="bverifikasi"><?= "$dokumen->status" ?></td>
+								<?php } ?>
 							</tr>
 						</table>
 					</div>

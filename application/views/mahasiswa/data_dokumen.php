@@ -96,6 +96,7 @@
 				<?php } else { ?>
 				<button class="btn btn-info btn-md" disabled>Unduh Berkas <i class="fa fa-download"></i></button>
 				<?php } ?>
+				
 				<?php if($ta->judulTA != NULL && $ta->konsentrasi != NULL && $ta->tahun_pembuatan != NULL || $dp1 != NULL || $dp2 != NULL) {?>
 				<button class="btn btn-danger btn-md" style="padding-bottom: 5px; padding-top: 5px; padding-right: 37px; padding-left: 37px;" onclick="delete_data(<?= $username ?>)">Hapus <i class="fa fa-trash"></i></button>
 				<?php } else {?>

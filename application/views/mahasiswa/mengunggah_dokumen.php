@@ -48,7 +48,7 @@
 									<select name="konsentrasi" class="form-control">
 					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
 					                  <option value="Basis Data">Basis Data</option>
-					                  <option value="Citra">Citra</option>
+					                  <option value="Pengolahan Citra">Pengolahan Citra</option>
 					                </select>
 								</div>
 								<div class="form-group">
