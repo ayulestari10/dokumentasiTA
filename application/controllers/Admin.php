@@ -104,6 +104,10 @@ class Admin extends MY_Controller
         if($this->POST('delete') && $this->POST('id')){
 
             $this->user_m->delete($this->POST('id'));
+            unlink('assets/File_TugasAkhir/'.$this->POST('id').'.pdf');
+            unlink('assets/foto/mahasiswa/'.$this->POST('id').'.jpg');
+            unlink('assets/foto/mahasiswa/'.$this->POST('id').'.png');
+            unlink('assets/foto/mahasiswa/'.$this->POST('id').'.jpeg');
             $this->mahasiswa_m->delete($this->POST('id'));
             $this->tugas_akhir_m->delete($this->POST('id'));
             $this->flashmsg('<i class="fa fa-check"></i> Data mahasiswa berhasil dihapus');
