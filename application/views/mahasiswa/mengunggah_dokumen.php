@@ -45,60 +45,65 @@
 								</div>
 								<div class="form-group">
 									<label for="Konsentrasi">Konsentrasi <?= $ta->konsentrasi ?> <span class="required">*</span></label>
-									<?php  
-	                                    $opt = [];
-	                                    foreach ( $konsentrasi as $row ) $opt[$row] = $row;
-	                                    echo form_dropdown( 'konsentrasi', $opt, $ta->konsentrasi, [ 'id' => 'konsentrasi', 'class' => 'form-control' ] );
-	                                ?>
-									<!-- <select name="konsentrasi" class="form-control">
-					                  <option value="Kecerdasan Buatan">Kecerdasan Buatan</option>
-					                  <option value="Basis Data">Basis Data</option>
-					                  <option value="Pengolahan Citra">Pengolahan Citra</option>
-					                </select> -->
+									<?php 
+										if($ta->konsentrasi == NULL){
+											$opt_konsentrasi = ['' => 'Pilih Konsentrasi'];
+		                                    foreach ( $konsentrasi as $row ) $opt_konsentrasi[$row] = $row;
+		                                    echo form_dropdown( 'konsentrasi', $opt_konsentrasi, $ta->konsentrasi, [ 'id' => 'konsentrasi', 'class' => 'form-control' ] );
+										}
+										else{  
+		                                    $opt_konsentrasi = [];
+		                                    foreach ( $konsentrasi as $row ) $opt_konsentrasi[$row] = $row;
+		                                    echo form_dropdown( 'konsentrasi', $opt_konsentrasi, $ta->konsentrasi, [ 'id' => 'konsentrasi', 'class' => 'form-control' ] );
+		                                } 
+		                            ?>
 								</div>
 								<div class="form-group">
 									<label for="Tahun">Tahun<span class="required">*</span></label>
-									<?php  
-	                                    $opt = [];
-	                                    foreach ( $tahun as $row ) $opt[$row] = $row;
-	                                    echo form_dropdown( 'tahun', $opt, $ta->tahun_pembuatan, [ 'id' => 'tahun', 'class' => 'form-control' ] );
-	                                ?>
+									<?php 
+										if($ta->tahun_pembuatan == NULL){
+											$opt_tahun = ['' => 'Pilih Tahun'];
+		                                    foreach ( $tahun as $row ) $opt_tahun[$row] = $row;
+		                                    echo form_dropdown( 'tahun', $opt_tahun, $ta->tahun_pembuatan, [ 'id' => 'tahun', 'class' => 'form-control' ] );
+										}
+										else{  
+		                                    $opt_tahun = [];
+		                                    foreach ( $tahun as $row ) $opt_tahun[$row] = $row;
+		                                    echo form_dropdown( 'tahun', $opt_tahun, $ta->tahun_pembuatan, [ 'id' => 'tahun', 'class' => 'form-control' ] );
+		                                } 
+		                            ?>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>
+									<?php if($ta->dosen_pembimbing1 == NULL): ?>
+										<?php  
+		                                    $opt_dosen_1 = ['' => 'Pilih Dosen Pembimbing 1'];
+		                                    foreach ( $dosen as $row ) $opt_dosen_1[$row->NIP] = $row->nama;
+		                                    echo form_dropdown( 'dosen_pembimbing1', $opt_dosen_1, $ta->dosen_pembimbing1, [ 'id' => 'dosen_1', 'class' => 'form-control' ] );
+		                                ?>
+									<?php else: ?>
 									<?php  
-	                                    $opt = [];
-	                                    foreach ( $dosen as $row ) $opt[$row->NIP] = $row->nama;
-	                                    echo form_dropdown( 'dosen_pembimbing1', $opt, $ta->dosen_pembimbing1, [ 'id' => 'dosen1', 'class' => 'form-control' ] );
+	                                    $opt_dosen1 = [];
+	                                    foreach ( $dosen as $row ) $opt_dosen1[$row->NIP] = $row->nama;
+	                                    echo form_dropdown( 'dosen_pembimbing1', $opt_dosen1, $ta->dosen_pembimbing1, [ 'id' => 'dosen1', 'class' => 'form-control' ] );
 	                                ?>
-									<!-- <select name="dosen_pembimbing1" class="form-control" id="dosen_pembimbing1">
-										<?php if($ta->dosen_pembimbing1 != NULL): ?>
-											<option value="<?= $ta->dosen_pembimbing1 ?>"> <?= $this->dosen_m->get_row(['NIP' => $ta->dosen_pembimbing1])->nama ?> </option>
-										<?php else: ?>
-											<option value="">Pilih Dosen Pembimbing 1</option>
-										<?php endif; ?>
-					                	<?php foreach($dosen as $row): ?>
-					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
-					              		<?php endforeach; ?>
-					                </select> -->
+		                            <?php endif; ?>
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 2">Dosen Pembimbing 2 <span class="required">*</span></label>
+									<?php if($ta->dosen_pembimbing2 == NULL): ?>
+										<?php  
+		                                    $opt_dosen_2 = ['' => 'Pilih Dosen Pembimbing 2'];
+		                                    foreach ( $dosen as $row ) $opt_dosen_2[$row->NIP] = $row->nama;
+		                                    echo form_dropdown( 'dosen_pembimbing2', $opt_dosen_2, $ta->dosen_pembimbing2, [ 'id' => 'dosen_2', 'class' => 'form-control' ] );
+		                                ?>
+									<?php else: ?>
 									<?php  
-	                                    $opt = [];
-	                                    foreach ( $dosen as $row ) $opt[$row->NIP] = $row->nama;
-	                                    echo form_dropdown( 'dosen_pembimbing2', $opt, $ta->dosen_pembimbing2, [ 'id' => 'dosen2', 'class' => 'form-control' ] );
+	                                    $opt_dosen2 = [];
+	                                    foreach ( $dosen as $row ) $opt_dosen2[$row->NIP] = $row->nama;
+	                                    echo form_dropdown( 'dosen_pembimbing2', $opt_dosen2, $ta->dosen_pembimbing2, [ 'id' => 'dosen2', 'class' => 'form-control' ] );
 	                                ?>
-									<!-- <select name="dosen_pembimbing2" class="form-control" id="dosen_pembimbing2">
- 										<?php if($ta->dosen_pembimbing2 != NULL): ?>
-											<option value="<?= $ta->dosen_pembimbing2 ?>">  <?= $this->dosen_m->get_row(['NIP' => $ta->dosen_pembimbing2])->nama ?> </option>
-										<?php else: ?>
-											<option value="">Pilih Dosen Pembimbing 2</option>
-										<?php endif; ?>
-					                	<?php foreach($dosen as $row): ?>
-					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
-					              		<?php endforeach; ?>
-					                </select> -->
+		                            <?php endif; ?>
 								</div>
 								<div class="form-group">
 									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
@@ -127,23 +132,37 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#dosen_pembimbing1').on('change', function(){
-			var dosen_pembimbing1 = $(this).val();
-			$.ajax({
-				url: "<?= base_url('Mahasiswa/get_dosen_pembimbing2') ?>",
-				type: "POST",
-				data: {
-					'dosen_pembimbing1' : dosen_pembimbing1
-				},
-				dataType: 'json',
-				success: function(data){
-					$('#dosen_pembimbing2').html(data);
-				},
-				error: function(){
-					alert('Error occur .. !!');
-				}
-			});
-		});
+
+		  let opt = <?= json_encode($ta->dosen_pembimbing1 ? $opt_dosen1 : $opt_dosen_1) ?>;
+		  let keys = Object.keys(opt);
+		  
+		  $('#dosen1').on('change', function() {
+		   let dosen1 = $(this).val();
+		   let dosen2 = $('#dosen2').val();
+		   let html = '';
+		   for (let i = 0; i < keys.length; i++) {
+		    if (dosen1 != keys[i] && dosen2 != keys[i]) {
+		     html += '<option value="' + keys[i] + '">' + opt[keys[i]] + '</option>';
+		    }
+		   }
+		   $('#dosen2')
+		    .html('<option value="' + dosen2 + '">' + opt[dosen2] + '</option>')
+		    .append(html);
+		  });
+
+		  $('#dosen2').on('change', function() {
+		   let dosen2 = $(this).val();
+		   let dosen1 = $('#dosen1').val();
+		   let html = '';
+		   for (let i = 0; i < keys.length; i++) {
+		    if (dosen1 != keys[i] && dosen2 != keys[i]) {
+		     html += '<option value="' + keys[i] + '">' + opt[keys[i]] + '</option>';
+		    }
+		   }
+		   $('#dosen1')
+		    .html('<option value="' + dosen1 + '">' + opt[dosen1] + '</option>')
+		    .append(html);
+		  });
 	});
 
 </script>
