@@ -116,6 +116,8 @@
               ?>
           </div>
           <?php endif; ?>
+          <br>
+          <ul id="pagination-demo" class="pagination-sm"></ul>
         </div>
       </div>
     </div>

@@ -24,4 +24,6 @@
     <link href="<?= base_url('assets/home/') ?>css/landing-page.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url('assets/foto/logo.png') ?>"> 
 
+    <script src="<?= base_url('assets/pagination/') ?>jquery.twbsPagination.js"></script>
+
   </head>
