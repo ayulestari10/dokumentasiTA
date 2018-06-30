@@ -67,12 +67,27 @@ class Home extends MY_Controller
                 if(count($this->data['dokumenTA']) <= 0 ){
                     $this->flashmsg('Dokumen tidak ada!', 'warning', 'message2');
                     redirect('home/search');
-                    exit;
-                    //$this->session->set_flashdata('message', '<div class="alert alert-warning" style="text-align:left;">Dokumen tidak ada!</div>');
-               
-                }else{
+                    exit;               
+                }
+                else{
+                    $result = [];
+                    foreach($this->data['dokumenTA'] as $row){
+                        $status = $row->status;
+                        
+                        if($status == "Terverifikasi"){
+                            $result[] = $row;
+                        }
+                    }
+
+                    $this->data['dokumenTA'] = $result;
+
+                    if(count($this->data['dokumenTA']) <= 0){
+                        $this->flashmsg('Dokumen tidak ada!', 'warning', 'message2');
+                        redirect('home/search');
+                        exit;
+                    }
+
                     $this->flashmsg('Dokumen ditemukan!','success', 'message2');
-                    //$this->session->set_flashdata('message', '<div class="alert alert-success" style="text-align:left;">Dokumen ditemukan</div>');
                 }
             }
             else {
