@@ -92,7 +92,7 @@ class Tugas_akhir_m extends MY_Model
 	public function tahun_pembuatan($tahun)
 	{
 		
-		$query = $this->db->query('SELECT tugas_akhir.NIM, tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE tugas_akhir.tahun_pembuatan = "'.$tahun.'"');
+		$query = $this->db->query('SELECT tugas_akhir.NIM, tugas_akhir.judulTA, mahasiswa.nama, mahasiswa.nim, mahasiswa.jurusan, tugas_akhir.konsentrasi, tugas_akhir.tahun_pembuatan, mahasiswa.email, tugas_akhir.abstrak FROM mahasiswa INNER JOIN tugas_akhir ON mahasiswa.NIM = tugas_akhir.NIM WHERE tugas_akhir.tahun_pembuatan = "'.$tahun.'" AND tugas_akhir.status != "Belum Terverifikasi" ');
 
 		return $query->result();
 	}
