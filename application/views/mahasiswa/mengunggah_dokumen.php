@@ -90,7 +90,7 @@
 	                                    echo form_dropdown( 'dosen_pembimbing2', $opt, $ta->dosen_pembimbing2, [ 'id' => 'dosen_pembimbing2', 'class' => 'form-control' ] );
 	                                ?> -->
 									<select name="dosen_pembimbing2" class="form-control" id="dosen_pembimbing2">
-										<?php if($ta->dosen_pembimbing2 != NULL): ?>
+ 										<?php if($ta->dosen_pembimbing2 != NULL): ?>
 											<option value="<?= $ta->dosen_pembimbing2 ?>">  <?= $this->dosen_m->get_row(['NIP' => $ta->dosen_pembimbing2])->nama ?> </option>
 										<?php else: ?>
 											<option value="">Pilih Dosen Pembimbing 2</option>
@@ -129,26 +129,20 @@
 	$(document).ready(function(){
 		$('#dosen_pembimbing1').on('change', function(){
 			var dosen_pembimbing1 = $(this).val();
-			if(dosen_pembimbing1 == ''){
-				$('#dosen_pembimbing2').prop('disabled', true);
-			}
-			else{
-				$('#dosen_pembimbing2').prop('disabled', false);
-				$.ajax({
-					url: "<?= base_url('Mahasiswa/get_dosen_pembimbing2') ?>",
-					type: "POST",
-					data: {
-						'dosen_pembimbing1' : dosen_pembimbing1
-					},
-					dataType: 'json',
-					success: function(data){
-						$('#dosen_pembimbing2').html(data);
-					},
-					error: function(){
-						alert('Error occur .. !!');
-					}
-				});
-			}
+			$.ajax({
+				url: "<?= base_url('Mahasiswa/get_dosen_pembimbing2') ?>",
+				type: "POST",
+				data: {
+					'dosen_pembimbing1' : dosen_pembimbing1
+				},
+				dataType: 'json',
+				success: function(data){
+					$('#dosen_pembimbing2').html(data);
+				},
+				error: function(){
+					alert('Error occur .. !!');
+				}
+			});
 		});
 	});
 
