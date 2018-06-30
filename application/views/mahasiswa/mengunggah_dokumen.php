@@ -66,12 +66,12 @@
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 1">Dosen Pembimbing 1 <span class="required">*</span></label>
-									<!-- <?php  
+									<?php  
 	                                    $opt = [];
-	                                    foreach ( $dosen1 as $row ) $opt[$row->NIP] = $row->nama;
-	                                    echo form_dropdown( 'dosen_pembimbing1', $opt, $ta->dosen_pembimbing1, [ 'id' => 'dosen_pembimbing1', 'class' => 'form-control' ] );
-	                                ?> -->
-									<select name="dosen_pembimbing1" class="form-control" id="dosen_pembimbing1">
+	                                    foreach ( $dosen as $row ) $opt[$row->NIP] = $row->nama;
+	                                    echo form_dropdown( 'dosen_pembimbing1', $opt, $ta->dosen_pembimbing1, [ 'id' => 'dosen1', 'class' => 'form-control' ] );
+	                                ?>
+									<!-- <select name="dosen_pembimbing1" class="form-control" id="dosen_pembimbing1">
 										<?php if($ta->dosen_pembimbing1 != NULL): ?>
 											<option value="<?= $ta->dosen_pembimbing1 ?>"> <?= $this->dosen_m->get_row(['NIP' => $ta->dosen_pembimbing1])->nama ?> </option>
 										<?php else: ?>
@@ -80,25 +80,25 @@
 					                	<?php foreach($dosen as $row): ?>
 					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
 					              		<?php endforeach; ?>
-					                </select>
+					                </select> -->
 								</div>
 								<div class="form-group">
 									<label for="Dosen Pembimbing 2">Dosen Pembimbing 2 <span class="required">*</span></label>
-									<!-- <?php  
+									<?php  
 	                                    $opt = [];
-	                                    foreach ( $dosen2 as $row ) $opt[$row->NIP] = $row->nama;
-	                                    echo form_dropdown( 'dosen_pembimbing2', $opt, $ta->dosen_pembimbing2, [ 'id' => 'dosen_pembimbing2', 'class' => 'form-control' ] );
-	                                ?> -->
-									<select name="dosen_pembimbing2" class="form-control" id="dosen_pembimbing2">
+	                                    foreach ( $dosen as $row ) $opt[$row->NIP] = $row->nama;
+	                                    echo form_dropdown( 'dosen_pembimbing2', $opt, $ta->dosen_pembimbing2, [ 'id' => 'dosen2', 'class' => 'form-control' ] );
+	                                ?>
+									<!-- <select name="dosen_pembimbing2" class="form-control" id="dosen_pembimbing2">
  										<?php if($ta->dosen_pembimbing2 != NULL): ?>
 											<option value="<?= $ta->dosen_pembimbing2 ?>">  <?= $this->dosen_m->get_row(['NIP' => $ta->dosen_pembimbing2])->nama ?> </option>
 										<?php else: ?>
 											<option value="">Pilih Dosen Pembimbing 2</option>
 										<?php endif; ?>
-					                	<!-- <?php foreach($dosen as $row): ?>
+					                	<?php foreach($dosen as $row): ?>
 					                	<option value="<?= $row->NIP ?>"> <?= $row->nama ?> </option>
-					              		<?php endforeach; ?> -->
-					                </select>
+					              		<?php endforeach; ?>
+					                </select> -->
 								</div>
 								<div class="form-group">
 									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
