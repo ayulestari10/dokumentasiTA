@@ -147,6 +147,25 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
+    public function get_dosen_pembimbing2(){
+        $dosen_pembimbing1 = $this->POST('dosen_pembimbing1');
+        $dosen_pembimbing2 = $this->dosen_m->getDosen2_byDosen1($dosen_pembimbing1);
+        $dataTA = $this->tugas_akhir_m->getDatabyNim($this->data['username']);
+        if(count($dosen_pembimbing2) > 0){
+            $dp2_select_box = '';
+
+            if($dataTA->dosen_pembimbing2 == NULL)
+                $dp2_select_box .= '<option value="">Pilih Dosen Pembimbing 2</option>';
+            else
+                $dp2_select_box .= '<option value="'.$dataTA->dosen_pembimbing2.'">'.$this->dosen_m->getDatabyNim($dataTA->dosen_pembimbing2)->nama.'</option>';
+
+            foreach ($dosen_pembimbing2 as $dosenpembimbing2) {
+                $dp2_select_box .='<option value="'.$dosenpembimbing2->NIP.'">'.$dosenpembimbing2->nama.'</option>';
+            }
+            echo json_encode($dp2_select_box);
+        }
+    }
+
     public function unggah_dokumen()
     {
         $this->data['title']  = 'Mengunggah Dokumen'.$this->title;
@@ -166,6 +185,7 @@ class Mahasiswa extends MY_Controller
         {
             $this->data['tahun'][$i] = $i;
         }
+
 
         if ($this->POST('simpan'))
         {
@@ -253,7 +273,7 @@ class Mahasiswa extends MY_Controller
                     $this->tugas_akhir_m->update($nim, $dataTA);
                     if($exe == '.pdf')
                         $this->uploadPDF($nim, 'upload');
-                    
+
                     $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir!', 'success');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
