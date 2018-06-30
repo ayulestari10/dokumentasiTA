@@ -209,12 +209,23 @@ class Mahasiswa extends MY_Controller
 
                 $file_name = $_FILES['upload']['name'];
                 $exe = substr($file_name, -4);
+                $exe2 = substr($file_name, 0);
 
-                if($exe != ".pdf"){
-                    $this->flashmsg('Pilih file pdf!', 'danger');
-                    redirect('mahasiswa/unggah-dokumen');
-                    exit;
+                if(!file_exists('assets/File_TugasAkhir/'.$this->data['username'].'.pdf')){
+                    if($exe != ".pdf"){
+                        $this->flashmsg('Pilih file pdf!', 'danger');
+                        redirect('mahasiswa/unggah-dokumen');
+                        exit;
+                    }
                 }
+                else{
+                    if($exe != ".pdf" && $exe2 != NULL){
+                        $this->flashmsg('Pilih file pdf!', 'danger');
+                        redirect('mahasiswa/unggah-dokumen');
+                        exit;
+                    }
+                }
+                
 
                 $nim        = $this->data['username'];
                 $judul      = $this->POST('judul');
@@ -240,8 +251,9 @@ class Mahasiswa extends MY_Controller
 
                 if(count($cekNIM_TA) > 0){
                     $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim, 'upload');
-
+                    if($exe == '.pdf')
+                        $this->uploadPDF($nim, 'upload');
+                    
                     $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir!', 'success');
                     redirect('mahasiswa/unggah-dokumen');
                     exit;
@@ -250,7 +262,8 @@ class Mahasiswa extends MY_Controller
                     $dataNim=array('nim' => $nim);
                     $this->tugas_akhir_m->insert($dataNim);
                     $this->tugas_akhir_m->update($nim, $dataTA);
-                    $this->uploadPDF($nim, 'upload');
+                    if($exe == '.pdf')
+                        $this->uploadPDF($nim, 'upload');
 
                     $this->flashmsg('Data tugas akhir berhasil disimpan! Silahkan cek Dokumen Tugas Akhir!');
                     redirect('mahasiswa/unggah-dokumen');

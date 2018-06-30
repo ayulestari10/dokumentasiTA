@@ -94,7 +94,11 @@
 								</div>
 								<div class="form-group">
 									<label for="Upload Dokumen">Unggah Dokumen <span class="required">* .pdf</span></label>
+									<?php if(!file_exists('assets/File_TugasAkhir/'.$this->session->userdata('username').'.pdf')): ?>
 									<input type="file" name="upload" required>
+									<?php else: ?>
+									<input type="file" name="upload">
+									<?php endif; ?>
 								</div>
 								<div class="form-group">
 									<label for="Abstrak">Abstrak <span class="required">*</span></label>
