@@ -85,7 +85,7 @@ class Admin extends MY_Controller
                 exit;
             }
             else{
-                $this->flashmsg('Pilih file jpg/jpeg/png !','danger');
+                $this->flashmsg('Pilih file jpg/jpeg/png/JPG/JPEG/PNG !','danger');
                 redirect('admin/profile');
                 exit;
             }
@@ -192,32 +192,48 @@ class Admin extends MY_Controller
     public function edit_mahasiswa(){
 
         if($this->POST('edit')){
-            
-            $this->form_validation->set_rules('password1', 'Password', 'required', array(
-                    'required'      => 'Password tidak boleh kosong'));
-            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
-                    'required'      => 'Konfirmasi password tidak boleh kosong',
-                    'matches'       => 'Password dan konfirmasi password harus sama'
+            $username = $this->POST('username_lama');
+
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|alpha_spaces', array(
+                    'trim'             => 'Nama tidak boleh kosong!',
+                    'alpha_spaces'     => 'Nama hanya boleh alfabet!'
                 ));
 
             if ($this->form_validation->run() == FALSE)
             {
                 $this->flashmsg(validation_errors(), 'danger');
-                redirect('admin/data-mahasiswa');
+                redirect('admin/data-mahasiswa/');
                 exit;
             }
 
-            $username = $this->POST('username_lama');
+            if(empty($this->POST('password1')) or empty($this->POST('password2'))) {
+                $data_mahasiswa = [
+                    'nama'      => htmlentities($this->POST('edit_nama'))
+                ];
+                $this->mahasiswa_m->update($username, $data_mahasiswa);
+            }
+            else {
+                $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'matches[password1]', array(
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
 
-            $data_user = [
-                'password'  => md5($this->POST('password1'))
-            ];
-            $this->user_m->update($username, $data_user);
+                if ($this->form_validation->run() == FALSE)
+                {
+                    $this->flashmsg(validation_errors(), 'danger');
+                    redirect('admin/data-mahasiswa/');
+                    exit;
+                }
 
-            $data_mahasiswa = [
-                'nama'      => $this->POST('edit_nama')
-            ];
-            $this->mahasiswa_m->update($username, $data_mahasiswa);
+                $data_user = [
+                    'password'  => md5($this->POST('password1'))
+                ];
+                $this->user_m->update($username, $data_user);
+
+                $data_mahasiswa = [
+                    'nama'      => htmlentities($this->POST('edit_nama'))
+                ];
+                $this->mahasiswa_m->update($username, $data_mahasiswa);
+            }
 
             $this->flashmsg('Data berhasil diedit!');
             redirect('admin/data-mahasiswa');
@@ -314,31 +330,48 @@ class Admin extends MY_Controller
 
         if($this->POST('edit')){
             
-            $this->form_validation->set_rules('password1', 'Password', 'required', array(
-                    'required'      => 'Password tidak boleh kosong'));
-            $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'required|matches[password1]', array(
-                    'required'      => 'Konfirmasi password tidak boleh kosong',
-                    'matches'       => 'Password dan konfirmasi password harus sama'
+            $username = $this->POST('username_lama');
+
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|alpha_spaces', array(
+                    'trim'             => 'Nama tidak boleh kosongaa!',
+                    'alpha_spaces'     => 'Nama hanya boleh alfabet!'
                 ));
 
             if ($this->form_validation->run() == FALSE)
             {
                 $this->flashmsg(validation_errors(), 'danger');
-                redirect('admin/data-mahasiswa');
+                redirect('admin/data-dosen/');
                 exit;
             }
 
-            $username = $this->POST('username_lama');
+            if(empty($this->POST('password1')) or empty($this->POST('password2'))) {
+                $data_dosen = [
+                    'nama'      => htmlentities($this->POST('edit_nama'))
+                ];
+                $this->dosen_m->update($username, $data_dosen);
+            }
+            else {
+                $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'matches[password1]', array(
+                    'matches'       => 'Password dan konfirmasi password harus sama'
+                ));
 
-            $data_user = [
-                'password'  => md5($this->POST('password1'))
-            ];
-            $this->user_m->update($username, $data_user);
+                if ($this->form_validation->run() == FALSE)
+                {
+                    $this->flashmsg(validation_errors(), 'danger');
+                    redirect('admin/data-dosen/');
+                    exit;
+                }
 
-            $data_dosen = [
-                'nama'      => $this->POST('edit_nama')
-            ];
-            $this->dosen_m->update($username, $data_dosen);
+                $data_user = [
+                    'password'  => md5($this->POST('password1'))
+                ];
+                $this->user_m->update($username, $data_user);
+
+                $data_dosen = [
+                    'nama'      => $this->POST('edit_nama')
+                ];
+                $this->dosen_m->update($username, $data_dosen);
+            }            
 
             $this->flashmsg('Data berhasil diedit!');
             redirect('admin/data-dosen');

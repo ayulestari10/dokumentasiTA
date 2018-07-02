@@ -81,7 +81,7 @@ class Dosen extends MY_Controller
                 exit;
             }
             else{
-                $this->flashmsg('Pilih file jpg/jpeg/png !','danger');
+                $this->flashmsg('Pilih file jpg/jpeg/png/JPG/JPEG/PNG !','danger');
                 redirect('dosen/profile');
                 exit;
             }            
@@ -200,7 +200,7 @@ class Dosen extends MY_Controller
             if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
                 $this->load->helper('download');
                 force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-                redirect('mahasiswa\data_dokumen');
+                redirect('mahasiswa/data_dokumen');
             }else{
                 $this->flashmsg('File tidak ada !','danger');
                 redirect('mahasiswa/data_dokumen');

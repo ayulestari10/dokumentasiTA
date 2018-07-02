@@ -37,16 +37,16 @@ class Mahasiswa extends MY_Controller
             $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha_spaces', array(
                     'trim'      => 'Nama tidak boleh kosong!',
                     'required'  => 'Nama tidak boleh kosong!',
-                    'alpha_spaces'     => 'Nama hanya boleh karakter!'
+                    'alpha_spaces'     => 'Nama hanya boleh alfabet!'
                 ));
             $this->form_validation->set_rules('jurusan', 'Jurusan', 'trim|required|alpha_spaces', array(
                     'trim'      => 'Jurusan tidak boleh kosong!',
                     'required'  => 'Jurusan tidak boleh kosong!',
-                    'alpha_spaces'     => 'Jurusan hanya boleh karakter!'
+                    'alpha_spaces'     => 'Jurusan hanya boleh alfabet!'
                 ));
             $this->form_validation->set_rules('angkatan', 'Angkatan', 'required|numeric', array(
-                    'required'      => 'Username tidak boleh kosong!',  
-                    'numeric'       => 'Username harus angka!'
+                    'required'      => 'Angkatan tidak boleh kosong!',  
+                    'numeric'       => 'Angkatan harus angka!'
                 ));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array(
                     'trim'      => 'Email tidak boleh kosong!',
@@ -254,7 +254,7 @@ class Mahasiswa extends MY_Controller
                 $dp1        = $this->POST('dosen_pembimbing1');
                 $dp2        = $this->POST('dosen_pembimbing2');
                 $file       = $this->POST('upload');
-                $abstrak    = $this->POST('abstrak');
+                $abstrak    = htmlentities($this->POST('abstrak'));
                 $status     = "Belum Terverifikasi";
 
                 $dataTA = array(
@@ -293,7 +293,7 @@ class Mahasiswa extends MY_Controller
         $this->template($this->data, 'mahasiswa');
     }
 
-    public function download_file($getNim){
+    public function download_file(){
         $username = $this->data['username'];
 
         if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {

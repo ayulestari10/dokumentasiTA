@@ -67,7 +67,7 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="Username">Username <span class="required">* NIM</span></label>
-						<input type="text" class="form-control" name="username" required>
+						<input type="number" class="form-control" name="username" required>
 					</div>
 					<div class="form-group">
 						<label for="Nama">Nama <span class="required">*</span></label>
@@ -107,15 +107,15 @@
 					</div>
 					<div class="form-group">
 						<label for="Nama">Nama <span class="required">*</span></label>
-						<input type="text" class="form-control" name="edit_nama" id="edit_nama" required>
+						<input type="text" class="form-control" name="edit_nama" id="edit_nama">
 					</div>
 					<div class="form-group">
 						<label for="Password">Password <span class="required">*</span></label>
-						<input type="password" class="form-control" name="password1" required>
+						<input type="password" class="form-control" name="password1">
 					</div>
 					<div class="form-group">
 						<label for="Konfirmasi Password">Konfirmasi Password <span class="required">*</span></label>
-						<input type="password" class="form-control" name="password2" required>
+						<input type="password" class="form-control" name="password2">
 					</div>
 				</div>
 				<div class="modal-footer">

@@ -55,7 +55,7 @@ class Login extends MY_Controller
 	        }
 
 			$this->data = [
-    			'username'	=> $this->POST('username'),
+    			'username'	=> htmlentities($this->POST('username')),
     			'password'	=> md5($this->POST('password'))
 			];
 
