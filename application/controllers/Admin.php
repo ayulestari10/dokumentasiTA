@@ -65,7 +65,7 @@ class Admin extends MY_Controller
             $exe = substr($file_name, -4);
             $exe2= substr($file_name, -5);
 
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg" || $exe == NULL){
+            if($exe == ".jpg" || $exe == ".JPG" || $exe == ".png"  || $exe == ".PNG" || $exe2 == ".jpeg" || $exe2 == ".JPEG"  || $exe == NULL){
                 $data_profile = [
                 'nama'  => $this->POST('nama'),
                 'email'  => $this->POST('email'),
@@ -416,11 +416,9 @@ class Admin extends MY_Controller
     public function download(){
         $nim = $this->uri->segment(3);
 
-        if (!isset($this->data['username'], $this->data['role']))
-        {
-            $this->session->sess_destroy();
-            $this->flashmsg('Anda harus login dulu!','warning');
-            redirect('login');
+        if(!isset($nim)){
+            $this->flashmsg('<i class="fa fa-close"></i> NIM tidak dicantumkan!', 'danger');
+            redirect('admin/data-dokumen');
             exit;
         }
         else{

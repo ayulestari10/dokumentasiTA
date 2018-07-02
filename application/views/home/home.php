@@ -6,6 +6,7 @@
           <div class="col-xl-9 mx-auto">
             <h1 class="mb-5">Dokumentasi Tugas Akhir</h1>
             <h3 class="mb-5">Mencari Tugas Akhir? Masukan Judul atau Kata Kunci yang Ada!</h3>
+            <h4 class="mb-5">Oleh Kelompok 6</h4>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <?= form_open_multipart('Home/search') ?>

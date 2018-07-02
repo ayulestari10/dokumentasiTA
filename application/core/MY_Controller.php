@@ -46,7 +46,7 @@ class MY_Controller extends CI_Controller
 			@unlink($upload_path . '/' . $id . '.jpg');
 			$config = [
 				'file_name' 		=> $id . '.jpg',
-				'allowed_types'		=> 'jpg|png|bmp|jpeg',
+				'allowed_types'		=> 'jpg|png|jpeg|JPG|PNG|JPEG',
 				'upload_path'		=> $upload_path
 			];
 			$this->load->library('upload');

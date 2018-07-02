@@ -68,7 +68,7 @@ class Mahasiswa extends MY_Controller
             $exe = substr($file_name, -4);
             $exe2= substr($file_name, -5);
 
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg" || $exe == NULL){
+            if($exe == ".jpg" || $exe == ".JPG" || $exe == ".png"  || $exe == ".PNG" || $exe2 == ".jpeg" || $exe2 == ".JPEG"  || $exe == NULL){
                     $data_profile = [
                     'nama'  => $this->POST('nama'),
                     'jurusan' => $this->POST('jurusan'),

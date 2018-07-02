@@ -61,7 +61,7 @@ class Dosen extends MY_Controller
             $exe = substr($file_name, -4);
             $exe2= substr($file_name, -5);
 
-            if($exe == ".jpg" || $exe == ".png" || $exe2 == ".jpeg" || $exe == NULL){
+            if($exe == ".jpg" || $exe == ".JPG" || $exe == ".png"  || $exe == ".PNG" || $exe2 == ".jpeg" || $exe2 == ".JPEG"  || $exe == NULL){
                 $data_profile = [
                 'nama'  => $this->POST('nama'),
                 'email'  => $this->POST('email'),
@@ -188,17 +188,24 @@ class Dosen extends MY_Controller
         $this->template($this->data, 'dosen');
     }
 
-    public function download($getNim){
-        
-        if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
-            $this->load->helper('download');
-            force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
-            redirect('mahasiswa\data_dokumen');
-        }else{
-            $this->flashmsg('File tidak ada !','danger');
-            redirect('mahasiswa/data_dokumen');
+    public function download(){
+        $getNim = $this->uri->segment(3);
+
+        if(!isset($getNim)){
+            $this->flashmsg('<i class="fa fa-close"></i> NIM tidak dicantumkan!', 'danger');
+            redirect('dosen/data-mahasiswa');
+            exit;
         }
-        
+        else{
+            if (file_exists('assets/File_TugasAkhir/'.$getNim.'.pdf')) {
+                $this->load->helper('download');
+                force_download('assets/File_TugasAkhir/'.$getNim.'.pdf',NULL);
+                redirect('mahasiswa\data_dokumen');
+            }else{
+                $this->flashmsg('File tidak ada !','danger');
+                redirect('mahasiswa/data_dokumen');
+            }
+        }
     }
 
 }

@@ -7,9 +7,10 @@
 				<div class="auth-box ">
 					<div class="left">
 						<div class="content" style="width: 95% !important;">
-							<div class="header">
-								<div class="logo text-center"><img src="<?= base_url('assets/logo.png') ?>" alt="Logo" style="width: 50px; height: 50px;"></div>
+							<div class="header text-center">
 								<h4><strong>Login Dokumentasi TA</strong></h4>
+								<div class="logo"><img src="<?= base_url('assets/logo.png') ?>" alt="Logo" style="width: 50px; height: 50px;"></div>
+								<p>Oleh Kelompok 6</p>
 							</div>
 							<div>
 								<?= $this->session->userdata('msg') ?>
@@ -20,15 +21,15 @@
 							<?= form_open('Login') ?>
 								<div class="form-group">
 									<label for="signin-username" class="control-label sr-only">Username</label>
-									<input type="number" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" >
+									<input type="number" class="form-control" name="username" required placeholder="Username" value="<?php echo set_value('username'); ?>">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" name="password" placeholder="Password" value="" >
+									<input type="password" class="form-control" name="password" placeholder="Password" value="" required>
 								</div>
 								<div class="form-group">
 					                <div style="text-align: left !important;"><h6>Sebagai</h6></div>
-					                <select name="role" class="form-control">
+					                <select name="role" class="form-control" required>
 					                  <option value="mahasiswa">Mahasiswa</option>
 					                  <option value="dosen">Dosen</option>
 					                  <option value="admin">Admin</option>
@@ -49,9 +50,8 @@
 					</div>
 					<div class="right">
 						<div class="overlay"></div>
-						<div class="content text">
-							<h1 class="heading text-center">Aplikasi Dokumentasi Tugas Akhir</h1>
-							<!-- <p>by The Develovers</p> -->
+						<div class="content text text-center">
+							<h1 class="heading">Aplikasi Dokumentasi Tugas Akhir</h1>
 						</div>
 					</div>
 					<div class="clearfix"></div>
