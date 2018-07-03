@@ -65,6 +65,8 @@ class Login extends MY_Controller
 			$result = $this->user_m->login($this->data);
 			if (!isset($result)) {
 				$this->flashmsg('Username atau password salah','danger');
+				redirect('Login');
+				exit;
 			}
 
 			if(isset($role)){
