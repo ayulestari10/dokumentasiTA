@@ -168,7 +168,7 @@
                 function delete_data(id){
 					swal({
 					  title: 'Apakah anda yakin?',
-					  text: 'Data mahasiswa tidak dapat dilihat kembali !',
+					  text: 'Data dosen tidak dapat dilihat kembali !',
 					  type: 'warning',
 					  showCancelButton: true,
 					  confirmButtonText: 'Hapus',

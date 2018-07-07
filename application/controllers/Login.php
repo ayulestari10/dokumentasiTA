@@ -40,7 +40,7 @@ class Login extends MY_Controller
 
   			$this->form_validation->set_rules('username', 'Username', 'required|min_length[14]|max_length[18]|numeric', array(
   					'required'		=> 'Username tidak boleh kosong', 
-  					'min_length' 	=> 'Username harus lebih dari 14 karakter', 
+  					'min_length' 	=> 'Username harus minimum 14 karakter', 
   					'max_length'	=> 'Username harus maksimum 18 karakter', 
   					'numeric' 		=> 'Username harus angka'
   				));
