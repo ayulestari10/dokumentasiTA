@@ -102,19 +102,19 @@
 				<input type="hidden" name="username_lama" id="edit_username_lama_hidden">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="Username">Username <span class="required">* NIM</span></label>
+						<label for="Username">Username</label>
 						<input type="text" class="form-control" name="edit_username" id="edit_username_lama" disabled>
 					</div>
 					<div class="form-group">
-						<label for="Nama">Nama <span class="required">*</span></label>
+						<label for="Nama">Nama</label>
 						<input type="text" class="form-control" name="edit_nama" id="edit_nama">
 					</div>
 					<div class="form-group">
-						<label for="Password">Password <span class="required">*</span></label>
+						<label for="Password">Password</label>
 						<input type="password" class="form-control" name="password1">
 					</div>
 					<div class="form-group">
-						<label for="Konfirmasi Password">Konfirmasi Password <span class="required">*</span></label>
+						<label for="Konfirmasi Password">Konfirmasi Password</label>
 						<input type="password" class="form-control" name="password2">
 					</div>
 				</div>
